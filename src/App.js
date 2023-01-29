@@ -1,6 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider, redirect, useNavigate } from "react-router-dom";
 import { HomePage } from './pages/HomePage.js';
+import { Page1 } from './pages/Page1.js';
+import { Page2 } from './pages/Page2.js';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -10,11 +12,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/page1",
-    element: <h1>This is page 1</h1>,
+    element: <Page1 />,
   },
   {
     path: "/page2",
-    element: <h1>This is page 2</h1>,
+    element: <Page2 />,
   }
 ]);
 
