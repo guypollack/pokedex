@@ -1,12 +1,12 @@
 import React from 'react';
-import { MyButton } from './MyButton';
+import { NavLink } from 'react-router-dom';
 
 export function NavBar() {
   return (
-    <div class="nav-bar">
-      <MyButton location='/' name='Home' />
-      <MyButton location='/page1' name='Page 1' />
-      <MyButton location='/page2' name='Page 2' />
+    <div className="nav-bar">
+      <NavLink to='/'>Home</NavLink>
+      <NavLink to='/page1'>Page 1</NavLink>
+      <NavLink to='/page2'>Page 2</NavLink>
     </div>
   )
 }
