@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { MyButton } from '../components/MyButton';
-import { NavBar } from '../components/NavBar';
+import { MyButton } from '../../components/MyButton';
+import { NavBar } from '../../components/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemon, selectStatus } from '../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, selectAllPokemon, selectStatus } from '../../features/pokemon/pokemonSlice';
+import { HomePageFlexContainer } from '../../components/HomePageFlexContainer/HomePageFlexContainer';
 
 export function HomePage() {
   const dispatch = useDispatch();
@@ -29,15 +30,7 @@ export function HomePage() {
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
       {status === "loading" && <h4>Data loading...</h4>}
-      {status === "idle" && allPokemon.map(pokemon => {
-        return (
-          <div>
-            <img src={pokemon.imageUrl} />
-            <p key={pokemon.name}>{pokemon.name} ~ {pokemon.url}</p>
-          </div>
-        )
-      })
-    }
+      {status === "idle" && <HomePageFlexContainer allPokemon={allPokemon} />}
     </div>
   )
 }

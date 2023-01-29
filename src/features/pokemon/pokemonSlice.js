@@ -21,7 +21,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
     // console.log(json);
     const results = await json.results;
     // console.log(results);
-    results.forEach(item => {
+    results.slice(0,1008).forEach(item => {
       const pokemonNumber = item.url.slice(34,item.url.length-1);
       // console.log(pokemonNumber);
       // console.log("https://pokeapi.co/api/v2/pokemon/".length);
