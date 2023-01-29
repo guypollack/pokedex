@@ -27,6 +27,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
       // console.log("https://pokeapi.co/api/v2/pokemon/".length);
       const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
       allPokemon.push(({
+        "number": pokemonNumber,
         "name": item.name,
         "url": item.url,
         "imageUrl" : imageUrl

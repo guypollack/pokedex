@@ -5,7 +5,7 @@ import { HomePagePokemonContainer } from "../HomePagePokemonContainer/HomePagePo
 export function HomePageFlexContainer({allPokemon}) {
   return (
     <div className="home-page-flex-container">
-      {allPokemon.map(pokemon => <HomePagePokemonContainer name={pokemon.name} imageUrl={pokemon.imageUrl} />)}
+      {allPokemon.map(pokemon => <HomePagePokemonContainer number={pokemon.number}  name={pokemon.name} imageUrl={pokemon.imageUrl} />)}
     </div>
   )
   

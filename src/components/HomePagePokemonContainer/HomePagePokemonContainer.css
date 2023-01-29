@@ -11,3 +11,8 @@
 .home-page-pokemon-container > img {
   width: 100px;
 }
+
+.home-page-pokemon-container > p {
+  margin: 0;
+}
+
