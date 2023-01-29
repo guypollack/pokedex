@@ -8,11 +8,26 @@
   margin: 10px;
 }
 
-.home-page-pokemon-container > img {
+.home-page-pokemon-image  {
   width: 100px;
 }
 
-.home-page-pokemon-container > p {
+.home-page-pokemon-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.home-page-pokemon-details > p {
   margin: 0;
 }
 
+.home-page-pokemon-container:hover > .home-page-pokemon-image {
+  width: 110px;
+}
+
+.home-page-pokemon-container:hover > .home-page-pokemon-details {
+  transform: translateY(-10px);
+  font-weight: bold;
+}

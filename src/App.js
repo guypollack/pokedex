@@ -3,7 +3,9 @@ import { createBrowserRouter, RouterProvider, redirect, useNavigate } from "reac
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
+import { PokemonPage } from './pages/PokemonPage.js';
 import './App.css';
+
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/page2",
     element: <Page2 />,
+  },
+  {
+    path: "/pokemon/:pokemonName",
+    element: <PokemonPage/>
   }
 ]);
 
