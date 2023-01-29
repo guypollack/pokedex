@@ -29,7 +29,15 @@ export function HomePage() {
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
       {status === "loading" && <h4>Data loading...</h4>}
-      {status === "idle" && allPokemon.map(pokemon => <p key={pokemon.name}>{pokemon.name} ~ {pokemon.url}</p>)}
+      {status === "idle" && allPokemon.map(pokemon => {
+        return (
+          <div>
+            <img src={pokemon.imageUrl} />
+            <p key={pokemon.name}>{pokemon.name} ~ {pokemon.url}</p>
+          </div>
+        )
+      })
+    }
     </div>
   )
 }

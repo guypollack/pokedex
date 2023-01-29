@@ -13,7 +13,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
   'pokemon/fetchAllPokemonAsync',
   async () => {
     // alert("Fetch starting");
-    const pokemon = [];
+    const allPokemon = [];
     const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
     // The value we return becomes the `fulfilled` action payload
     // console.log("BBBB");
@@ -22,13 +22,27 @@ export const fetchAllPokemonAsync = createAsyncThunk(
     const results = await json.results;
     // console.log(results);
     results.forEach(item => {
-      pokemon.push(({
+      const pokemonNumber = item.url.slice(34,item.url.length-1);
+      // console.log(pokemonNumber);
+      // console.log("https://pokeapi.co/api/v2/pokemon/".length);
+      const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
+      allPokemon.push(({
         "name": item.name,
-        "url": item.url
+        "url": item.url,
+        "imageUrl" : imageUrl
       }))
     })
+
+    // for (let pokemon of results) {
+    //   const pokemonResponse = await fetch(pokemon.url);
+    //   const pokemonJson = await pokemonResponse.json();
+    //   console.log("XYZ");
+    //   console.log(pokemonJson);
+    // }
+
+
     // alert("Function complete");
-    return pokemon;
+    return allPokemon;
   }
 );
 
