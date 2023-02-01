@@ -3,7 +3,7 @@ import { MyButton } from '../../components/MyButton';
 import { NavBar } from '../../components/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, selectAllPokemon, selectStatus } from '../../features/pokemon/pokemonSlice';
-import { HomePageFlexContainer } from '../../components/HomePageFlexContainer/HomePageFlexContainer';
+import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export function HomePage() {
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
       {status === "loading" && <h4>Data loading...</h4>}
-      {status === "idle" && <HomePageFlexContainer allPokemon={allPokemon} />}
+      {status === "idle" && <PokemonFlexContainer allPokemon={allPokemon} />}
     </div>
   )
 }
