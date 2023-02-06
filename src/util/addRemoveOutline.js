@@ -44,33 +44,66 @@ function findMainColor(canvas, ctx) {
   
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
+  // data.filter();
 
-  for (let i = 0; i < data.length; i += 4) {
-    const rgba = numberToString(data[i]) + numberToString(data[i+1]) + numberToString(data[i+2]) + numberToString(data[i+3]);
-    if (colors[rgba]) {
-      colors[rgba]++;
-    } else {
-      colors[rgba] = 1;
-    }
-  }
+  // color finding method 1
 
-  let mainColor;
-  let maxCount = 0;
+  // for (let i = 0; i < data.length; i += 4) {
+  //   const rgba = numberToString(data[i]) + numberToString(data[i+1]) + numberToString(data[i+2]) + numberToString(data[i+3]);
+  //   if (colors[rgba]) {
+  //     colors[rgba]++;
+  //   } else {
+  //     colors[rgba] = 1;
+  //   }
+  // }
 
-  for (let color of Object.keys(colors)) {
-    if (color.slice(0,9) !== "000000000") {
-      if (colors[color] > maxCount) {
-        mainColor = color;
-        maxCount = colors[color];
-      }
-    }
-  }
-  return ({
-    red: mainColor.slice(0,3),
-    green: mainColor.slice(3,6),
-    blue: mainColor.slice(6,9),
-    alpha: mainColor.slice(9,12)
-  });
+  // let mainColor;
+  // let maxCount = 0;
+
+  // for (let color of Object.keys(colors)) {
+  //   if (color.slice(0,9) !== "000000000") {
+  //     if (colors[color] > maxCount) {
+  //       console.log(color);
+  //       mainColor = color;
+  //       maxCount = colors[color];
+  //     }
+  //   }
+  // }
+  // return ({
+  //   red: mainColor.slice(0,3),
+  //   green: mainColor.slice(3,6),
+  //   blue: mainColor.slice(6,9),
+  //   alpha: mainColor.slice(9,12)
+  // });
+
+  // color finding method 2
+
+  // let colorsArray = []
+
+  // for (let i = 0; i < data.length; i += 4) {
+  //   colorsArray.push(numberToString(data[i]) + numberToString(data[i+1]) + numberToString(data[i+2]) + numberToString(data[i+3]));
+  // }
+
+  // colorsArray = colorsArray.filter(color => color !== "000000000000");
+
+  // let mainColor;
+  // let maxCount = 0;
+
+
+  // colorsArray.forEach((color, index, self) => {
+  //   const count = self.filter(elem => elem === color).length;
+  //   if (count > maxCount) {
+  //     mainColor = color;
+  //     maxCount = count;
+  //   }
+  // });
+
+  // return ({
+  //   red: mainColor.slice(0,3),
+  //   green: mainColor.slice(3,6),
+  //   blue: mainColor.slice(6,9),
+  //   alpha: mainColor.slice(9,12)
+  // });
 }
 
 function numberToString(num) {
