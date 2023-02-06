@@ -1,7 +1,7 @@
 .pokemon-card-container {
   border: 1px solid black;
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@
 
 .pokemon-card-image  {
   width: 100px;
+  margin-top: 10px;
 }
 
 .pokemon-card-details {
