@@ -1,6 +1,7 @@
 import React from "react";
 import "./PokemonCardContainer.css";
 import { useNavigate } from "react-router";
+import { addOutline, removeOutline } from "../../util/addRemoveOutline";
 
 export function PokemonCardContainer({number, name, imageUrl}) {
   // console.log("A");
@@ -19,11 +20,12 @@ export function PokemonCardContainer({number, name, imageUrl}) {
     // imageClassName = "pokemon-card-image-hovered";
     // alert(imageClassName);
     document.getElementById(id).classList.add("hovered");
-
+    addOutline(id);
   }
 
   function handleMouseOut() {
     document.getElementById(id).classList.remove("hovered");
+    removeOutline(id);
   }
 
   return (
