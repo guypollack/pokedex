@@ -23,19 +23,10 @@ export function addOutline(elementId) {
 
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const {red, green, blue, alpha} = findMainColor(canvas, ctx);  
     
-    const {red, green, blue, alpha} = findMainColor(canvas, ctx);
-      
-    color["r"] = red;
-    color["g"] = green;
-    color["b"] = blue;
-    color["a"] = alpha;
-
-    // alert(`${color["r"]} ${color["g"]} ${color["b"]} ${color["a"]}`);
-
-    // test.style.filter=(`drop-shadow(10px 10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(10px -10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-10px 10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-10px -10px 2.5px rgba(${red},${green},${blue},${alpha}))`);
     elem.style.filter=(`drop-shadow(5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(5px -5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px -5px 1.5px rgba(${red},${green},${blue},${alpha}))`);
-    // canvas.style.filter=(`drop-shadow(10px 10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(10px -10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-10px 10px 2.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-10px -10px 2.5px rgba(${red},${green},${blue},${alpha}))`);
   };
 }
 
@@ -44,66 +35,45 @@ function findMainColor(canvas, ctx) {
   
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
-  // data.filter();
 
-  // color finding method 1
+  // startTime = Date.now();
 
-  // for (let i = 0; i < data.length; i += 4) {
-  //   const rgba = numberToString(data[i]) + numberToString(data[i+1]) + numberToString(data[i+2]) + numberToString(data[i+3]);
-  //   if (colors[rgba]) {
-  //     colors[rgba]++;
-  //   } else {
-  //     colors[rgba] = 1;
-  //   }
-  // }
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i+3] !== 0) {
+      const color = [data[i], data[i+1], data[i+2], data[i+3]].join(",");
+      if (colors[color]) {
+        colors[color]++;
+      } else {
+        colors[color] = 1;
+      }
+    }
+  }
 
-  // let mainColor;
-  // let maxCount = 0;
+  // alert((Date.now() - startTime)/1000);
 
-  // for (let color of Object.keys(colors)) {
-  //   if (color.slice(0,9) !== "000000000") {
-  //     if (colors[color] > maxCount) {
-  //       console.log(color);
-  //       mainColor = color;
-  //       maxCount = colors[color];
-  //     }
-  //   }
-  // }
-  // return ({
-  //   red: mainColor.slice(0,3),
-  //   green: mainColor.slice(3,6),
-  //   blue: mainColor.slice(6,9),
-  //   alpha: mainColor.slice(9,12)
-  // });
+  // startTime = Date.now();
 
-  // color finding method 2
+  let mainColor;
+  let maxCount = 0;
 
-  // let colorsArray = []
+  for (let color of Object.keys(colors)) {
+    if (colors[color] > maxCount) {
+      mainColor = color;
+      maxCount = colors[color];
+    }
+  }
 
-  // for (let i = 0; i < data.length; i += 4) {
-  //   colorsArray.push(numberToString(data[i]) + numberToString(data[i+1]) + numberToString(data[i+2]) + numberToString(data[i+3]));
-  // }
+  // alert((Date.now() - startTime)/1000);
 
-  // colorsArray = colorsArray.filter(color => color !== "000000000000");
+  mainColor = mainColor.split(",");
 
-  // let mainColor;
-  // let maxCount = 0;
+  return ({
+    red: mainColor[0],
+    green: mainColor[1],
+    blue: mainColor[2],
+    alpha: mainColor[3]
+  });
 
-
-  // colorsArray.forEach((color, index, self) => {
-  //   const count = self.filter(elem => elem === color).length;
-  //   if (count > maxCount) {
-  //     mainColor = color;
-  //     maxCount = count;
-  //   }
-  // });
-
-  // return ({
-  //   red: mainColor.slice(0,3),
-  //   green: mainColor.slice(3,6),
-  //   blue: mainColor.slice(6,9),
-  //   alpha: mainColor.slice(9,12)
-  // });
 }
 
 function numberToString(num) {
