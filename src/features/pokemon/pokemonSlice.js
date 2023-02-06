@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { findMainColor } from '../../util/findMainColor';
 
 const initialState = {
   allPokemon: []
@@ -30,7 +31,8 @@ export const fetchAllPokemonAsync = createAsyncThunk(
         "number": pokemonNumber,
         "name": item.name,
         "url": item.url,
-        "imageUrl" : imageUrl
+        "imageUrl" : imageUrl,
+        "outlineColor": {}
       }))
     })
 

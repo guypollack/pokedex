@@ -1,3 +1,37 @@
+export function findMainColor(source) {
+  const canvas =  document.createElement("canvas");
+  canvas.setAttribute("id","canvas");
+  canvas.width = 300;
+  canvas.height = 300;
+  canvas.style.display = "none";
+  const ctx = canvas.getContext("2d");
+
+  const image = new Image();
+  image.src = source;
+  image.crossOrigin = "Anonymous";
+
+  const outlineColor = {
+    r: "",
+    g: "",
+    b: "",
+    a: ""
+  }
+
+  image.onload = () => {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const {red, green, blue, alpha} = mainColor(canvas, ctx, 16);
+
+    outlineColor["r"] = red;
+    outlineColor["g"] = green;
+    outlineColor["b"] = blue;
+    outlineColor["a"] = alpha;
+  }
+
+  return outlineColor;
+
+}
+
 export function mainColor(canvas, ctx, tolerance) {
   const colors = {};
   

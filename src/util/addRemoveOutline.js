@@ -33,9 +33,7 @@ export function addOutline(elementId) {
 
     elem.style.filter=(`drop-shadow(5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(5px -5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px -5px 1.5px rgba(${red},${green},${blue},${alpha}))`);
   }
-
-  console.log(outlineColor);
-
+  // console.log(outlineColor);
 }
 
 export function removeOutline(elementId) {
