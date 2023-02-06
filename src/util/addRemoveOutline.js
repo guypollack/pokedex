@@ -24,13 +24,13 @@ export function addOutline(elementId) {
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    const {red, green, blue, alpha} = findMainColor(canvas, ctx);  
+    const {red, green, blue, alpha} = findMainColor(canvas, ctx, 10);  
     
     elem.style.filter=(`drop-shadow(5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(5px -5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px -5px 1.5px rgba(${red},${green},${blue},${alpha}))`);
   };
 }
 
-function findMainColor(canvas, ctx) {
+function findMainColor(canvas, ctx, tolerance) {
   const colors = {};
   
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -40,7 +40,7 @@ function findMainColor(canvas, ctx) {
 
   for (let i = 0; i < data.length; i += 4) {
     if (data[i+3] !== 0) {
-      const color = [data[i], data[i+1], data[i+2], data[i+3]].join(",");
+      const color = [roundNumber(data[i],tolerance), roundNumber(data[i+1],tolerance), roundNumber(data[i+2],tolerance), roundNumber(data[i+3],tolerance)].join(",");
       if (colors[color]) {
         colors[color]++;
       } else {
@@ -67,6 +67,8 @@ function findMainColor(canvas, ctx) {
 
   mainColor = mainColor.split(",");
 
+  alert(mainColor);
+
   return ({
     red: mainColor[0],
     green: mainColor[1],
@@ -84,6 +86,10 @@ function numberToString(num) {
   } else {
     return "00" + num.toString();
   }
+}
+
+function roundNumber(num,toNum) {
+  return Math.round(num/toNum)*toNum;
 }
 
 export function removeOutline(elementId) {
