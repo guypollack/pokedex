@@ -24,7 +24,7 @@ export function addOutline(elementId) {
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    const {red, green, blue, alpha} = findMainColor(canvas, ctx, 10);  
+    const {red, green, blue, alpha} = findMainColor(canvas, ctx, 16);  
     
     elem.style.filter=(`drop-shadow(5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(5px -5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px 5px 1.5px rgba(${red},${green},${blue},${alpha})) drop-shadow(-5px -5px 1.5px rgba(${red},${green},${blue},${alpha}))`);
   };
@@ -67,7 +67,7 @@ function findMainColor(canvas, ctx, tolerance) {
 
   mainColor = mainColor.split(",");
 
-  alert(mainColor);
+  // alert(mainColor);
 
   return ({
     red: mainColor[0],
