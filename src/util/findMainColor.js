@@ -1,4 +1,4 @@
-export function findMainColor(canvas, ctx, tolerance) {
+export function mainColor(canvas, ctx, tolerance) {
   const colors = {};
   
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -43,18 +43,8 @@ export function findMainColor(canvas, ctx, tolerance) {
     blue: mainColor[2],
     alpha: mainColor[3]
   });
-
 }
 
-function numberToString(num) {
-  if (num >= 100) {
-    return num.toString();
-  } else if (num >= 10) {
-    return "0" + num.toString();
-  } else {
-    return "00" + num.toString();
-  }
-}
 
 function roundNumber(num,toNum) {
   return Math.round(num/toNum)*toNum;

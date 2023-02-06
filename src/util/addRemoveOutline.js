@@ -1,4 +1,4 @@
-import { findMainColor } from "./findMainColor";
+import { mainColor } from "./findMainColor";
 
 export function addOutline(elementId) {
   const elem = document.getElementById(elementId); 
@@ -24,7 +24,7 @@ export function addOutline(elementId) {
   image.onload = () => {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    const {red, green, blue, alpha} = findMainColor(canvas, ctx, 16);
+    const {red, green, blue, alpha} = mainColor(canvas, ctx, 16);
 
     outlineColor["r"] = red;
     outlineColor["g"] = green;
