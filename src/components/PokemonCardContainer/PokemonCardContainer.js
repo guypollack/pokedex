@@ -1,11 +1,16 @@
-import React from "react";
-import "./PokemonCardContainer.css";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
+import { setOutlineColor } from "../../features/pokemon/pokemonSlice";
+import "./PokemonCardContainer.css";
 
 export function PokemonCardContainer({number, name, imageUrl}) {
   // console.log("A");
   // console.log(number);
+
+  const dispatch = useDispatch();
 
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
