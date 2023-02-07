@@ -22,7 +22,15 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   }
 
   useEffect(() => {
-    addOutlineColorToPokemon();
+    // addOutlineColorToPokemon();
+  },[])
+
+  useEffect(() => { // use this logic to only add outline color data for visible elements
+    if (name.includes("pidgey")) {
+      // alert(document.getElementById(id).classList);
+      const top = document.getElementById(id).getBoundingClientRect().top;
+      // console.log((top >= 0) && (top <= window.innerHeight));
+    }
   },[])
 
   function handleClick() {
