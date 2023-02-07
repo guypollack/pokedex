@@ -1,4 +1,4 @@
-export function findMainColor(source) {
+export async function findMainColor(source) {
   const canvas =  document.createElement("canvas");
   canvas.setAttribute("id","canvas");
   canvas.width = 300;
@@ -6,30 +6,31 @@ export function findMainColor(source) {
   canvas.style.display = "none";
   const ctx = canvas.getContext("2d");
 
-  const image = new Image();
-  image.src = source;
-  image.crossOrigin = "Anonymous";
+  await loadImage(source, canvas, ctx);
+
+  const {red, green, blue, alpha} = mainColor(canvas, ctx, 16);
 
   const outlineColor = {
-    r: "",
-    g: "",
-    b: "",
-    a: ""
+    "r": red,
+    "g": green,
+    "b": blue,
+    "a": alpha
   }
-
-  image.onload = () => {
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    const {red, green, blue, alpha} = mainColor(canvas, ctx, 16);
-
-    outlineColor["r"] = red;
-    outlineColor["g"] = green;
-    outlineColor["b"] = blue;
-    outlineColor["a"] = alpha;
-  }
-
+  // console.log(outlineColor);
   return outlineColor;
+}
 
+function loadImage(source, canvas, ctx) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = source;
+    img.crossOrigin = "Anonymous";
+    img.addEventListener('load', () => {
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(); // could use resolve(img) if needed to return img to findMainColor function, e.g. const img = loadImage(source, canvas, ctx))
+    });
+    img.addEventListener('error', reject);
+  });
 }
 
 export function mainColor(canvas, ctx, tolerance) {

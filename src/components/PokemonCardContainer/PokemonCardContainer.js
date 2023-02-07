@@ -11,11 +11,19 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   // console.log(number);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (name.includes("saur")) {
+      findMainColor(imageUrl);
+    }
+
+  },[])
+
+
 
   function handleClick() {
     navigate("/pokemon/"+name);
