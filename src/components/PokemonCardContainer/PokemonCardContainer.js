@@ -16,14 +16,14 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
 
+  async function addOutlineColorToPokemon() {
+    const color = await findMainColor(imageUrl);
+    dispatch(setOutlineColor({"number": number, "color": color}));
+  }
+
   useEffect(() => {
-    if (name.includes("saur")) {
-      findMainColor(imageUrl);
-    }
-
+    addOutlineColorToPokemon();
   },[])
-
-
 
   function handleClick() {
     navigate("/pokemon/"+name);
