@@ -68,8 +68,8 @@ export const pokemonSlice = createSlice({
       state.value += action.payload;
     },
     setOutlineColor: (state, action) => {
-      console.log("XXXXXYYYY");
-      console.log(action.payload);
+      // console.log("XXXXXYYYY");
+      // console.log(action.payload);
       state.allPokemon[action.payload.number].outlineColor = action.payload.color;
     }
   },
