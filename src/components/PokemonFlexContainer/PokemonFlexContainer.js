@@ -5,7 +5,7 @@ import { PokemonCardContainer } from "../PokemonCardContainer/PokemonCardContain
 export function PokemonFlexContainer({allPokemon}) {
   return (
     <div className="pokemon-flex-container">
-      {allPokemon.map(pokemon => <PokemonCardContainer number={pokemon.number}  name={pokemon.name} imageUrl={pokemon.imageUrl} />)}
+      {Object.keys(allPokemon).map(number => <PokemonCardContainer number={number}  name={allPokemon[number].name} imageUrl={allPokemon[number].imageUrl} />)}
     </div>
   )
   
