@@ -1,8 +1,8 @@
-export async function findMainColor(source) {
+export async function findMainColor(source, width, height) {
   const canvas =  document.createElement("canvas");
   canvas.setAttribute("id","canvas");
-  canvas.width = 300;
-  canvas.height = 300;
+  canvas.width = width;
+  canvas.height = height;
   canvas.style.display = "none";
   const ctx = canvas.getContext("2d");
 
@@ -82,7 +82,6 @@ export function mainColor(canvas, ctx, tolerance) {
     alpha: mainColor[3]
   });
 }
-
 
 function roundNumber(num,toNum) {
   return Math.round(num/toNum)*toNum;
