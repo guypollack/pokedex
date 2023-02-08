@@ -44,7 +44,8 @@ export function mainColor(canvas, ctx, tolerance) {
   // let startTime = Date.now();
 
   for (let i = 0; i < data.length; i += 4) {
-    if (data[i+3] !== 0) {
+    if (data[i] > 50 && data[i+1] > 50 && data[i+2] > 50 && data[i+3] !== 0) {
+    // if (data[i+3] !== 0) {
       const color = [roundNumber(data[i],tolerance), roundNumber(data[i+1],tolerance), roundNumber(data[i+2],tolerance), roundNumber(data[i+3],tolerance)].join(",");
       if (colors[color]) {
         colors[color]++;
@@ -72,7 +73,7 @@ export function mainColor(canvas, ctx, tolerance) {
 
   mainColor = mainColor.split(",");
 
-  alert(mainColor);
+  // alert(mainColor);
 
   return ({
     red: mainColor[0],
