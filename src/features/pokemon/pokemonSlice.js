@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { findMainColor } from '../../util/findMainColor';
 
 const initialState = {
-  allPokemon: []
+  allPokemon: {},
+  types: {},
+  status: ""
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -48,6 +50,23 @@ export const fetchAllPokemonAsync = createAsyncThunk(
   }
 );
 
+export const fetchPokemonTypesAsync = createAsyncThunk(
+  'pokemon/fetchPokemonTypesAsync',
+  async () => {
+    // alert("Fetching pokemon types");
+    const types = {};
+    for (let i = 0; i < 1008; i++) {
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+(i+1)+"/");
+      const json = await response.json();
+      // console.log(json);
+      const pokemonTypes = json.types.map(t => t.type.name);
+      types[i+1] = pokemonTypes.sort();
+    }
+    return types;
+  }
+);
+
+
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
@@ -84,6 +103,10 @@ export const pokemonSlice = createSlice({
         state.status = 'idle';
         // console.log("CCCC");
         state.allPokemon = action.payload;
+      })
+      .addCase(fetchPokemonTypesAsync.fulfilled, (state, action) => {
+        state.types = action.payload;
+        // alert("Pokemon Types Loaded");
       });
   },
 });
