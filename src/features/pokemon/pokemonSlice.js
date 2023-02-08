@@ -22,18 +22,18 @@ export const fetchAllPokemonAsync = createAsyncThunk(
     // console.log(json);
     const results = await json.results;
     // console.log(results);
-    results.slice(0,1008).forEach(item => {
-      const pokemonNumber = item.url.slice(34,item.url.length-1);
-      // console.log(pokemonNumber);
-      // console.log("https://pokeapi.co/api/v2/pokemon/".length);
+
+    for (let i = 0; i < 1008; i++) {
+      const pokemonNumber = results[i].url.slice(34,results[i].url.length-1);
       const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
       allPokemon[pokemonNumber] = {
-        "name": item.name,
-        "url": item.url,
+        "name": results[i].name,
+        "url": results[i].url,
         "imageUrl" : imageUrl,
         "outlineColor": {}
       };
-    })
+    }
+
 
     // for (let pokemon of results) {
     //   const pokemonResponse = await fetch(pokemon.url);
