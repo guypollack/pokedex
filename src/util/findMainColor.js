@@ -39,7 +39,9 @@ export function mainColor(canvas, ctx, tolerance) {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
 
-  // startTime = Date.now();
+  // alert(data.length);
+
+  // let startTime = Date.now();
 
   for (let i = 0; i < data.length; i += 4) {
     if (data[i+3] !== 0) {
@@ -70,7 +72,7 @@ export function mainColor(canvas, ctx, tolerance) {
 
   mainColor = mainColor.split(",");
 
-  // alert(mainColor);
+  alert(mainColor);
 
   return ({
     red: mainColor[0],
