@@ -50,8 +50,8 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   }
 
   return (
-    <div key={number} className="pokemon-card-container" onClick={handleClick} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-      <img id={id}  className="pokemon-card-image" src={imageUrl} />
+    <div key={number} className="pokemon-card-container" onClick={handleClick} >
+      <img id={id}  className="pokemon-card-image" src={imageUrl} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
       <div className="pokemon-card-details">
         <p>{number}</p>
         <p>{name}</p>

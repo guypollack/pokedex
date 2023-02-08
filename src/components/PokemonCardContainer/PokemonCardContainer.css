@@ -24,11 +24,11 @@
   margin: 0;
 }
 
-.pokemon-card-container:hover > .pokemon-card-image {
+.pokemon-card-image:hover {
   width: 110px;
 }
 
-.pokemon-card-container:hover > .pokemon-card-details {
+.pokemon-card-image:hover ~ .pokemon-card-details {
   transform: translateY(-10px);
   font-weight: bold;
 }
