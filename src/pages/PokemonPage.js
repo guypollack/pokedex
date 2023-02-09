@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { NavBar } from '../components/NavBar.js'
+import { NavBar } from '../components/NavBar/NavBar.js'
 
 export function PokemonPage() {
   const { pokemonName } = useParams();
