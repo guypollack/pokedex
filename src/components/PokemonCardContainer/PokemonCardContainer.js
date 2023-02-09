@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
 import { setOutlineColor } from "../../features/pokemon/pokemonSlice";
+import { addToFavourites } from "../../features/favourites/favouritesSlice";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as outlineHeart } from "@fortawesome/free-regular-svg-icons";
@@ -57,11 +58,12 @@ export function PokemonCardContainer({number, name, imageUrl}) {
 
   function handleClickFavourite(e) {
     e.stopPropagation();
+    dispatch(addToFavourites(number))
     alert(`${name} added to favourites`)
   }
 
   return (
-    <div key={number} className="pokemon-card-container" onClick={handleClick} >
+    <div key={number} className="pokemon-card-container" onClick={handleClick}>
       <div className="favourite-button" onClick={handleClickFavourite}>
         <FontAwesomeIcon className="outline-heart" icon={outlineHeart} />
         <FontAwesomeIcon className="solid-heart" icon={solidHeart} />
