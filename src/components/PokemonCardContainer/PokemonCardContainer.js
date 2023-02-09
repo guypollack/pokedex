@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
 import { setOutlineColor } from "../../features/pokemon/pokemonSlice";
-import { addToFavourites } from "../../features/favourites/favouritesSlice";
+import { selectFavourites, addToFavourites, removeFromFavourites } from "../../features/favourites/favouritesSlice";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 // import "./PokemonCardContainer.css";
 
@@ -14,6 +14,9 @@ export function PokemonCardContainer({number, name, imageUrl}) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  const favourites = useSelector(selectFavourites);
+  const favourited = favourites.includes(number);
 
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
@@ -53,8 +56,13 @@ export function PokemonCardContainer({number, name, imageUrl}) {
 
   function handleClickFavourite(e) {
     e.stopPropagation();
-    dispatch(addToFavourites(number))
-    alert(`${name} added to favourites`)
+    if (!favourited) {
+      dispatch(addToFavourites(number))
+      // alert(`${name} added to favourites`)
+    } else {
+      dispatch(removeFromFavourites(number))
+      // alert(`${name} removed from favourites`)
+    }
   }
 
   return (
@@ -63,8 +71,9 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       name={name}
       id={id}
       imageUrl={imageUrl}
-      handleClickCard={handleClickCard}
-      handleClickFavourite={handleClickFavourite}
+      favourited={favourited}
+      onClickCard={handleClickCard}
+      onClickFavourite={handleClickFavourite}
       handleMouseOver={handleMouseOver}
       handleMouseOut={handleMouseOut}
     />

@@ -1,0 +1,28 @@
+.favourite-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: palevioletred;
+}
+
+.outline-heart, .solid-heart {
+  position: relative;
+  cursor: pointer;
+}
+
+.solid-heart {
+  display: none;
+}
+
+.solid-heart.favourited {
+  display: inline;
+}
+
+.outline-heart:hover {
+  display: none;
+}
+
+.outline-heart:hover ~ .solid-heart{
+  display: inline-block;
+}
