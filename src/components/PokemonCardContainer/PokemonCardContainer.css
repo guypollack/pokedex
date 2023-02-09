@@ -12,26 +12,26 @@
 .favourite-button {
   position: absolute;
   bottom: 5px;
-  right: -15px;
+  right: 5px;
   font-size: 20px;
   color: palevioletred;
 }
 
 .outline-heart, .solid-heart {
   position: relative;
+  cursor: pointer;
 }
 
 .solid-heart {
-  opacity: 0;
+  display: none;
 }
 
 .outline-heart:hover {
-  opacity: 0;
+  display: none;
 }
 
 .outline-heart:hover ~ .solid-heart{
-  opacity: 1;
-  transform: translateX(-20px);
+  display: inline-block;
 }
 
 .pokemon-card-image  {
