@@ -5,13 +5,8 @@ import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
 import { setOutlineColor } from "../../features/pokemon/pokemonSlice";
 import { addToFavourites } from "../../features/favourites/favouritesSlice";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as outlineHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-
-
-import "./PokemonCardContainer.css";
+import { PokemonCard } from "../PokemonCard/PokemonCard";
+// import "./PokemonCardContainer.css";
 
 export function PokemonCardContainer({number, name, imageUrl}) {
   // console.log("A");
@@ -40,7 +35,7 @@ export function PokemonCardContainer({number, name, imageUrl}) {
     }
   },[])
 
-  function handleClick() {
+  function handleClickCard() {
     navigate("/pokemon/"+name);
   }
 
@@ -63,17 +58,15 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   }
 
   return (
-    <div key={number} className="pokemon-card-container" onClick={handleClick}>
-      <div className="favourite-button" onClick={handleClickFavourite}>
-        <FontAwesomeIcon className="outline-heart" icon={outlineHeart} />
-        <FontAwesomeIcon className="solid-heart" icon={solidHeart} />
-      </div>
-      <img id={id}  className="pokemon-card-image" src={imageUrl} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
-      <div className="pokemon-card-details">
-        <p>{number}</p>
-        <p>{name}</p>
-      </div>
-      
-    </div>
+    <PokemonCard 
+      number={number}
+      name={name}
+      id={id}
+      imageUrl={imageUrl}
+      handleClickCard={handleClickCard}
+      handleClickFavourite={handleClickFavourite}
+      handleMouseOver={handleMouseOver}
+      handleMouseOut={handleMouseOut}
+    />
   )
 };
