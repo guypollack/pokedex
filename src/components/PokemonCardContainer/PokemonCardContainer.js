@@ -81,7 +81,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       id={id}
       imageUrl={imageUrl}
       favourited={favourited}
-      transition={transition}
       onClickCard={handleClickCard}
       onClickFavourite={handleClickFavourite}
       handleMouseOver={handleMouseOver}
