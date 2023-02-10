@@ -57,10 +57,19 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   function handleClickFavourite(e) {
     e.stopPropagation();
     if (!favourited) {
-      dispatch(addToFavourites(number))
+      dispatch(addToFavourites(number));
+      if (e.target.classList.length !== 0) {
+        // alert("A");
+        // alert(e.target.nextElementSibling.classList);
+        e.target.nextElementSibling.classList.add("favourited");
+      } else {
+        // alert("B");
+        e.target.parentElement.nextElementSibling.classList.add("favourited");
+      }
+      
       // alert(`${name} added to favourites`)
     } else {
-      dispatch(removeFromFavourites(number))
+      dispatch(removeFromFavourites(number));
       // alert(`${name} removed from favourites`)
     }
   }
@@ -72,6 +81,7 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       id={id}
       imageUrl={imageUrl}
       favourited={favourited}
+      transition={transition}
       onClickCard={handleClickCard}
       onClickFavourite={handleClickFavourite}
       handleMouseOver={handleMouseOver}

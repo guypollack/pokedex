@@ -4,11 +4,18 @@
   right: 5px;
   font-size: 20px;
   color: palevioletred;
+  /* border: 1px solid red; */
+  width: 20px;
+  height: 20px;
+}
+
+.outline-heart, .solid-heart, .solid-heart-animation {
+  position: absolute;
+  cursor: pointer;
 }
 
 .outline-heart, .solid-heart {
-  position: relative;
-  cursor: pointer;
+  z-index: 2;
 }
 
 .solid-heart {
@@ -19,10 +26,35 @@
   display: inline;
 }
 
-.outline-heart:hover {
-  display: none;
+.solid-heart-animation {
+  /* color: aquamarine; */
+  /* display: none; */
+  visibility: hidden;
+  opacity: 1;
+  z-index: 1;
+  transition: none;
 }
 
-.outline-heart:hover ~ .solid-heart{
-  display: inline-block;
+.solid-heart-animation.favourited {
+  visibility: visible;
+  font-size: 60px;
+  transform: translateX(-20px) translateY(-20px);
+  opacity: 0;
+  transition: all 0.8s;
 }
+
+.outline-heart:hover ~ .solid-heart {
+  display: inline;
+}
+
+/* @keyframes clickFavourite {
+  from {
+    font-size: 20px;
+    opacity: 1;
+  }
+  to {
+    font-size: 60px;
+    transform: translateX(-20px) translateY(-20px);
+    opacity: 0;
+  }
+} */
