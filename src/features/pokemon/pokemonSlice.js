@@ -55,12 +55,17 @@ export const fetchPokemonTypesAsync = createAsyncThunk(
   async () => {
     // alert("Fetching pokemon types");
     const types = {};
-    for (let i = 0; i < 1008; i++) {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+(i+1)+"/");
+    for (let i = 1; i < 1009; i++) {
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
       // console.log(json);
       const pokemonTypes = json.types.map(t => t.type.name);
-      types[i+1] = pokemonTypes.sort();
+      if (pokemonTypes.length > 1) {
+        types[i] = [pokemonTypes, pokemonTypes.slice(0,pokemonTypes.length).sort()];
+      } else {
+        types[i] = [pokemonTypes, pokemonTypes];
+      }
+      
     }
     return types;
   }
