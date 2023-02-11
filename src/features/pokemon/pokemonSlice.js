@@ -57,25 +57,63 @@ export const fetchPokemonDataAsync = createAsyncThunk(
   async () => {
     // alert("Fetching pokemon types");
     const types = {};
+    const generations = {};
     const heights = {};
     const weights = {};
 
     for (let i = 1; i < 1009; i++) {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
-      if (i === 1) {
-        console.log(json);
-      }
+      // if (i === 1) {
+      //   console.log(json);
+      // }
       const pokemonTypes = json.types.map(t => t.type.name);
       if (pokemonTypes.length > 1) {
         types[i] = [pokemonTypes, pokemonTypes.slice(0,pokemonTypes.length).sort()];
       } else {
         types[i] = [pokemonTypes, pokemonTypes];
       }
+
+      const generationBoundaries = {1: 151,
+                                    2: 251,
+                                    3: 386,
+                                    4: 493,
+                                    5: 649,
+                                    6: 721,
+                                    7: 809,
+                                    8: 905,
+                                    9: 1008}
+
+      for (let [generation, boundary] of Object.entries(generationBoundaries)) {
+        if (i <= boundary) {
+          generations[i] = generation;
+          break;
+        }
+      }
+
+      // Method for finding generation below does not work - some pokemon do not pass test at all/give false positives
+      // const generationList = Object.keys(json.sprites.versions);
+
+      // for (let j = 0; j < generationList.length; j++) {
+      //   let generationFound = false;
+      //   if (i === 1008) {
+      //     console.log(json.sprites.versions[generationList[j]]);
+      //   }
+      //   for (let version of Object.values(json.sprites.versions[generationList[j]])) {
+          
+      //     if (Object.values(version).some(variationUrl => variationUrl !== null)) {
+      //       generations[i] = j+1;
+      //       generationFound = true
+      //       break;
+      //     }
+      //   }
+      //   if (generationFound) break;
+      // }
+      
       heights[i] = json.height / 10;
       weights[i] = json.weight / 10;
     }
-    return {types, heights, weights};
+    return {types, generations, heights, weights};
   }
 );
 
@@ -119,6 +157,7 @@ export const pokemonSlice = createSlice({
       })
       .addCase(fetchPokemonDataAsync.fulfilled, (state, action) => {
         state.types = action.payload.types;
+        state.generations = action.payload.generations;
         state.heights = action.payload.heights;
         state.weights = action.payload.weights;
         // alert("Pokemon Types Loaded");
