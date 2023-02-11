@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonTypesAsync, selectAllPokemon } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon } from '../../features/pokemon/pokemonSlice';
 import { selectFavourites } from '../../features/favourites/favouritesSlice.js';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 

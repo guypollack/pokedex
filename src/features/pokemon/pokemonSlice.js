@@ -4,6 +4,8 @@ import { findMainColor } from '../../util/findMainColor';
 const initialState = {
   allPokemon: {},
   types: {},
+  heights: {},
+  weights: {},
   status: ""
 };
 
@@ -50,24 +52,30 @@ export const fetchAllPokemonAsync = createAsyncThunk(
   }
 );
 
-export const fetchPokemonTypesAsync = createAsyncThunk(
-  'pokemon/fetchPokemonTypesAsync',
+export const fetchPokemonDataAsync = createAsyncThunk(
+  'pokemon/fetchPokemonDataAsync',
   async () => {
     // alert("Fetching pokemon types");
     const types = {};
+    const heights = {};
+    const weights = {};
+
     for (let i = 1; i < 1009; i++) {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
-      // console.log(json);
+      if (i === 1) {
+        console.log(json);
+      }
       const pokemonTypes = json.types.map(t => t.type.name);
       if (pokemonTypes.length > 1) {
         types[i] = [pokemonTypes, pokemonTypes.slice(0,pokemonTypes.length).sort()];
       } else {
         types[i] = [pokemonTypes, pokemonTypes];
       }
-      
+      heights[i] = json.height / 10;
+      weights[i] = json.weight / 10;
     }
-    return types;
+    return {types, heights, weights};
   }
 );
 
@@ -109,8 +117,10 @@ export const pokemonSlice = createSlice({
         // console.log("CCCC");
         state.allPokemon = action.payload;
       })
-      .addCase(fetchPokemonTypesAsync.fulfilled, (state, action) => {
-        state.types = action.payload;
+      .addCase(fetchPokemonDataAsync.fulfilled, (state, action) => {
+        state.types = action.payload.types;
+        state.heights = action.payload.heights;
+        state.weights = action.payload.weights;
         // alert("Pokemon Types Loaded");
       });
   },

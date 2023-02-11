@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MyButton } from '../../components/MyButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonTypesAsync, selectAllPokemon, selectStatus } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectStatus } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -15,7 +15,7 @@ export function HomePage() {
 
   if (status !== "idle") {
     dispatch(fetchAllPokemonAsync());
-    dispatch(fetchPokemonTypesAsync());
+    dispatch(fetchPokemonDataAsync());
   }
 
   // useEffect(() => {
