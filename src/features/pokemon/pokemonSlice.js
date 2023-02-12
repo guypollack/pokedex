@@ -4,8 +4,10 @@ import { findMainColor } from '../../util/findMainColor';
 const initialState = {
   allPokemon: {},
   types: {},
+  generations: {},
   heights: {},
   weights: {},
+  filters: {"types": [], "generations": [], "heights": [], "weights": []},
   status: ""
 };
 
@@ -141,6 +143,14 @@ export const pokemonSlice = createSlice({
       // console.log("XXXXXYYYY");
       // console.log(action.payload);
       state.allPokemon[action.payload.number].outlineColor = action.payload.color;
+    },
+    addFilter: (state, action) => {
+      // payload format {property: __, value: __}
+      state.filters[action.payload.property].push(action.payload.value);
+      // console.log(state.filters);
+    },
+    removeFilter: (state, action) => {
+      state.filters[action.payload.property] = state.filters[action.payload.property].filter(value => value !== action.payload.value);
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -173,7 +183,11 @@ export const pokemonSlice = createSlice({
 export const selectStatus = (state) => state.pokemon.status;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
-export const { setOutlineColor } = pokemonSlice.actions;
+// export const selectFilteredPokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([pokemonNumber, pokemonValue]) => {
+//                                             return state.pokemon.filters.every(([filterType, filterValue]) => state.pokemon[filterType][pokemonNumber].includes(filterValue))
+//                                           }));
+export const selectFilters = (state) => state.pokemon.filters;
+export const { setOutlineColor, addFilter, removeFilter } = pokemonSlice.actions;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 

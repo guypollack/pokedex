@@ -1,6 +1,6 @@
 import React from "react";
-import "./PokemonFlexContainer.css";
 import { PokemonCardContainer } from "../PokemonCardContainer/PokemonCardContainer";
+import "./PokemonFlexContainer.css";
 
 export function PokemonFlexContainer({allPokemon}) {
   return (
