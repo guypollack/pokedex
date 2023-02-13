@@ -7,8 +7,10 @@ const initialState = {
   generations: {},
   heights: {},
   weights: {},
-  filters: {"types": [], "generations": [], "heights": [], "weights": []},
-  status: ""
+  filters: {"types": [], "generation": [], "height": [], "weight": []},
+  status: "",
+  lBound: 0,
+  uBound: 100
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -30,16 +32,21 @@ export const fetchAllPokemonAsync = createAsyncThunk(
     // console.log(results);
 
     for (let i = 0; i < 1008; i++) {
-      const pokemonNumber = results[i].url.slice(34,results[i].url.length-1);
+      const pokemonNumber = i+1; //results[i].url.slice(34,results[i].url.length-1);
       const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
       allPokemon[pokemonNumber] = {
         "name": results[i].name,
         "url": results[i].url,
         "imageUrl" : imageUrl,
-        "outlineColor": {}
+        "outlineColor": {},
+        "types": [],
+        "unsortedTypes": [],
+        "generation": "",
+        "height": 0,
+        "weight": 0,
+        "visible": false
       };
     }
-
 
     // for (let pokemon of results) {
     //   const pokemonResponse = await fetch(pokemon.url);
@@ -146,7 +153,11 @@ export const pokemonSlice = createSlice({
     },
     addFilter: (state, action) => {
       // payload format {property: __, value: __}
-      state.filters[action.payload.property].push(action.payload.value);
+      if (!(state.filters[action.payload.property].includes(action.payload.value))) {
+        state.filters[action.payload.property].push(action.payload.value);
+        state.filters[action.payload.property].sort();
+      }
+      
       // console.log(state.filters);
     },
     removeFilter: (state, action) => {
@@ -170,6 +181,13 @@ export const pokemonSlice = createSlice({
         state.generations = action.payload.generations;
         state.heights = action.payload.heights;
         state.weights = action.payload.weights;
+        // for (let i = 1; i < 1009; i++) {
+        //   state.allPokemon[i].unsortedTypes = action.payload.types[i][0];
+        //   state.allPokemon[i].types = action.payload.types[i][1];
+        //   state.allPokemon[i].generation = action.payload.generations[i];
+        //   state.allPokemon[i].height = action.payload.heights[i];
+        //   state.allPokemon[i].weight = action.payload.weights[i];
+        // }
         // alert("Pokemon Types Loaded");
       });
   },
@@ -183,10 +201,52 @@ export const pokemonSlice = createSlice({
 export const selectStatus = (state) => state.pokemon.status;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
-// export const selectFilteredPokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([pokemonNumber, pokemonValue]) => {
-//                                             return state.pokemon.filters.every(([filterType, filterValue]) => state.pokemon[filterType][pokemonNumber].includes(filterValue))
-//                                           }));
+// export const selectFilteredPokemon = (state) => {
+//   return Object.fromEntries(Object.entries(state.pokemon.allPokemon).slice(0,10).filter(([pokemonNumber, pokemonValues]) => {
+//       // console.log(pokemonValues);
+//       // console.log(Object.entries(state.pokemon.filters).every(([filterKey, filterValue]) => pokemonValues[filterKey] === filterValue));
+//       console.log(pokemonNumber);
+//       for (let filterKey in state.pokemon.filters) {
+//         console.log("A");
+//         // console.log(filterKey);
+//         // console.log(state.pokemon.filters);
+//         console.log(state.pokemon.filters[filterKey]);
+//         if (state.pokemon[filterKey][pokemonNumber]) {
+//           console.log("B");
+//           console.log(state.pokemon[filterKey][pokemonNumber][1]);
+//           console.log("C");
+//           console.log(state.pokemon.filters[filterKey].every(val => state.pokemon[filterKey][pokemonNumber][1].includes(val)));
+//         }
+//         // console.log("A");
+//         // console.log(pokemonValues);
+//         // console.log("B");
+//         // console.log(filterKey);
+//         // console.log("C");
+//         // console.log(pokemonValues[filterKey]);
+//         // console.log("D");
+//         // console.log(state.pokemon.filters[filterKey]);
+//         if (pokemonValues[filterKey] !== state.pokemon.filters[filterKey]) {
+//           return false;
+//         }
+//         // if (!(pokemonValues[filterKey].includes(state.pokemon.filters[filterKey]))) {
+//         //   return false;
+//         // }
+//       }
+//       return true;
+      
+//       // return Object.entries(state.pokemon.filters).every(([filterKey, filterValue]) => pokemonValues[filterKey] === filterValue);
+//     }))
+//   }
+
+// // export const selectFilteredPokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([pokemonNumber, pokemonValue]) => {
+// //                                             return state.pokemon.filters.every(([filterType, filterValue]) => state.pokemon[filterType][pokemonNumber].includes(filterValue))
+// //                                           }));
+
+
+
 export const selectFilters = (state) => state.pokemon.filters;
+export const selectLBound = (state) => state.pokemon.lBound;
+export const selectUBound = (state) => state.pokemon.uBound;
 export const { setOutlineColor, addFilter, removeFilter } = pokemonSlice.actions;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

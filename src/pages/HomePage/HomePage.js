@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MyButton } from '../../components/MyButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, addFilter, removeFilter, selectAllPokemon, selectFilteredPokemon, selectFilters, selectStatus } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, addFilter, removeFilter, selectAllPokemon, selectFilteredPokemon, selectFilters, selectStatus, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -10,7 +10,11 @@ export function HomePage() {
 
   const allPokemon = useSelector(selectAllPokemon);
   const status = useSelector(selectStatus);
-  const filters = useSelector(selectFilters);
+  // const filters = useSelector(selectFilters);
+  // const filteredPokemon = useSelector(selectFilteredPokemon);
+  const lBound = useSelector(selectLBound);
+  const uBound = useSelector(selectUBound);
+  
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -22,6 +26,8 @@ export function HomePage() {
   useEffect(() => {
     dispatch(addFilter({"property": "types", "value": "water"}))
   },[])
+
+  // console.log(filteredPokemon);
 
   // useEffect(() => {
   //   dispatch(fetchAllPokemonAsync());
