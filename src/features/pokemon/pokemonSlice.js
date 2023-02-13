@@ -264,50 +264,6 @@ export const selectFilteredPokemon = (state) => {
   }
 }
 
-
-// export const selectFilteredPokemon = (state) => {
-//   return Object.fromEntries(Object.entries(state.pokemon.allPokemon).slice(0,10).filter(([pokemonNumber, pokemonValues]) => {
-//       // console.log(pokemonValues);
-//       // console.log(Object.entries(state.pokemon.filters).every(([filterKey, filterValue]) => pokemonValues[filterKey] === filterValue));
-//       console.log(pokemonNumber);
-//       for (let filterKey in state.pokemon.filters) {
-//         console.log("A");
-//         // console.log(filterKey);
-//         // console.log(state.pokemon.filters);
-//         console.log(state.pokemon.filters[filterKey]);
-//         if (state.pokemon[filterKey][pokemonNumber]) {
-//           console.log("B");
-//           console.log(state.pokemon[filterKey][pokemonNumber][1]);
-//           console.log("C");
-//           console.log(state.pokemon.filters[filterKey].every(val => state.pokemon[filterKey][pokemonNumber][1].includes(val)));
-//         }
-//         // console.log("A");
-//         // console.log(pokemonValues);
-//         // console.log("B");
-//         // console.log(filterKey);
-//         // console.log("C");
-//         // console.log(pokemonValues[filterKey]);
-//         // console.log("D");
-//         // console.log(state.pokemon.filters[filterKey]);
-//         if (pokemonValues[filterKey] !== state.pokemon.filters[filterKey]) {
-//           return false;
-//         }
-//         // if (!(pokemonValues[filterKey].includes(state.pokemon.filters[filterKey]))) {
-//         //   return false;
-//         // }
-//       }
-//       return true;
-      
-//       // return Object.entries(state.pokemon.filters).every(([filterKey, filterValue]) => pokemonValues[filterKey] === filterValue);
-//     }))
-//   }
-
-// // export const selectFilteredPokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([pokemonNumber, pokemonValue]) => {
-// //                                             return state.pokemon.filters.every(([filterType, filterValue]) => state.pokemon[filterType][pokemonNumber].includes(filterValue))
-// //                                           }));
-
-
-
 export const selectFilters = (state) => state.pokemon.filters;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
