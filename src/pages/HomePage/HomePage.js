@@ -41,6 +41,8 @@ export function HomePage() {
 
   useEffect(() => {
     dispatch(addFilter({"property": "types", "value": "water"}))
+    // dispatch(addFilter({"property": "types", "value": "fire"}));
+    // dispatch(addFilter({"property": "types", "value": "flying"}));
   },[])
 
   // console.log(filteredPokemon);

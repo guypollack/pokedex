@@ -219,7 +219,7 @@ export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries
 export const selectFilteredPokemon = (state) => {
   // let visiblePokemonArray = Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible).map(([pokemonNumber, pokemonValue]) => pokemonNumber);
   let visiblePokemonArray = [];
-  for (let i = state.pokemon.lBound; i < state.pokemon.uBound; i++) {
+  for (let i = 1; i < state.pokemon.uBound; i++) {
     visiblePokemonArray.push(i);
   }
   // console.log(visiblePokemonArray);
