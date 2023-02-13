@@ -3,7 +3,7 @@ import { MyButton } from '../../components/MyButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -13,6 +13,7 @@ export function HomePage() {
   const visiblePokemon = useSelector(selectVisiblePokemon);
   const status = useSelector(selectStatus);
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
+  const dataFetched = useSelector(selectDataFetched);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
   const lBound = useSelector(selectLBound);
@@ -59,8 +60,8 @@ export function HomePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
-      {status === "loading" && <h4>Data loading...</h4>}
-      {status === "idle" && <PokemonFlexContainer allPokemon={filteredPokemon} />}
+      {(!allPokemonFetched || !dataFetched) && <h4>Data loading...</h4>}
+      {allPokemonFetched && dataFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       <SeeMoreButton />
     </div>
   )

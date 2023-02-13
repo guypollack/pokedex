@@ -10,6 +10,7 @@ const initialState = {
   filters: {"types": [], "generation": [], "height": [], "weight": []},
   status: "",
   allPokemonFetched: false,
+  dataFetched: false,
   lBound: 1,
   uBound: 101
 };
@@ -189,11 +190,15 @@ export const pokemonSlice = createSlice({
         state.allPokemon = action.payload;
         state.allPokemonFetched = true;
       })
+      .addCase(fetchPokemonDataAsync.pending, (state) => {
+        state.dataFetched = false;
+      })
       .addCase(fetchPokemonDataAsync.fulfilled, (state, action) => {
         state.types = {...state.types, ...action.payload.types};
         state.generations = {...state.generations, ...action.payload.generations};
         state.heights = {...state.heights, ...action.payload.heights};
         state.weights = {...state.weights, ...action.payload.weights};
+        state.dataFetched = true;
         // for (let i = 1; i < 1009; i++) {
         //   state.allPokemon[i].unsortedTypes = action.payload.types[i][0];
         //   state.allPokemon[i].types = action.payload.types[i][1];
@@ -213,6 +218,7 @@ export const pokemonSlice = createSlice({
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectStatus = (state) => state.pokemon.status;
 export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetched;
+export const selectDataFetched = (state) => state.pokemon.dataFetched;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
