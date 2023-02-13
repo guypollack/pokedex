@@ -9,8 +9,9 @@ const initialState = {
   weights: {},
   filters: {"types": [], "generation": [], "height": [], "weight": []},
   status: "",
-  lBound: 0,
-  uBound: 100
+  allPokemonFetched: false,
+  lBound: 1,
+  uBound: 101
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -151,6 +152,17 @@ export const pokemonSlice = createSlice({
       // console.log(action.payload);
       state.allPokemon[action.payload.number].outlineColor = action.payload.color;
     },
+    setBounds: (state, action) => {
+      state.lBound = action.payload.lBound;
+      state.uBound = action.payload.uBound;
+    },
+    makeVisible: (state, action) => {
+      for (let i = action.payload.start; i < action.payload.end; i++) {
+        state.allPokemon[i].visible = true;
+      }
+      // alert(state.allPokemon[1].visible)
+      // alert(state.allPokemon[1].visible)
+    },
     addFilter: (state, action) => {
       // payload format {property: __, value: __}
       if (!(state.filters[action.payload.property].includes(action.payload.value))) {
@@ -175,6 +187,7 @@ export const pokemonSlice = createSlice({
         state.status = 'idle';
         // console.log("CCCC");
         state.allPokemon = action.payload;
+        state.allPokemonFetched = true;
       })
       .addCase(fetchPokemonDataAsync.fulfilled, (state, action) => {
         state.types = action.payload.types;
@@ -199,6 +212,7 @@ export const pokemonSlice = createSlice({
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectStatus = (state) => state.pokemon.status;
+export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetched;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
@@ -248,7 +262,7 @@ export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries
 export const selectFilters = (state) => state.pokemon.filters;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
-export const { setOutlineColor, addFilter, removeFilter } = pokemonSlice.actions;
+export const { setOutlineColor, addFilter, setBounds, makeVisible, removeFilter } = pokemonSlice.actions;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 

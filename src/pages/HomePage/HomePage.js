@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MyButton } from '../../components/MyButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -11,6 +11,7 @@ export function HomePage() {
   const allPokemon = useSelector(selectAllPokemon);
   const visiblePokemon = useSelector(selectVisiblePokemon);
   const status = useSelector(selectStatus);
+  const allPokemonFetched = useSelector(selectAllPokemonFetched);
   // const filters = useSelector(selectFilters);
   // const filteredPokemon = useSelector(selectFilteredPokemon);
   const lBound = useSelector(selectLBound);
@@ -19,10 +20,22 @@ export function HomePage() {
 
   // dispatch(fetchAllPokemonAsync());
 
-  if (status !== "idle") {
-    dispatch(fetchAllPokemonAsync());
-    dispatch(fetchPokemonDataAsync());
-  }
+  useEffect(() => {
+    if (!allPokemonFetched) {
+      // console.log("A");
+      dispatch(fetchAllPokemonAsync());
+      // dispatch(makeVisible({"start": lBound, "end": uBound}));
+      // dispatch(fetchPokemonDataAsync());
+    }
+  },[allPokemonFetched])
+  
+
+  useEffect(() => {
+    if (allPokemonFetched) {
+      // console.log("B");
+      dispatch(makeVisible({"start": lBound, "end": uBound}));
+    }
+  },[allPokemonFetched])
 
   useEffect(() => {
     dispatch(addFilter({"property": "types", "value": "water"}))
