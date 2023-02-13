@@ -1,13 +1,21 @@
 import React from "react";
-import { addFilter } from "../../features/pokemon/pokemonSlice";
+import { addFilter, removeFilter } from "../../features/pokemon/pokemonSlice";
 import { useDispatch } from "react-redux";
+import "./FilterButton.css"
 
 export function FilterButton({property, value}) {
   const dispatch = useDispatch();
 
-  function handleClick() {
-    dispatch(addFilter({property, value}));
+  function handleClick(e) {
+    // alert(e.target.classList.contains("active"));
+    if (!e.target.classList.contains("active")) {
+      dispatch(addFilter({property, value}));
+      e.target.classList.add("active");
+    } else {
+      dispatch(removeFilter({property, value}));
+      e.target.classList.remove("active");
+    }
   }
   
-  return <button onClick={handleClick}>{property}: {value}</button>
+  return <button className="filter-button"  onClick={handleClick}>{property}: {value}</button>
 }
