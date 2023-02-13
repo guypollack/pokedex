@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { MyButton } from '../../components/MyButton';
+import { FilterButton } from '../../components/FilterButton/FilterButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,10 +42,18 @@ export function HomePage() {
   },[allPokemonFetched, lBound, uBound])
 
   useEffect(() => {
-    dispatch(addFilter({"property": "types", "value": "water"}))
+    // dispatch(addFilter({"property": "types", "value": "water"}))
     // dispatch(addFilter({"property": "types", "value": "fire"}));
     // dispatch(addFilter({"property": "types", "value": "flying"}));
   },[])
+
+  useEffect(() => {
+    if (allPokemonFetched && dataFetched) {
+      if (Object.keys(filteredPokemon).length < 50 && uBound < 1009) {
+        dispatch(setBounds({"lBound": lBound + 100, "uBound": uBound + 100}));
+      }
+    }
+  },[filteredPokemon])
 
   // console.log(filteredPokemon);
 
@@ -60,8 +69,13 @@ export function HomePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
+      <FilterButton property="types" value="water" />
+      <FilterButton property="types" value="fire" />
+      <FilterButton property="types" value="flying" />
       {(!allPokemonFetched || !dataFetched) && <h4>Data loading...</h4>}
       {allPokemonFetched && dataFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>}
+      {allPokemonFetched && dataFetched &&<h4>{Object.keys(filteredPokemon).length} results found</h4>}
+      {Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
       {allPokemonFetched && dataFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       <SeeMoreButton />
     </div>
