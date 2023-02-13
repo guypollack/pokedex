@@ -34,6 +34,7 @@ export function HomePage() {
     if (allPokemonFetched) {
       // console.log("B");
       dispatch(makeVisible({"start": lBound, "end": uBound}));
+      dispatch(fetchPokemonDataAsync({"start": lBound, "end": uBound}));
     }
   },[allPokemonFetched])
 

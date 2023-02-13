@@ -64,14 +64,14 @@ export const fetchAllPokemonAsync = createAsyncThunk(
 
 export const fetchPokemonDataAsync = createAsyncThunk(
   'pokemon/fetchPokemonDataAsync',
-  async () => {
+  async ({start, end}) => {
     // alert("Fetching pokemon types");
     const types = {};
     const generations = {};
     const heights = {};
     const weights = {};
 
-    for (let i = 1; i < 1009; i++) {
+    for (let i = start; i < end; i++) {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
       // if (i === 1) {
@@ -190,10 +190,10 @@ export const pokemonSlice = createSlice({
         state.allPokemonFetched = true;
       })
       .addCase(fetchPokemonDataAsync.fulfilled, (state, action) => {
-        state.types = action.payload.types;
-        state.generations = action.payload.generations;
-        state.heights = action.payload.heights;
-        state.weights = action.payload.weights;
+        state.types = {...state.types, ...action.payload.types};
+        state.generations = {...state.generations, ...action.payload.generations};
+        state.heights = {...state.heights, ...action.payload.heights};
+        state.weights = {...state.weights, ...action.payload.weights};
         // for (let i = 1; i < 1009; i++) {
         //   state.allPokemon[i].unsortedTypes = action.payload.types[i][0];
         //   state.allPokemon[i].types = action.payload.types[i][1];
