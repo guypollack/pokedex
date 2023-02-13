@@ -201,6 +201,7 @@ export const pokemonSlice = createSlice({
 export const selectStatus = (state) => state.pokemon.status;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
+export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
 // export const selectFilteredPokemon = (state) => {
 //   return Object.fromEntries(Object.entries(state.pokemon.allPokemon).slice(0,10).filter(([pokemonNumber, pokemonValues]) => {
 //       // console.log(pokemonValues);
