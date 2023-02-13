@@ -9,6 +9,7 @@ const initialState = {
   heights: {},
   weights: {},
   filters: {"types": [], "generation": [], "height": [], "weight": []},
+  filteredPokemon: {},
   status: "",
   allPokemonFetched: false,
   dataFetched: false,
@@ -129,6 +130,42 @@ export const fetchPokemonDataAsync = createAsyncThunk(
   }
 );
 
+export const filterPokemonAsync = createAsyncThunk(
+  'pokemon/filterPokemonAsync',
+  async (arg, {getState}) => {
+    const state = getState();
+
+    let visiblePokemonArray = [];
+    for (let i = 1; i < state.pokemon.uBound; i++) {
+      visiblePokemonArray.push(i);
+    }
+    // console.log(visiblePokemonArray);
+
+    const filters = Object.entries(state.pokemon.filters);
+    // console.log(filters);
+    
+    let filteredPokemonArray = [];
+
+    if (!state.pokemon.weights[visiblePokemonArray[visiblePokemonArray.length - 1]]) {
+      console.log("A");
+      return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+      // return state.pokemon.filteredPokemon;
+    } else {
+      console.log("B");
+      filteredPokemonArray = visiblePokemonArray.filter(pokemonNumber => {
+        return filters.every(([filterName, filterValues]) => {
+          return filterValues.every(filterValue => {
+            return doesPokemonFitFilter(filterName, filterValue, pokemonNumber);
+          })
+        })
+      })
+    }
+    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray.includes(+key))); //the + in +key is needed to convert string to number
+    // console.log(filteredPokemon);
+    return filteredPokemon;
+  }
+);
+
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
@@ -207,6 +244,13 @@ export const pokemonSlice = createSlice({
         //   state.allPokemon[i].weight = action.payload.weights[i];
         // }
         // alert("Pokemon Types Loaded");
+      })
+      .addCase(filterPokemonAsync.pending, (state) => {
+        state.dataFetched = false;
+      })
+      .addCase(filterPokemonAsync.fulfilled, (state, action) => {
+        state.filteredPokemon = action.payload;
+        state.dataFetched = true;
       });
   },
 });
@@ -264,6 +308,8 @@ export const selectFilteredPokemon = (state) => {
     return filteredPokemon;
   }
 }
+
+export const selectFilteredPokemon2 = (state) => state.pokemon.filteredPokemon;
 
 export const selectFilters = (state) => state.pokemon.filters;
 export const selectLBound = (state) => state.pokemon.lBound;

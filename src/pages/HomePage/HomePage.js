@@ -4,7 +4,7 @@ import { FilterButton } from '../../components/FilterButton/FilterButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilteredPokemon2, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, filterPokemonAsync } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -17,6 +17,7 @@ export function HomePage() {
   const dataFetched = useSelector(selectDataFetched);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
+  // const filteredPokemon = useSelector(selectFilteredPokemon2);
   const lBound = useSelector(selectLBound);
   const uBound = useSelector(selectUBound);
   
@@ -37,6 +38,7 @@ export function HomePage() {
     if (allPokemonFetched) {
       // console.log("B");
       dispatch(makeVisible({"start": lBound, "end": uBound}));
+      // dispatch(filterPokemonAsync());
       dispatch(fetchPokemonDataAsync({"start": lBound, "end": uBound}));
     }
   },[allPokemonFetched, lBound, uBound])
