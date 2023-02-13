@@ -72,6 +72,8 @@ export function HomePage() {
       <FilterButton property="types" value="water" />
       <FilterButton property="types" value="fire" />
       <FilterButton property="types" value="flying" />
+      <FilterButton property="generations" value="2" />
+      <FilterButton property="generations" value="3" />
       {(!allPokemonFetched || !dataFetched) && <h4>Data loading...</h4>}
       {allPokemonFetched && dataFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>}
       {allPokemonFetched && dataFetched &&<h4>{Object.keys(filteredPokemon).length} results found</h4>}

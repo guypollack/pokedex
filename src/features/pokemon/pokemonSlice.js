@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { findMainColor } from '../../util/findMainColor';
+import { doesPokemonFitFilter } from './pokemonSliceHelperFunctions';
 
 const initialState = {
   allPokemon: {},
@@ -128,7 +129,6 @@ export const fetchPokemonDataAsync = createAsyncThunk(
   }
 );
 
-
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
@@ -249,11 +249,12 @@ export const selectFilteredPokemon = (state) => {
   
     const filteredPokemonArray = visiblePokemonArray.filter(pokemonNumber => {
       return filters.every(([filterName, filterValues]) => {
-        return filterValues.every(value => {
+        return filterValues.every(filterValue => {
           // console.log(pokemonNumber, filterName, value);
           // console.log(state.pokemon[filterName][pokemonNumber][1]);
           // console.log(state.pokemon[filterName][pokemonNumber][1].includes(value));
-          return state.pokemon[filterName][pokemonNumber][1].includes(value)
+          // return state.pokemon[filterName][pokemonNumber][1].includes(filterValue);
+          return doesPokemonFitFilter(filterName, filterValue, pokemonNumber);
         })
       })
     })
@@ -267,6 +268,7 @@ export const selectFilteredPokemon = (state) => {
 export const selectFilters = (state) => state.pokemon.filters;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
+export const selectState = (state) => state.pokemon;
 export const { setOutlineColor, addFilter, setBounds, makeVisible, removeFilter } = pokemonSlice.actions;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
