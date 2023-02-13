@@ -13,8 +13,8 @@ export function HomePage() {
   const visiblePokemon = useSelector(selectVisiblePokemon);
   const status = useSelector(selectStatus);
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
-  // const filters = useSelector(selectFilters);
-  // const filteredPokemon = useSelector(selectFilteredPokemon);
+  const filters = useSelector(selectFilters);
+  const filteredPokemon = useSelector(selectFilteredPokemon);
   const lBound = useSelector(selectLBound);
   const uBound = useSelector(selectUBound);
   
@@ -58,7 +58,7 @@ export function HomePage() {
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
       {status === "loading" && <h4>Data loading...</h4>}
-      {status === "idle" && <PokemonFlexContainer allPokemon={visiblePokemon} />}
+      {status === "idle" && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       <SeeMoreButton />
     </div>
   )

@@ -216,6 +216,49 @@ export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetche
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+export const selectFilteredPokemon = (state) => {
+  // let visiblePokemonArray = Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible).map(([pokemonNumber, pokemonValue]) => pokemonNumber);
+  let visiblePokemonArray = [];
+  for (let i = state.pokemon.lBound; i < state.pokemon.uBound; i++) {
+    visiblePokemonArray.push(i);
+  }
+  // console.log(visiblePokemonArray);
+  const filters = Object.entries(state.pokemon.filters);
+  if (!state.pokemon.weights[visiblePokemonArray[visiblePokemonArray.length - 1]]) {
+    // console.log("A");
+    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+  } else {
+    // console.log("B");
+    // console.log(filters);
+    // console.log(state.pokemon.types[visiblePokemonArray[visiblePokemonArray.length - 1]]);
+    // visiblePokemonArray.filter(pokemonNumber => {
+    //   filters.forEach(([filterName, filterValues]) => {
+    //     filterValues.forEach(value => {
+    //       console.log(pokemonNumber, filterName, value);
+    //       console.log(state.pokemon[filterName][pokemonNumber][1]);
+    //       console.log(state.pokemon[filterName][pokemonNumber][1].includes(value));
+    //     })
+    //   })
+    // })
+  
+    const filteredPokemonArray = visiblePokemonArray.filter(pokemonNumber => {
+      return filters.every(([filterName, filterValues]) => {
+        return filterValues.every(value => {
+          // console.log(pokemonNumber, filterName, value);
+          // console.log(state.pokemon[filterName][pokemonNumber][1]);
+          // console.log(state.pokemon[filterName][pokemonNumber][1].includes(value));
+          return state.pokemon[filterName][pokemonNumber][1].includes(value)
+        })
+      })
+    })
+    // console.log(filteredPokemonArray);
+    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray.includes(+key))); //the + in +key is needed to convert string to number
+    // console.log(filteredPokemon);
+    return filteredPokemon;
+  }
+}
+
+
 // export const selectFilteredPokemon = (state) => {
 //   return Object.fromEntries(Object.entries(state.pokemon.allPokemon).slice(0,10).filter(([pokemonNumber, pokemonValues]) => {
 //       // console.log(pokemonValues);
