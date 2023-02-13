@@ -154,7 +154,7 @@ export const pokemonSlice = createSlice({
     },
     setBounds: (state, action) => {
       state.lBound = action.payload.lBound;
-      state.uBound = action.payload.uBound;
+      state.uBound = action.payload.uBound <= 1009 ? action.payload.uBound : 1009;
     },
     makeVisible: (state, action) => {
       for (let i = action.payload.start; i < action.payload.end; i++) {

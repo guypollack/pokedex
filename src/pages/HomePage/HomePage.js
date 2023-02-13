@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { MyButton } from '../../components/MyButton';
+import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, addFilter, removeFilter, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
@@ -36,7 +37,7 @@ export function HomePage() {
       dispatch(makeVisible({"start": lBound, "end": uBound}));
       dispatch(fetchPokemonDataAsync({"start": lBound, "end": uBound}));
     }
-  },[allPokemonFetched])
+  },[allPokemonFetched, lBound, uBound])
 
   useEffect(() => {
     dispatch(addFilter({"property": "types", "value": "water"}))
@@ -58,6 +59,7 @@ export function HomePage() {
       <h2>This is the home page</h2>
       {status === "loading" && <h4>Data loading...</h4>}
       {status === "idle" && <PokemonFlexContainer allPokemon={visiblePokemon} />}
+      <SeeMoreButton />
     </div>
   )
 }
