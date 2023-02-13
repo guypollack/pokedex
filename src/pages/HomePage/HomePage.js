@@ -61,6 +61,7 @@ export function HomePage() {
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
       {(!allPokemonFetched || !dataFetched) && <h4>Data loading...</h4>}
+      {allPokemonFetched && dataFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>}
       {allPokemonFetched && dataFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       <SeeMoreButton />
     </div>
