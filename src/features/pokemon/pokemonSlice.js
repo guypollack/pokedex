@@ -10,6 +10,9 @@ const initialState = {
   weights: {},
   filters: {"types": [], "generation": [], "height": [], "weight": []},
   filteredPokemon: {},
+  isFiltering: false,
+  filterMessage: "",
+  reload: false,
   status: "",
   allPokemonFetched: false,
   dataFetched: false,
@@ -207,11 +210,22 @@ export const pokemonSlice = createSlice({
         state.filters[action.payload.property].push(action.payload.value);
         state.filters[action.payload.property].sort();
       }
+      state.filterMessage = "Adding filter...";
       
       // console.log(state.filters);
     },
     removeFilter: (state, action) => {
       state.filters[action.payload.property] = state.filters[action.payload.property].filter(value => value !== action.payload.value);
+      state.filterMessage = "Removing filter...";
+    },
+    setIsFiltering: (state, action) => {
+      state.isFiltering = action.payload;
+    },
+    setFilteredPokemon: (state, action) => {
+      state.filteredPokemon = action.payload;
+    },
+    setReload: (state, action) => {
+      state.reload = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -236,6 +250,7 @@ export const pokemonSlice = createSlice({
         state.heights = {...state.heights, ...action.payload.heights};
         state.weights = {...state.weights, ...action.payload.weights};
         state.dataFetched = true;
+        state.isFiltering = false;
         // for (let i = 1; i < 1009; i++) {
         //   state.allPokemon[i].unsortedTypes = action.payload.types[i][0];
         //   state.allPokemon[i].types = action.payload.types[i][1];
@@ -274,10 +289,19 @@ export const selectFilteredPokemon = (state) => {
   }
   // console.log(visiblePokemonArray);
   const filters = Object.entries(state.pokemon.filters);
+  // if (!state.pokemon.weights[visiblePokemonArray[visiblePokemonArray.length - 1]]) {
+  //   // console.log("A");
+  //   // alert("A");
+  //   return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+  //   // return ({});
   if (!state.pokemon.weights[visiblePokemonArray[visiblePokemonArray.length - 1]]) {
-    // console.log("A");
-    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+    if (Object.keys(state.pokemon.filteredPokemon).length === 0) {
+      return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+    } else {
+      return state.pokemon.filteredPokemon;
+    }
   } else {
+    // alert("B");
     // console.log("B");
     // console.log(filters);
     // console.log(state.pokemon.types[visiblePokemonArray[visiblePokemonArray.length - 1]]);
@@ -312,10 +336,13 @@ export const selectFilteredPokemon = (state) => {
 export const selectFilteredPokemon2 = (state) => state.pokemon.filteredPokemon;
 
 export const selectFilters = (state) => state.pokemon.filters;
+export const selectIsFiltering = (state) => state.pokemon.isFiltering;
+export const selectFilterMessage = (state) => state.pokemon.filterMessage;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
+export const selectReload = (state) => state.pokemon.reload;
 export const selectState = (state) => state.pokemon;
-export const { setOutlineColor, addFilter, setBounds, makeVisible, removeFilter } = pokemonSlice.actions;
+export const { setOutlineColor, addFilter, setBounds, makeVisible, removeFilter, setIsFiltering, setFilteredPokemon, setReload } = pokemonSlice.actions;
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
 
