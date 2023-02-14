@@ -11,6 +11,7 @@ const initialState = {
   filters: {"types": [], "generations": [], "heights": [], "weights": []},
   filteredPokemon: {},
   filterMessage: "",
+  isLoading: false,
   status: "",
   allPokemonFetched: false,
   dataFetched: false,
@@ -110,6 +111,10 @@ export const pokemonSlice = createSlice({
     },
     setFilteredPokemon: (state, action) => {
       state.filteredPokemon = action.payload;
+    },
+    setIsLoading: (state, action) => {
+      // alert("C");
+      state.isLoading = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -177,7 +182,8 @@ export const selectFilters = (state) => state.pokemon.filters;
 export const selectFilterMessage = (state) => state.pokemon.filterMessage;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
-export const { setBounds, makeVisible, addFilter, removeFilter, setFilteredPokemon } = pokemonSlice.actions;
+export const selectIsLoading = (state) => state.pokemon.isLoading;
+export const { setBounds, makeVisible, addFilter, removeFilter, setFilteredPokemon, setIsLoading } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

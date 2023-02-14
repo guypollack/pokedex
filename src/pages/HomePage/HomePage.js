@@ -3,8 +3,9 @@ import { MyButton } from '../../components/MyButton';
 import { FilterButton } from '../../components/FilterButton/FilterButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
+import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -19,7 +20,7 @@ export function HomePage() {
   const filteredPokemon = useSelector(selectFilteredPokemon);
   const lBound = useSelector(selectLBound);
   const uBound = useSelector(selectUBound);
-  
+  const isLoading = useSelector(selectIsLoading);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -78,12 +79,14 @@ export function HomePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
+      <h3>isLoading: {isLoading.toString()}</h3>
       <FilterButton property="types" value="water" />
       <FilterButton property="types" value="fire" />
       <FilterButton property="types" value="flying" />
       <FilterButton property="generations" value="2" />
       <FilterButton property="generations" value="3" />
       {(!allPokemonFetched) && <h4>Data loading...</h4>}
+      {isLoading && <LoadingIcon />}
       {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>}
       {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
       {Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}

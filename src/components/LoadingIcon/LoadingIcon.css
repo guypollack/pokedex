@@ -1,0 +1,24 @@
+.loading-icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-icon {
+  width: 100px;
+  animation: loadingIconRotate 1.2s linear 0s infinite normal forwards;
+}
+
+@keyframes loadingIconRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  /* 75% {
+    transform: rotate(340deg);
+  } */
+  100% {
+    transform: rotate(360deg);
+  }
+}
