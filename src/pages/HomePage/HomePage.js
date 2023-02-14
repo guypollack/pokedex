@@ -55,7 +55,7 @@ export function HomePage() {
         dispatch(setBounds({"lBound": lBound + 100, "uBound": uBound + 100}));
       }
     }
-    console.log(filteredPokemon);
+    // console.log(filteredPokemon);
   },[filteredPokemon])
 
   function areFilteredPokemonDefault() {
