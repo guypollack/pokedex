@@ -183,6 +183,9 @@ export const selectFilterMessage = (state) => state.pokemon.filterMessage;
 export const selectLBound = (state) => state.pokemon.lBound;
 export const selectUBound = (state) => state.pokemon.uBound;
 export const selectIsLoading = (state) => state.pokemon.isLoading;
+export const selectAreFiltersApplied = (state) => {
+  return !Object.values(state.pokemon.filters).every(filterValue => filterValue.length === 0);
+}
 export const { setBounds, makeVisible, addFilter, removeFilter, setFilteredPokemon, setIsLoading } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
