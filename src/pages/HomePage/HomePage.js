@@ -100,6 +100,8 @@ export function HomePage() {
       <FilterButton property="types" value="flying" />
       <FilterButton property="generations" value="2" />
       <FilterButton property="generations" value="3" />
+      <FilterButton property="weights" value="<50" />
+      <FilterButton property="heights" value=">=6" />
       
       {(!allPokemonFetched) && <h4>Data loading...</h4>}
       {isLoading && <LoadingIcon />}

@@ -11,4 +11,12 @@ export const doesPokemonFitFilter = (filterName, filterValue, pokemonNumber) => 
     return store.getState().pokemon[filterName][pokemonNumber] === filterValue;
   }
 
+  if (filterName === "weights") {
+    return (eval(store.getState().pokemon[filterName][pokemonNumber] + filterValue));
+  }
+
+  if (filterName === "heights") {
+    return (eval(store.getState().pokemon[filterName][pokemonNumber] + filterValue));
+  }
+
 }
