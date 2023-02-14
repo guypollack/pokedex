@@ -8,7 +8,7 @@ const initialState = {
   generations: {},
   heights: {},
   weights: {},
-  filters: {"types": [], "generation": [], "height": [], "weight": []},
+  filters: {"types": [], "generations": [], "heights": [], "weights": []},
   filteredPokemon: {},
   isFiltering: false,
   filterMessage: "",
