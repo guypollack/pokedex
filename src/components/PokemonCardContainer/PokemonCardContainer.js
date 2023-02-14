@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
-import { setOutlineColor } from "../../features/pokemon/pokemonSlice";
 import { selectFavourites, addToFavourites, removeFromFavourites } from "../../features/favourites/favouritesSlice";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 // import "./PokemonCardContainer.css";
@@ -20,11 +19,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
 
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
-
-  async function addOutlineColorToPokemon() {
-    const color = await findMainColor(imageUrl);
-    dispatch(setOutlineColor({"number": number, "color": color}));
-  }
 
   useEffect(() => {
     // addOutlineColorToPokemon();

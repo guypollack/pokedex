@@ -1,5 +1,5 @@
 import React from "react";
-import { selectLBound, selectUBound, setBounds, setReload, selectFilteredPokemon, setFilteredPokemon } from "../../features/pokemon/pokemonSlice";
+import { selectLBound, selectUBound, setBounds, selectFilteredPokemon, setFilteredPokemon } from "../../features/pokemon/pokemonSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 export function SeeMoreButton() {
@@ -11,7 +11,6 @@ export function SeeMoreButton() {
   const uBound = useSelector(selectUBound);
 
   function handleClick() {
-    dispatch(setReload(false));
     dispatch(setFilteredPokemon(filteredPokemon));
     dispatch(setBounds({"lBound": lBound + 100, "uBound": uBound + 100}));
   }
