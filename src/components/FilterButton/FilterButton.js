@@ -1,5 +1,5 @@
 import React from "react";
-import { addFilter, removeFilter, setBounds, selectFilteredPokemon, setFilteredPokemon, selectLBound, selectUBound } from "../../features/pokemon/pokemonSlice";
+import { addFilter, removeFilter, setBounds, selectFilteredPokemon, setFilteredPokemon, selectLBound, selectUBound, setPreviousCount } from "../../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./FilterButton.css"
 
@@ -14,6 +14,7 @@ export function FilterButton({property, value}) {
     // alert("A");
     // alert(e.target.classList.contains("active"));
     dispatch(setFilteredPokemon(filteredPokemon));
+    dispatch(setPreviousCount(0));
     if (!e.target.classList.contains("active")) {
       dispatch(addFilter({property, value}));
       // dispatch(filterPokemonAsync());

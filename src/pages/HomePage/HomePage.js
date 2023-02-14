@@ -5,7 +5,7 @@ import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, selectAreFiltersApplied } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, selectAreFiltersApplied, selectPreviousCount, setPreviousCount } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -22,6 +22,7 @@ export function HomePage() {
   const uBound = useSelector(selectUBound);
   const isLoading = useSelector(selectIsLoading);
   const areFiltersApplied = useSelector(selectAreFiltersApplied);
+  const previousCount = useSelector(selectPreviousCount);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -41,9 +42,19 @@ export function HomePage() {
       // console.log("B");
       dispatch(makeVisible({"start": lBound, "end": uBound}));
       // dispatch(filterPokemonAsync());
-      dispatch(fetchPokemonDataAsync({"start": lBound, "end": uBound}));
+      // dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
     }
   },[allPokemonFetched, lBound, uBound, filters])
+
+  useEffect(() => {
+    if (allPokemonFetched) {
+      // alert("B");
+      // console.log("B");
+      // dispatch(makeVisible({"start": lBound, "end": uBound}));
+      // dispatch(filterPokemonAsync());
+      dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
+    }
+  },[allPokemonFetched])
 
   useEffect(() => {
     // dispatch(addFilter({"property": "types", "value": "water"}))
@@ -80,8 +91,10 @@ export function HomePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
-      <h3>isLoading: {isLoading.toString()}</h3>
-      <h3>areFiltersApplied: {areFiltersApplied.toString()}</h3>
+      {/* <h3>lBound: {lBound.toString()}</h3> */}
+      {/* <h3>uBound: {uBound.toString()}</h3> */}
+      {/* <h3>isLoading: {isLoading.toString()}</h3> */}
+      {/* <h3>areFiltersApplied: {areFiltersApplied.toString()}</h3> */}
       <FilterButton property="types" value="water" />
       <FilterButton property="types" value="fire" />
       <FilterButton property="types" value="flying" />
