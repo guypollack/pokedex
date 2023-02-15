@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCategory, selectOperator, selectValue, setCategory, setOperator, setValue, setSelectorValue } from "../../features/filters/filtersSlice";
+import { selectCategory, selectOperator, selectValue, setCategory, setOperator, setValue, setSelectorValue, selectFilterList, addToFilterList, removeFromFilterList } from "../../features/filters/filtersSlice";
 import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
-import { addFilter, selectFilters } from "../../features/pokemon/pokemonSlice";
+import { addFilter, selectFilters, setDisplayCount } from "../../features/pokemon/pokemonSlice";
 import { FilterBlock } from "../FilterBlock/FilterBlock";
 import "./FilterCreator.css";
 
@@ -14,6 +14,7 @@ export function FilterCreator() {
   const operator = useSelector(selectOperator);
   const value = useSelector(selectValue);
   const filters = useSelector(selectFilters);
+  const filterList  = useSelector(selectFilterList);
 
   const inputValid = (category === "Height" || category === "Weight") ? (category && operator && (value >= 0)) : (category && value);
 
@@ -24,6 +25,8 @@ export function FilterCreator() {
 
   function handleSubmit() {
     // alert("Button clicked");
+    dispatch(setDisplayCount(50));
+    dispatch(addToFilterList([category, operator + value]));
     dispatch(addFilter({"property": (category.toLowerCase() + "s"), "value": operator + value.toString().toLowerCase()}));
     dispatch(setSelectorValue({"selector": "category", "value": ""}));
     dispatch(setSelectorValue({"selector": "operator", "value": ""}));
@@ -41,7 +44,8 @@ export function FilterCreator() {
         <button disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
       </div>
       <div className="filter-blocks-flex-container">
-        {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))}
+        {/* {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))} */}
+        {filterList.map(([category, value], index) => <FilterBlock property={category} value={value} filterNumber={index}/>)}
       </div>
     </div>
   )

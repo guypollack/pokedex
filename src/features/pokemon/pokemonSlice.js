@@ -99,16 +99,17 @@ export const pokemonSlice = createSlice({
     addFilter: (state, action) => {
       // payload format {property: __, value: __}
       // console.log("adding filter");
-      if (!(state.filters[action.payload.property].includes(action.payload.value))) {
-        state.filters[action.payload.property].push(action.payload.value);
-        state.filters[action.payload.property].sort();
-      }
+      state.filters[action.payload.property].push(action.payload.value);
+      // state.filters[action.payload.property].sort();
       state.filterMessage = "Adding filter...";
       
       // console.log(state.filters);
     },
     removeFilter: (state, action) => {
-      state.filters[action.payload.property] = state.filters[action.payload.property].filter(value => value !== action.payload.value);
+      // state.filters[action.payload.property] = state.filters[action.payload.property].filter(value => value !== action.payload.value);
+      // alert("removing filter");
+      let i = state.filters[action.payload.property].indexOf(action.payload.value);
+      state.filters[action.payload.property] = state.filters[action.payload.property].slice(0,i).concat(state.filters[action.payload.property].slice(i+1));
       state.filterMessage = "Removing filter...";
     },
     clearFilters: (state) => {
