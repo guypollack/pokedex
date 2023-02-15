@@ -181,9 +181,10 @@ export const selectFilteredPokemon = (state) => {
   } else {  
     // console.log("C");
     const filteredPokemonArray = [];
+    const myArrayFunction = Array.prototype.every;
     for (let i = 1; i < 1009; i++) {
-        if (filters.every(([filterName, filterValues]) => {
-          return filterValues.every(filterValue => {
+        if (myArrayFunction.call(filters, ([filterName, filterValues]) => {
+          return myArrayFunction.call(filterValues, (filterValue) => {
             return doesPokemonFitFilter(filterName, filterValue, i);
           })
         })) {
