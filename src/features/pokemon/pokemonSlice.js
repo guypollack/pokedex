@@ -111,6 +111,9 @@ export const pokemonSlice = createSlice({
       state.filters[action.payload.property] = state.filters[action.payload.property].filter(value => value !== action.payload.value);
       state.filterMessage = "Removing filter...";
     },
+    clearFilters: (state) => {
+      state.filters = {"types": [], "generations": [], "heights": [], "weights": []};
+    },
     setFilteredPokemon: (state, action) => {
       // console.log("settingFilteredPokemon");
       state.filteredPokemon = action.payload;
@@ -168,6 +171,7 @@ export const selectFilteredPokemon = (state) => {
   // console.log("B")
   // console.log("selectFilteredPokemon running");
   // console.log(visiblePokemonArray);
+  // alert("Getting filtered pokemon");
   const filters = Object.entries(state.pokemon.filters);
   if (!state.pokemon.dataFetched) {
     // console.log("A");
@@ -206,7 +210,7 @@ export const selectNumberOfFilters = (state) => {
 }
 export const selectPreviousCount  = (state) => state.pokemon.previousCount;
 export const selectDisplayCount  = (state) => state.pokemon.displayCount;
-export const { addFilter, removeFilter, setDisplayCount } = pokemonSlice.actions;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

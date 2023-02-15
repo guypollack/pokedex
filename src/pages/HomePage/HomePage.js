@@ -6,7 +6,7 @@ import { FiltersContainer } from '../../components/FiltersContainer/FiltersConta
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -23,6 +23,7 @@ export function HomePage() {
   const lBound = useSelector(selectLBound);
   const uBound = useSelector(selectUBound);
   const isLoading = useSelector(selectIsLoading);
+  const numberOfFilters = useSelector(selectNumberOfFilters);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -38,6 +39,7 @@ export function HomePage() {
 
   useEffect(() => {
     if (allPokemonFetched) {
+      // alert("all pokemon fetched");
       // alert("B");
       // console.log("B");
       // dispatch(makeVisible({"start": lBound, "end": uBound}));
@@ -51,6 +53,10 @@ export function HomePage() {
     // dispatch(addFilter({"property": "types", "value": "water"}))
     // dispatch(addFilter({"property": "types", "value": "fire"}));
     // dispatch(addFilter({"property": "types", "value": "flying"}));
+    return (() => {
+      alert("clearing all filters");
+      dispatch(clearFilters());
+    })
   },[])
 
   // useEffect(() => {
@@ -88,6 +94,8 @@ export function HomePage() {
       {/* <h3>uBound: {uBound.toString()}</h3> */}
       {/* <h3>isLoading: {isLoading.toString()}</h3> */}
       {/* <h3>areFiltersApplied: {areFiltersApplied.toString()}</h3> */}
+      {/* <h3>numberOfFilters: {numberOfFilters}</h3> */}
+      {/* <h3>filters: {Object.entries(filters).toString()}</h3> */}
       <FiltersContainer /> 
       <FilterButton property="types" value="water" />
       <FilterButton property="types" value="fire" />
