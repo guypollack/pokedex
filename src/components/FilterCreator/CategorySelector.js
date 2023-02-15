@@ -18,7 +18,7 @@ export function CategorySelector() {
   }
 
   return (
-    <div>
+    <div className="selector">
       <label htmlFor="category-selector">Category</label>
       <select id="category-selector" value={category} onChange={handleChange}>
         <option></option>

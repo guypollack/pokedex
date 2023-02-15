@@ -11,7 +11,7 @@ export function OperatorSelector() {
   }
 
   return (
-    <div>
+    <div className="selector">
       <label htmlFor="operator-selector">Operator</label>
       <select id="operator-selector" value={operator} onChange={handleChange}>
         <option></option>

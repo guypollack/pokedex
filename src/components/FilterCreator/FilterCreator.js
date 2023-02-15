@@ -23,7 +23,7 @@ export function FilterCreator() {
   }
 
   function handleSubmit() {
-    alert("Button clicked");
+    // alert("Button clicked");
     dispatch(addFilter({"property": (category.toLowerCase() + "s"), "value": operator + value.toString().toLowerCase()}));
     dispatch(setSelectorValue({"selector": "category", "value": ""}));
     dispatch(setSelectorValue({"selector": "operator", "value": ""}));
@@ -34,11 +34,15 @@ export function FilterCreator() {
   return (
     <div className="filter-creator">
       <h2>Filter Creator</h2>
-      <CategorySelector />
-      {(category === "Height" || category === "Weight") && <OperatorSelector />}
-      {(category !== "") && <ValueSelector />}
-      <button disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
-      {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))}
+      <div className="selectors-flex-container">
+        <CategorySelector />
+        {(category === "Height" || category === "Weight") && <OperatorSelector />}
+        {(category !== "") && <ValueSelector />}
+        <button disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
+      </div>
+      <div className="filter-blocks-flex-container">
+        {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))}
+      </div>
     </div>
   )
 }

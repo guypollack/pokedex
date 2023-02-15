@@ -2,3 +2,27 @@
   border: 1px solid black;
   margin: 10px;
 }
+
+.selectors-flex-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.selector {
+  margin-right: 20px;
+}
+
+.selector > label {
+  margin-right: 10px;
+}
+
+.filters-flex-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter-block {
+  height: 30px;
+  margin-right: 20px;
+}
+
