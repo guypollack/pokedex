@@ -9,15 +9,11 @@ const initialState = {
   heights: {},
   weights: {},
   filters: {"types": [], "generations": [], "heights": [], "weights": []},
-  filteredPokemon: {},
-  previousCount: 50,
   filterMessage: "",
-  isLoading: false,
   status: "",
   allPokemonFetched: false,
   dataFetched: false,
-  lBound: 1,
-  uBound: 101
+  displayCount: 100
 };
 
 
@@ -38,7 +34,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
         "name": results[i].name,
         "url": results[i].url,
         "imageUrl" : imageUrl,
-        "visible": false
+        "visible": true
       };
     }
     // alert("Function complete");
@@ -126,6 +122,10 @@ export const pokemonSlice = createSlice({
     setPreviousCount: (state, action) => {
       // console.log("settingPreviousCount");
       state.previousCount = action.payload;
+    },
+    setDisplayCount: (state, action) => {
+      // console.log("settingPreviousCount");
+      state.displayCount = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -184,7 +184,7 @@ export const selectFilteredPokemon = (state) => {
         })) {
           filteredPokemonArray.push(i);
         }
-      if (filteredPokemonArray.length === state.pokemon.previousCount + 50) {
+      if (filteredPokemonArray.length === state.pokemon.displayCount) {
         break;
       }
     }
@@ -201,8 +201,12 @@ export const selectIsLoading = (state) => state.pokemon.isLoading;
 export const selectAreFiltersApplied = (state) => {
   return !Object.values(state.pokemon.filters).every(filterValue => filterValue.length === 0);
 }
+export const selectNumberOfFilters = (state) => {
+  return (Object.values(state.pokemon.filters).reduce((total, current) => total + current.length, 0));
+}
 export const selectPreviousCount  = (state) => state.pokemon.previousCount;
-export const { setBounds, makeVisible, addFilter, removeFilter, setFilteredPokemon, setIsLoading, setPreviousCount } = pokemonSlice.actions;
+export const selectDisplayCount  = (state) => state.pokemon.displayCount;
+export const { addFilter, removeFilter, setDisplayCount } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

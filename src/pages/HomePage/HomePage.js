@@ -6,7 +6,7 @@ import { FiltersContainer } from '../../components/FiltersContainer/FiltersConta
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, selectAreFiltersApplied, selectPreviousCount, setPreviousCount } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters,selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -23,33 +23,18 @@ export function HomePage() {
   const lBound = useSelector(selectLBound);
   const uBound = useSelector(selectUBound);
   const isLoading = useSelector(selectIsLoading);
-  const areFiltersApplied = useSelector(selectAreFiltersApplied);
-  const previousCount = useSelector(selectPreviousCount);
 
   // dispatch(fetchAllPokemonAsync());
 
   useEffect(() => {
     if (!allPokemonFetched) {
       // console.log("A");
-      console.log("dispatch(fetchAllPokemonAsync());");
+      // console.log("dispatch(fetchAllPokemonAsync());");
       dispatch(fetchAllPokemonAsync());
       // dispatch(makeVisible({"start": lBound, "end": uBound}));
       // dispatch(fetchPokemonDataAsync());
     }
   },[allPokemonFetched])
-  
-
-  useEffect(() => {
-    if (allPokemonFetched) {
-      // alert("B");
-      // console.log("B");
-      // console.log("A1");
-      // console.log(`dispatch(makeVisible({"start": ${lBound}, "end": ${uBound}}))`);
-      dispatch(makeVisible({"start": lBound, "end": uBound}));
-      // dispatch(filterPokemonAsync());
-      // dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
-    }
-  },[allPokemonFetched, lBound, uBound, filters])
 
   useEffect(() => {
     if (allPokemonFetched) {
@@ -57,7 +42,7 @@ export function HomePage() {
       // console.log("B");
       // dispatch(makeVisible({"start": lBound, "end": uBound}));
       // dispatch(filterPokemonAsync());
-      console.log(`dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));`);
+      // console.log(`dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));`);
       dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
     }
   },[allPokemonFetched])
@@ -68,30 +53,30 @@ export function HomePage() {
     // dispatch(addFilter({"property": "types", "value": "flying"}));
   },[])
 
-  useEffect(() => {
-    // console.log(filteredPokemon);
-    if (allPokemonFetched && dataFetched) {
-      if (Object.keys(filteredPokemon).length < 50 && uBound < 1009) {
-        console.log(`dispatch(setBounds({"lBound": ${lBound + 100}, "uBound": ${uBound + 100}}))`);
-        dispatch(setBounds({"lBound": lBound + 100, "uBound": uBound + 100}));
-      }
-    }
-    // console.log(filteredPokemon);
-  },[filteredPokemon])
+  // useEffect(() => {
+  //   // console.log(filteredPokemon);
+  //   if (allPokemonFetched && dataFetched) {
+  //     if (Object.keys(filteredPokemon).length < 50 && uBound < 1009) {
+  //       console.log(`dispatch(setBounds({"lBound": ${lBound + 100}, "uBound": ${uBound + 100}}))`);
+  //       dispatch(setBounds({"lBound": lBound + 100, "uBound": uBound + 100}));
+  //     }
+  //   }
+  //   // console.log(filteredPokemon);
+  // },[filteredPokemon])
 
-  function areFilteredPokemonDefault() {
-    const noFiltersApplied = Object.values(filters).every(value => value.length === 0);
-    const filteredPokemonEqualsVisiblePokemon = Object.keys(filteredPokemon).length === Object.keys(visiblePokemon).length && Object.entries(filteredPokemon).every(([key, value]) => visiblePokemon[key] === value);
-    // alert(Object.keys(filteredPokemon).length);
-    if (noFiltersApplied) {
-      return false;
-    } else {
-      return filteredPokemonEqualsVisiblePokemon;
-    }
-  }
+  // function areFilteredPokemonDefault() {
+  //   const noFiltersApplied = Object.values(filters).every(value => value.length === 0);
+  //   const filteredPokemonEqualsVisiblePokemon = Object.keys(filteredPokemon).length === Object.keys(visiblePokemon).length && Object.entries(filteredPokemon).every(([key, value]) => visiblePokemon[key] === value);
+  //   // alert(Object.keys(filteredPokemon).length);
+  //   if (noFiltersApplied) {
+  //     return false;
+  //   } else {
+  //     return filteredPokemonEqualsVisiblePokemon;
+  //   }
+  // }
 
-  const noFiltersApplied = Object.values(filters).every(value => value.length === 0);
-  const filteredPokemonEqualsVisiblePokemon = Object.keys(filteredPokemon).length === Object.keys(visiblePokemon).length && Object.entries(filteredPokemon).every(([key, value]) => visiblePokemon[key] === value);
+  // const noFiltersApplied = Object.values(filters).every(value => value.length === 0);
+  // const filteredPokemonEqualsVisiblePokemon = Object.keys(filteredPokemon).length === Object.keys(visiblePokemon).length && Object.entries(filteredPokemon).every(([key, value]) => visiblePokemon[key] === value);
 
 
   return (
@@ -114,9 +99,9 @@ export function HomePage() {
       
       {(!allPokemonFetched) && <h4>Data loading...</h4>}
       {isLoading && <LoadingIcon />}
-      {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>}
+      {/* {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>} */}
       {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
-      {Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
+      {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
       {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       <SeeMoreButton />
     </div>

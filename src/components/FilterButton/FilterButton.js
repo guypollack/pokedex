@@ -1,28 +1,20 @@
 import React from "react";
-import { addFilter, removeFilter, setBounds, selectFilteredPokemon, setFilteredPokemon, selectLBound, selectUBound, setPreviousCount } from "../../features/pokemon/pokemonSlice";
+import { addFilter, removeFilter, setDisplayCount, selectNumberOfFilters } from "../../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./FilterButton.css"
 
 export function FilterButton({property, value}) {
   const dispatch = useDispatch();
-
-  const filteredPokemon = useSelector(selectFilteredPokemon);
-  // const lBound = useSelector(selectLBound);
-  // const uBound = useSelector(selectUBound);
+  const numberOfFilters = useSelector(selectNumberOfFilters);
 
   function handleClick(e) {
-    // alert("A");
-    // alert(e.target.classList.contains("active"));
-    dispatch(setFilteredPokemon(filteredPokemon));
-    dispatch(setPreviousCount(0));
     if (!e.target.classList.contains("active")) {
+      dispatch(setDisplayCount(50));
       dispatch(addFilter({property, value}));
-      // dispatch(filterPokemonAsync());
       e.target.classList.add("active");
     } else {
-      dispatch(setBounds({"lBound": 1, "uBound": 101}));
+      dispatch(setDisplayCount(numberOfFilters > 1 ? 50 : 100));
       dispatch(removeFilter({property, value}));
-      // dispatch(filterPokemonAsync());
       e.target.classList.remove("active");
     }
   }
