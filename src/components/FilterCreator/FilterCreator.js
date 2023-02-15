@@ -5,6 +5,7 @@ import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
 import { addFilter, selectFilters } from "../../features/pokemon/pokemonSlice";
+import { FilterBlock } from "../FilterBlock/FilterBlock";
 import "./FilterCreator.css";
 
 export function FilterCreator() {
@@ -37,6 +38,7 @@ export function FilterCreator() {
       {(category === "Height" || category === "Weight") && <OperatorSelector />}
       {(category !== "") && <ValueSelector />}
       <button disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
+      {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))}
     </div>
   )
 }

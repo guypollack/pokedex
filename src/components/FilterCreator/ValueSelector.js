@@ -43,7 +43,7 @@ export function ValueSelector() {
       <div>
         <label htmlFor="value-selector">Value</label>
         <input type="range" min="0" max="10" step="0.1" value={value} class="slider" id="value-selector" onChange={handleChange}></input>
-        <p>{value}</p>
+        <p>{value}m</p>
       </div>
     )
   }
@@ -55,7 +55,7 @@ export function ValueSelector() {
       <div>
         <label htmlFor="value-selector">Value</label>
         <input type="range" min="0" max="1000" step="1" value={value} class="slider" id="value-selector" onChange={handleChange}></input>
-        <p>{value}</p>
+        <p>{value}kg</p>
       </div>
     )
   }
