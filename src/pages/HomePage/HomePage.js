@@ -3,6 +3,7 @@ import { MyButton } from '../../components/MyButton';
 import { FilterButton } from '../../components/FilterButton/FilterButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
+import { clearFilterList } from '../../features/filters/filtersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
@@ -54,8 +55,9 @@ export function HomePage() {
     // dispatch(addFilter({"property": "types", "value": "fire"}));
     // dispatch(addFilter({"property": "types", "value": "flying"}));
     return (() => {
-      alert("clearing all filters");
+      // alert("clearing all filters");
       dispatch(clearFilters());
+      dispatch(clearFilterList());
     })
   },[])
 
@@ -97,13 +99,13 @@ export function HomePage() {
       {/* <h3>numberOfFilters: {numberOfFilters}</h3> */}
       {/* <h3>filters: {Object.entries(filters).toString()}</h3> */}
       <FiltersContainer /> 
-      <FilterButton property="types" value="water" />
+      {/* <FilterButton property="types" value="water" />
       <FilterButton property="types" value="fire" />
       <FilterButton property="types" value="flying" />
       <FilterButton property="generations" value="2" />
       <FilterButton property="generations" value="3" />
       <FilterButton property="weights" value="<50" />
-      <FilterButton property="heights" value=">=6" />
+      <FilterButton property="heights" value=">=6" /> */}
       
       {(!allPokemonFetched) && <h4>Data loading...</h4>}
       {isLoading && <LoadingIcon />}

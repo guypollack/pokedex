@@ -9,7 +9,7 @@ export function FilterBlock({property, value, filterNumber}) {
   const numberOfFilters = useSelector(selectNumberOfFilters);
   let numberStart;
 
-  if (property === "heights" || property === "weights") {
+  if (property === "Height" || property === "Weight") {
     numberStart = value[1] === "=" ? 2 : 1;
   }
 

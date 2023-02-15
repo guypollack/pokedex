@@ -28,6 +28,9 @@ export const filtersSlice = createSlice({
     },
     removeFromFilterList: (state, action) => {
       state.filterList = state.filterList.slice(0, action.payload).concat(state.filterList.slice(action.payload + 1));
+    },
+    clearFilterList: (state) => {
+      state.filterList = [];
     }
   }
 });
@@ -36,6 +39,6 @@ export const selectCategory = (state) => state.filters.category;
 export const selectOperator = (state) => state.filters.operator;
 export const selectValue = (state) => state.filters.value;
 export const selectFilterList = (state) => state.filters.filterList;
-export const { setCategory, setOperator, setValue, setSelectorValue, addToFilterList, removeFromFilterList } = filtersSlice.actions;
+export const { setCategory, setOperator, setValue, setSelectorValue, addToFilterList, removeFromFilterList, clearFilterList } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
