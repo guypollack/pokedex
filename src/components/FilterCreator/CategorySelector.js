@@ -8,6 +8,7 @@ export function CategorySelector() {
 
   function handleChange(e) {
     dispatch(setSelectorValue({"selector": "category", "value": e.target.value}));
+    dispatch(setSelectorValue({"selector": "operator", "value": ""}));
     if (e.target.value === "Height") {
       dispatch(setSelectorValue({"selector": "value", "value": 5}));
     }
