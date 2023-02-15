@@ -166,28 +166,15 @@ export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
 export const selectFilteredPokemon = (state) => {
   // console.log("B")
-  console.log("selectFilteredPokemon running");
-  let visiblePokemonArray = [];
-  for (let i = 1; i < state.pokemon.uBound; i++) {
-    visiblePokemonArray.push(i);
-  }
+  // console.log("selectFilteredPokemon running");
   // console.log(visiblePokemonArray);
   const filters = Object.entries(state.pokemon.filters);
-  if (!state.pokemon.weights[visiblePokemonArray[visiblePokemonArray.length - 1]]) {
-    if (Object.keys(state.pokemon.filteredPokemon).length === 0) {
-      return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
-    } else {
-      return state.pokemon.filteredPokemon;
-    }
+  if (!state.pokemon.dataFetched) {
+    // console.log("A");
+    // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
+    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < 101));
   } else {  
-    // const filteredPokemonArray = visiblePokemonArray.filter(pokemonNumber => {
-    //   return filters.every(([filterName, filterValues]) => {
-    //     return filterValues.every(filterValue => {
-    //       return doesPokemonFitFilter(filterName, filterValue, pokemonNumber);
-    //     })
-    //   })
-    // }).slice(0, state.pokemon.previousCount + 50);
-
+    // console.log("C");
     const filteredPokemonArray = [];
     for (let i = 1; i < 1009; i++) {
         if (filters.every(([filterName, filterValues]) => {
