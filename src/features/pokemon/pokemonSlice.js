@@ -25,6 +25,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
   'pokemon/fetchAllPokemonAsync',
   async () => {
     // alert("Fetch starting");
+    // console.log("fetching all pokemon");
     const allPokemon = {};
     const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
     const json = await response.json();
@@ -49,6 +50,7 @@ export const fetchPokemonDataAsync = createAsyncThunk(
   'pokemon/fetchPokemonDataAsync',
   async ({start, end}) => {
     // alert("Fetching pokemon types");
+    // console.log("fetching pokemon data");
     const types = {};
     const generations = {};
     const heights = {};
@@ -86,10 +88,12 @@ export const pokemonSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setBounds: (state, action) => {
+      // console.log("setting bounds");
       state.lBound = action.payload.lBound;
       state.uBound = action.payload.uBound <= 1009 ? action.payload.uBound : 1009;
     },
     makeVisible: (state, action) => {
+      // console.log("updating visibilities");
       for (let i = action.payload.start; i < action.payload.end; i++) {
         state.allPokemon[i].visible = true;
       }
@@ -98,6 +102,7 @@ export const pokemonSlice = createSlice({
     },
     addFilter: (state, action) => {
       // payload format {property: __, value: __}
+      // console.log("adding filter");
       if (!(state.filters[action.payload.property].includes(action.payload.value))) {
         state.filters[action.payload.property].push(action.payload.value);
         state.filters[action.payload.property].sort();
@@ -111,6 +116,7 @@ export const pokemonSlice = createSlice({
       state.filterMessage = "Removing filter...";
     },
     setFilteredPokemon: (state, action) => {
+      // console.log("settingFilteredPokemon");
       state.filteredPokemon = action.payload;
     },
     setIsLoading: (state, action) => {
@@ -118,6 +124,7 @@ export const pokemonSlice = createSlice({
       state.isLoading = action.payload;
     },
     setPreviousCount: (state, action) => {
+      // console.log("settingPreviousCount");
       state.previousCount = action.payload;
     }
   },
@@ -158,6 +165,8 @@ export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
 export const selectFilteredPokemon = (state) => {
+  // console.log("B")
+  console.log("selectFilteredPokemon running");
   let visiblePokemonArray = [];
   for (let i = 1; i < state.pokemon.uBound; i++) {
     visiblePokemonArray.push(i);
