@@ -5,6 +5,7 @@ import { Slider } from '../../components/Slider/Slider';
 import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
+import  { SearchBar } from "../SearchBar/SearchBar"
 import { addFilter, selectFilters, setDisplayCount, selectSearchTypes } from "../../features/pokemon/pokemonSlice";
 import "./FilterCreator.css";
 
@@ -35,6 +36,7 @@ export function FilterCreator() {
   return (
     <div className="filter-creator">
       <h2>Filter Creator</h2>
+      <SearchBar />
       <Slider heading="In category search type" type="inCategory" value1="AND" value2="OR" checked={inCategorySearchType === "or"} />
       <Slider heading="Between category search type" type="betweenCategory" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"}/>
       <div className="selectors-flex-container">

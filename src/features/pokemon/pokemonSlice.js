@@ -17,7 +17,8 @@ const initialState = {
   inCategorySearchType: "and",
   betweenCategorySearchType: "and",
   searchTypes: {"inCategory": "and", "betweenCategory": "and"},
-  filteredPokemonSnapshot: {}
+  filteredPokemonSnapshot: {},
+  searchTerm: ""
 };
 
 
@@ -150,6 +151,13 @@ export const pokemonSlice = createSlice({
     },
     setFilteredPokemonSnapshot: (state, action) => {
       state.filteredPokemonSnapshot = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      if (action.payload === " ") {
+        state.searchTerm = "";
+      } else {
+        state.searchTerm = action.payload.toString().toLowerCase();
+      }
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -196,7 +204,7 @@ export const selectFilteredPokemon = (state) => {
   const filters = Object.entries(state.pokemon.filters);
   const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
   // console.log(filteredCategories);
-  if (filteredCategories.length === 0) {
+  if (filteredCategories.length === 0 && state.pokemon.searchTerm === "") {
     // console.log("A");
     // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
     return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < state.pokemon.displayCount + 1));
@@ -231,42 +239,58 @@ export const selectFilteredPokemon = (state) => {
     //
     //
     const filteredPokemonObj = {"types": [], "generations": [], "heights": [], "weights": []};
+    const nameFilteredPokemon = [];
     
+    let filteredPokemonArray2;
+
     for (let i = 1; i < 1009; i++) {
-      for (let filterName of filteredCategories) {
-        //
-        // console.log(filterName);
-        // console.log(state.pokemon.filters[filterName].length === 0);
-        //
-        if (state.pokemon.searchTypes["inCategory"] === "and") {
-          //"AND" within categories
-          if (state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
-            filteredPokemonObj[filterName].push(i);
-          }
+      // console.log(state.pokemon.allPokemon[i].name);
+      // console.log(state.pokemon.searchTerm);
+      // console.log(state.pokemon.allPokemon[i].name.includes(state.pokemon.searchTerm));
+      if (state.pokemon.allPokemon[i].name.includes(state.pokemon.searchTerm)) {
+        console.log(state.pokemon.allPokemon[i].name);
+
+        if (filteredCategories.length === 0) {
+          nameFilteredPokemon.push(i);
         } else {
-          //"OR" within categories
-          if (state.pokemon.filters[filterName].some(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
-            filteredPokemonObj[filterName].push(i);
+          for (let filterName of filteredCategories) {
+            //
+            // console.log(filterName);
+            // console.log(state.pokemon.filters[filterName].length === 0);
+            //
+            if (state.pokemon.searchTypes["inCategory"] === "and") {
+              //"AND" within categories
+              if (state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+                filteredPokemonObj[filterName].push(i);
+              }
+            } else {
+              //"OR" within categories
+              if (state.pokemon.filters[filterName].some(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+                filteredPokemonObj[filterName].push(i);
+              }
+            }
           }
         }
+
       }
-    }
-    // console.log("A");
-    // console.log(filteredPokemonObj);
+      // console.log("A");
+      // console.log(filteredPokemonObj);
 
-    // console.log("B");
-    // console.log(Object.values(filteredPokemonObj).flat(1));
+      // console.log("B");
+      // console.log(Object.values(filteredPokemonObj).flat(1));
 
-    let filteredPokemonArray2;
-    if (state.pokemon.searchTypes["betweenCategory"] === "and") {
-      //"AND" between categories
-      filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).filter(value => {
-        return filteredCategories.every(category => filteredPokemonObj[category].includes(value));
-      }).slice(0,state.pokemon.displayCount);
-    } else {
-      //"OR" between categories
-      filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index);
-    // 
+      if (filteredCategories.length === 0) {
+        filteredPokemonArray2 = nameFilteredPokemon.slice(0, state.pokemon.displayCount);
+      } else if (state.pokemon.searchTypes["betweenCategory"] === "and") {
+        //"AND" between categories
+        filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).filter(value => {
+          return filteredCategories.every(category => filteredPokemonObj[category].includes(value));
+        }).slice(0,state.pokemon.displayCount);
+      } else {
+        //"OR" between categories
+        filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).slice(0,state.pokemon.displayCount);
+      // 
+      }
     }
     // console.log("C");
     // console.log(filteredPokemonArray2);
@@ -294,7 +318,8 @@ export const selectDisplayCount  = (state) => state.pokemon.displayCount;
 export const selectInCategorySearchType  = (state) => state.pokemon.inCategorySearchType;
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot } = pokemonSlice.actions;
+export const selectSearchTerm = (state) => state.pokemon.searchTerm;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.

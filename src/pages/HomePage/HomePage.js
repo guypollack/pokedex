@@ -7,7 +7,7 @@ import { clearFilterList } from '../../features/filters/filtersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters, resetSearchTypes, setFilteredPokemonSnapshot } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters, resetSearchTypes, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -25,6 +25,7 @@ export function HomePage() {
   const uBound = useSelector(selectUBound);
   const isLoading = useSelector(selectIsLoading);
   const numberOfFilters = useSelector(selectNumberOfFilters);
+  const searchTerm = useSelector(selectSearchTerm);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -67,7 +68,7 @@ export function HomePage() {
     return (() => {
       dispatch(setFilteredPokemonSnapshot(filteredPokemon));
     })
-  },[filters])
+  },[filters, searchTerm])
 
   // useEffect(() => {
   //   // console.log(filteredPokemon);
