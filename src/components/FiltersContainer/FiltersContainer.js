@@ -19,10 +19,10 @@ export function FiltersContainer() {
     <div className="filters-container">
       <FilterCreator />
       <div className="filter-blocks-containers-flex">
-        <FilterBlocksContainer category="type" filters={typeFilters} />
-        <FilterBlocksContainer category="generation" filters={generationFilters} />
-        <FilterBlocksContainer category="height" filters={heightFilters} />
-        <FilterBlocksContainer category="weight" filters={weightFilters} />
+        {typeFilters.length > 0 && <FilterBlocksContainer category="type" filters={typeFilters} />}
+        {generationFilters.length > 0 && <FilterBlocksContainer category="generation" filters={generationFilters} />}
+        {heightFilters.length > 0 && <FilterBlocksContainer category="height" filters={heightFilters} />}
+        {weightFilters.length > 0 && <FilterBlocksContainer category="weight" filters={weightFilters} />}
       </div>
     </div>
   )

@@ -1,3 +1,13 @@
 .filter-block {
   background-color: aqua;
+  /* height: fit-content; */
+  height: 30px;
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+  padding: 0 5px;
+}
+
+.filter-block > p {
+  font-size: 12px;
 }

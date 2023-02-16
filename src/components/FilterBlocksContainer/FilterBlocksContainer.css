@@ -1,16 +1,19 @@
 .filter-blocks-container {
   display: flex;
   flex-direction: column;
-  flex: 0 0 20%;
-  /* border: 1px solid red; */
+  /* flex-grow: 1; */
+  width: 25%;
+  border: 1px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
   align-items: center;
 }
 
 .filter-blocks-flex-container {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column;
   min-height: 100px;
-  width: 100%;
+  /* width: 100%; */
   /* border: 1px solid red; */
   justify-content: flex-start;
 }
