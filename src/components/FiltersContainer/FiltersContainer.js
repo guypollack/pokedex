@@ -22,8 +22,8 @@ export function FiltersContainer() {
 
   return (
     <div className="filters-container">
-      <button onClick={() => dispatch(toggleInCategorySearchType())}>In category search type: {inCategorySearchType}</button>
-      <button onClick={() => dispatch(toggleBetweenCategorySearchType())}>Between category search type: {betweenCategorySearchType}</button>
+      {/* <button onClick={() => dispatch(toggleInCategorySearchType())}>In category search type: {inCategorySearchType}</button> */}
+      {/* <button onClick={() => dispatch(toggleBetweenCategorySearchType())}>Between category search type: {betweenCategorySearchType}</button> */}
       <FilterCreator />
       <div className="filter-blocks-containers-flex">
         {typeFilters.length > 0 && <FilterBlocksContainer category="type" filters={typeFilters} />}

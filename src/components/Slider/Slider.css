@@ -1,0 +1,68 @@
+.slider-flex-container {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+
+.slider-flex-container > * {
+  margin: 0;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid black; */
+  align-items: center;
+}
+
+.slider-container > div {
+  /* border: 1px solid black; */
+}
+
+.slider-bar {
+  border: 0.2px solid black;
+  background-color: rgb(47, 255, 141);
+  background: rgb(47, 255, 141);
+  width: 30px;
+  height: 10px;
+  border-radius: 20px;
+  margin: 5px;
+  display: flex;
+  transition: background-color 0.2s linear;
+}
+
+.slider-bar:hover {
+  cursor: pointer;
+}
+
+.slider-button {
+  position: relative;
+  border: 0.2px solid black;
+  width: 10px;
+  border-radius: 10px;
+  background-color: azure;
+  left: 0px;
+  transition: left 0.2s linear;
+}
+
+/* .slider-bar.toggled {
+  background-color: grey;
+} */
+
+/* .slider-bar.toggled > .slider-button {
+  left: 20px;
+} */
+
+[id$="checkbox"] {
+  display: none;
+}
+
+[id$="checkbox"]:checked ~ .slider-bar  {
+  background-color: grey;
+}
+
+[id$="checkbox"]:checked ~ .slider-bar > .slider-button {
+  left: 20px;
+}
+
+
