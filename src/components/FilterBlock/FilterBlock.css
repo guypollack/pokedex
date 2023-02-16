@@ -6,8 +6,109 @@
   /* flex-direction: row; */
   align-items: center;
   padding: 0 5px;
+  margin-bottom: 2px;
+  border-radius: 5px;
 }
 
 .filter-block > p {
   font-size: 12px;
+  color: white;
+}
+
+.type.bug {
+  background-color: rgb(114,159,63);
+}
+
+.type.dark {
+  background-color: rgb(112,112,112);
+}
+
+.type.dragon {
+  background: linear-gradient(
+    to bottom,
+    rgb(83,163,207) 0%,
+    rgb(83,163,207) 50%,
+    rgb(241,109,86) 50%,
+    rgb(241,109,86) 100%
+  );
+}
+
+.type.electric {
+  color: black;
+  background-color: rgb(238,212,52);
+}
+
+.type.fairy {
+  color: black;
+  background-color: rgb(253,184,233);
+}
+
+.type.fighting {
+  background-color: rgb(213,103,35);
+}
+
+.type.fire {
+  background-color: rgb(253,125,35);
+}
+
+.type.flying {
+  color: black;
+  background: linear-gradient(
+    to bottom,
+    rgb(61,198,239) 0%,
+    rgb(61,198,239) 50%,
+    rgb(189,185,184) 50%,
+    rgb(189,185,184) 100%
+  );
+}
+
+.type.ghost {
+  background-color: rgb(123,98,163);
+}
+
+.type.grass {
+  color: black;
+  background-color: rgb(155,203,80);
+}
+
+.type.ground {
+  color: black;
+  background: linear-gradient(
+    to bottom,
+    rgb(247,221,63) 0%,
+    rgb(247,221,63) 50%,
+    rgb(170,152,65) 50%,
+    rgb(170,152,65) 100%
+  );
+}
+
+.type.ice {
+  color: black;
+  background-color: rgb(81,195,231);
+}
+
+.type.normal {
+  color: black;
+  background-color: rgb(164,172,175);
+}
+
+.type.poison {
+  background-color: rgb(185,127,201);
+}
+
+.type.psychic {
+  background-color: rgb(243,101,185);
+}
+
+.type.rock {
+  background-color: rgb(162,140,32);
+}
+
+.type.steel {
+  color: black;
+  background-color: rgb(158,183,184);
+}
+
+.type.water {
+  background-color: rgb(69,146,196);
 }
