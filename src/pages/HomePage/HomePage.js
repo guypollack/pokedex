@@ -7,7 +7,7 @@ import { clearFilterList } from '../../features/filters/filtersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters, resetSearchTypes } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters, resetSearchTypes, setFilteredPokemonSnapshot } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -56,11 +56,18 @@ export function HomePage() {
     // dispatch(addFilter({"property": "types", "value": "flying"}));
     return (() => {
       // alert("clearing all filters");
-      dispatch(clearFilters());
-      dispatch(clearFilterList());
+      // dispatch(clearFilters());
+      // dispatch(clearFilterList());
       // dispatch(resetSearchTypes());
+      // dispatch(setFilteredPokemonSnapshot(filteredPokemon));
     })
   },[])
+
+  useEffect(() => {
+    return (() => {
+      dispatch(setFilteredPokemonSnapshot(filteredPokemon));
+    })
+  },[filters])
 
   // useEffect(() => {
   //   // console.log(filteredPokemon);

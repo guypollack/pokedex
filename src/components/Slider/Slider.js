@@ -31,7 +31,7 @@ export function Slider({heading, type, value1, value2, checked}) {
           <p>{value1}</p>
         </div>
         <input type="checkbox" id={`${heading}-checkbox`} checked={checked} onChange={() => dispatch(toggleSearchType(type))}></input>
-        <label for={`${heading}-checkbox`} className="slider-bar">
+        <label htmlFor={`${heading}-checkbox`} className="slider-bar">
           <div className="slider-button"></div>
         </label>
         {/* <div className="slider-bar" onClick={handleClick}>

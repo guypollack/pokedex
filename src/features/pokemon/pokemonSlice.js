@@ -16,7 +16,8 @@ const initialState = {
   displayCount: 100,
   inCategorySearchType: "and",
   betweenCategorySearchType: "and",
-  searchTypes: {"inCategory": "and", "betweenCategory": "and"}
+  searchTypes: {"inCategory": "and", "betweenCategory": "and"},
+  filteredPokemonSnapshot: {}
 };
 
 
@@ -146,6 +147,9 @@ export const pokemonSlice = createSlice({
     resetSearchTypes: (state) => {
       state.searchTypes["inCategory"] = "and";
       state.searchTypes["betweenCategory"] = "and";
+    },
+    setFilteredPokemonSnapshot: (state, action) => {
+      state.filteredPokemonSnapshot = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -192,10 +196,13 @@ export const selectFilteredPokemon = (state) => {
   const filters = Object.entries(state.pokemon.filters);
   const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
   // console.log(filteredCategories);
-  if (!state.pokemon.dataFetched || filteredCategories.length === 0) {
+  if (filteredCategories.length === 0) {
     // console.log("A");
     // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
-    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < 101));
+    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < state.pokemon.displayCount + 1));
+  } else if (!state.pokemon.dataFetched) {
+    // console.log("B");
+    return state.pokemon.filteredPokemonSnapshot;
   } else {  
     // console.log("C");
     // START OF OLD METHOD
@@ -287,7 +294,7 @@ export const selectDisplayCount  = (state) => state.pokemon.displayCount;
 export const selectInCategorySearchType  = (state) => state.pokemon.inCategorySearchType;
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes } = pokemonSlice.actions;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
