@@ -18,7 +18,7 @@ export function ValueSelector() {
         <label htmlFor="value-selector">Value</label>
         <select id="value-selector" value={value} onChange={handleChange}>
           <option></option>
-          {allTypes.map(type => <option>{type}</option>)}
+          {allTypes.map(type => <option key={`value-selector-type-${type}`}>{type}</option>)}
         </select>
       </div>
     )
@@ -30,7 +30,7 @@ export function ValueSelector() {
         <label htmlFor="value-selector">Value</label>
         <select id="value-selector" value={value} onChange={handleChange}>
           <option></option>
-          {allGenerations.map(generation => <option>{generation}</option>)}
+          {allGenerations.map(generation => <option key={`value-selector-generation-${generation}`}>{generation}</option>)}
         </select>
       </div>
     )

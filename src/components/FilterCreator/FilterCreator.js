@@ -45,7 +45,7 @@ export function FilterCreator() {
       </div>
       <div className="filter-blocks-flex-container">
         {/* {Object.entries(filters).map(([key, vals]) => vals.map(val => <FilterBlock property={key} value={val} />))} */}
-        {filterList.map(([category, value], index) => <FilterBlock property={category} value={value} filterNumber={index}/>)}
+        {filterList.map(([category, value], index) => <FilterBlock property={category} value={value} filterNumber={index} key={`filter-block-${index}`}/>)}
       </div>
     </div>
   )

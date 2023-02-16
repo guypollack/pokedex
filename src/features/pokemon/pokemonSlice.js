@@ -174,28 +174,77 @@ export const selectFilteredPokemon = (state) => {
   // console.log(visiblePokemonArray);
   // alert("Getting filtered pokemon");
   const filters = Object.entries(state.pokemon.filters);
-  if (!state.pokemon.dataFetched) {
+  const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
+  // console.log(filteredCategories);
+  if (!state.pokemon.dataFetched || filteredCategories.length === 0) {
     // console.log("A");
     // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
     return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < 101));
   } else {  
     // console.log("C");
-    const filteredPokemonArray = [];
-    const myArrayFunction = Array.prototype.every;
+    // START OF OLD METHOD
+    //
+    //
+    // const filteredPokemonArray = [];
+    // const myArrayFunction = Array.prototype.every;
+
+    // for (let i = 1; i < 1009; i++) {
+    //     if (myArrayFunction.call(filters, ([filterName, filterValues]) => {
+    //       return myArrayFunction.call(filterValues, (filterValue) => {
+    //         return doesPokemonFitFilter(filterName, filterValue, i);
+    //       })
+    //     })) {
+    //       filteredPokemonArray.push(i);
+    //     }
+    //   if (filteredPokemonArray.length === state.pokemon.displayCount) {
+    //     break;
+    //   }
+    // }
+    //
+    //
+    // END OF OLD METHOD
+
+    // START OF NEW METHOD
+    //
+    //
+    const filteredPokemonObj = {"types": [], "generations": [], "heights": [], "weights": []};
+    
     for (let i = 1; i < 1009; i++) {
-        if (myArrayFunction.call(filters, ([filterName, filterValues]) => {
-          return myArrayFunction.call(filterValues, (filterValue) => {
-            return doesPokemonFitFilter(filterName, filterValue, i);
-          })
-        })) {
-          filteredPokemonArray.push(i);
+      for (let filterName of Object.keys(state.pokemon.filters)) {
+        //
+        // console.log(filterName);
+        // console.log(state.pokemon.filters[filterName].length === 0);
+        //
+        //"AND" within categories
+        if (state.pokemon.filters[filterName].length !== 0 && state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+          filteredPokemonObj[filterName].push(i);
         }
-      if (filteredPokemonArray.length === state.pokemon.displayCount) {
-        break;
+        //"OR" within categories
+        // if (state.pokemon.filters[filterName].some(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+        //   filteredPokemonObj[filterName].push(i);
+        // }
       }
     }
+    // console.log("A");
+    // console.log(filteredPokemonObj);
 
-    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray.includes(+key))); //the + in +key is needed to convert string to number
+    // console.log("B");
+    // console.log(Object.values(filteredPokemonObj).flat(1));
+
+    //"AND" between categories
+    const filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).filter(value => {
+      return filteredCategories.every(category => filteredPokemonObj[category].includes(value));
+    }).slice(0,state.pokemon.displayCount);
+    //"OR" between categories
+    // const filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index);
+    // 
+    // console.log("C");
+    // console.log(filteredPokemonArray2);
+    //
+    //
+    // END OF NEW METHOD
+
+    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray2.includes(+key))); //the + in +key is needed to convert string to number
     return filteredPokemon;
   }
 }
