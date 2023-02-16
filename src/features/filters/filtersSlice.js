@@ -27,7 +27,15 @@ export const filtersSlice = createSlice({
       state.filterList.push(action.payload);
     },
     removeFromFilterList: (state, action) => {
-      state.filterList = state.filterList.slice(0, action.payload).concat(state.filterList.slice(action.payload + 1));
+      let i = 0;
+      while (i < state.filterList.length) {
+        if (state.filterList[i][0] === action.payload[0] && state.filterList[i][1] === action.payload[1]) {
+          break;
+        } else {
+          i++;
+        }
+      }
+      state.filterList = state.filterList.slice(0,i).concat(state.filterList.slice(i+1));
     },
     clearFilterList: (state) => {
       state.filterList = [];

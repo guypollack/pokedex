@@ -1,0 +1,7 @@
+.filter-blocks-container {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 0 20%;
+  min-height: 100px;
+  border: 1px solid red;
+}

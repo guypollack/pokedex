@@ -16,7 +16,7 @@ export function FilterBlock({property, value, filterNumber}) {
   function handleClick(e) {
     dispatch(setDisplayCount(numberOfFilters > 1 ? 50 : 100));
     dispatch(removeFilter({"property": property.toLowerCase() + "s", "value": value.toLowerCase()}));
-    dispatch(removeFromFilterList(filterNumber));
+    dispatch(removeFromFilterList([property, value.toString()]));
   }
 
   function valueFormatter(val) {

@@ -1,0 +1,9 @@
+.filters-container {
+  border: 1px solid black;
+}
+
+.filter-blocks-containers-flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
