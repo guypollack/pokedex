@@ -47,7 +47,9 @@ export function HomePage() {
       // dispatch(makeVisible({"start": lBound, "end": uBound}));
       // dispatch(filterPokemonAsync());
       // console.log(`dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));`);
-      dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
+      if (!dataFetched) {
+        dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
+      }
     }
   },[allPokemonFetched])
 
