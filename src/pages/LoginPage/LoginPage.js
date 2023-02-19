@@ -6,9 +6,17 @@ export function LoginPage() {
     <div>
       <NavBar />
       <h2>This is the Login Page</h2>
+      <h3>Login</h3>
       <label htmlFor="login-username">Username</label>
       <input type="text"></input>
-      <label htmlFor="login-username">Password</label>
+      <label htmlFor="login-password">Password</label>
+      <input type="password"></input>
+      <h3>Create account</h3>
+      <label htmlFor="create-account-username">Username</label>
+      <input type="text"></input>
+      <label htmlFor="create-account-password">Password</label>
+      <input type="password"></input>
+      <label htmlFor="create-account-password-very">Retype password</label>
       <input type="password"></input>
     </div>
   )
