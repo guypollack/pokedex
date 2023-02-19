@@ -5,23 +5,6 @@ import "./Slider.css";
 
 export function Slider({heading, type, value1, value2, checked}) {
   const dispatch = useDispatch();
-
-  function toggleButton(target) {
-    if (target.classList.contains("toggled")) {
-      target.classList.remove("toggled");
-    } else {
-      target.classList.add("toggled");
-    }
-    dispatch(toggleSearchType(type));
-  }
-
-  function handleClick(e) {
-    if (e.target.classList.contains("slider-bar")) {
-      toggleButton(e.target);
-    } else if (e.target.classList.contains("slider-button")) {
-      toggleButton(e.target.parentElement);
-    }
-  }
   
   return (
     <div className="slider-flex-container">
