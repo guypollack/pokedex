@@ -15,14 +15,28 @@
   align-items: center;
 }
 
+.slider-container :nth-child(1) { 
+  order: 2;
+}
+.slider-container :nth-child(2) { 
+  order: 3;
+}
+.slider-container :nth-child(3) { 
+  order: 1;
+}
+.slider-container :nth-child(4) { 
+  order: 4;
+}
+
 .slider-container > div {
   /* border: 1px solid black; */
 }
 
 .slider-bar {
   border: 0.2px solid black;
-  background-color: rgb(47, 255, 141);
-  background: rgb(47, 255, 141);
+  /* background-color: rgb(47, 255, 141); */
+  /* background: rgb(47, 255, 141); */
+  background-color: grey;
   width: 30px;
   height: 10px;
   border-radius: 20px;
@@ -53,16 +67,36 @@
   left: 20px;
 } */
 
+.slider-value {
+  /* opacity: 0.2; */
+}
+
+.slider-container > div:nth-child(odd) {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.slider-container > div:nth-child(even) {
+  opacity: 0.2;
+  font-weight: normal;
+}
+
 [id$="checkbox"] {
   display: none;
 }
 
-[id$="checkbox"]:checked ~ .slider-bar  {
-  background-color: grey;
-}
 
 [id$="checkbox"]:checked ~ .slider-bar > .slider-button {
   left: 20px;
 }
 
 
+[id$="checkbox"]:checked ~ div:nth-child(odd) {
+  opacity: 0.2;
+  font-weight: normal;
+}
+
+[id$="checkbox"]:checked ~ div:nth-child(even) {
+  opacity: 1;
+  font-weight: bold;
+}
