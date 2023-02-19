@@ -247,7 +247,7 @@ export const selectFilteredPokemon = (state) => {
     for (let i of searchTermFilteredPokemonArray) {
       for (let filterName of filteredCategories) {
         //
-        console.log(filterName);
+        // console.log(filterName);
         // console.log(state.pokemon.filters[filterName].length === 0);
         //
         if (state.pokemon.searchTypes["inCategory"] === "and") {
@@ -283,13 +283,13 @@ export const selectFilteredPokemon = (state) => {
     // 
     }
     // console.log("C");
-    console.log(filteredPokemonArray2);
+    // console.log(filteredPokemonArray2);
     //
     //
     // END OF NEW METHOD
 
     const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray2.includes(key))); // now removed the + in +key is needed to convert string to number
-    console.log(filteredPokemon);
+    // console.log(filteredPokemon);
     return filteredPokemon;
   }
 }
