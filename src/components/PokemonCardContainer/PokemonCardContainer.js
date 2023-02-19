@@ -32,7 +32,8 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   //   }
   // },[])
 
-  function handleClickCard() {
+  function handleClickCard(e) {
+    alert("Card clicked");
     navigate("/pokemon/"+name);
   }
 
@@ -48,26 +49,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
     removeOutline(id);
   }
 
-  function handleClickFavourite(e) {
-    e.stopPropagation();
-    if (!favourited) {
-      dispatch(addToFavourites(number));
-      if (e.target.classList.length !== 0) {
-        // alert("A");
-        // alert(e.target.nextElementSibling.classList);
-        e.target.nextElementSibling.classList.add("favourited");
-      } else {
-        // alert("B");
-        e.target.parentElement.nextElementSibling.classList.add("favourited");
-      }
-      
-      // alert(`${name} added to favourites`)
-    } else {
-      dispatch(removeFromFavourites(number));
-      // alert(`${name} removed from favourites`)
-    }
-  }
-
   return (
     <PokemonCard 
       number={number}
@@ -76,7 +57,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       imageUrl={imageUrl}
       favourited={favourited}
       onClickCard={handleClickCard}
-      onClickFavourite={handleClickFavourite}
       handleMouseOver={handleMouseOver}
       handleMouseOut={handleMouseOut}
     />

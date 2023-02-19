@@ -14,11 +14,19 @@ export const favouritesSlice = createSlice({
     },
     removeFromFavourites: (state, action) => {
       state.favourites = state.favourites.filter(item => item !== action.payload);
+    },
+    toggleFavourite: (state, action) => {
+      if (!state.favourites.includes(action.payload)) {
+        state.favourites.push(action.payload);
+        state.favourites.sort();
+      } else {
+        state.favourites = state.favourites.filter(item => item !== action.payload);
+      }
     }
   }
 });
 
 export const selectFavourites = (state) => state.favourites.favourites;
-export const { addToFavourites, removeFromFavourites } = favouritesSlice.actions;
+export const { addToFavourites, removeFromFavourites, toggleFavourite } = favouritesSlice.actions;
 
 export default favouritesSlice.reducer;

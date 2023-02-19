@@ -1,7 +1,7 @@
 .favourite-button {
   position: absolute;
   bottom: 5px;
-  right: 5px;
+  right: 13px;
   font-size: 20px;
   color: palevioletred;
   /* border: 1px solid red; */
@@ -9,52 +9,45 @@
   height: 20px;
 }
 
-.outline-heart, .solid-heart, .solid-heart-animation {
+[id^=favourite-button] {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.outline-heart, .solid-heart, .animation-heart {
   position: absolute;
   cursor: pointer;
 }
 
-.outline-heart, .solid-heart {
-  z-index: 2;
-}
-
 .solid-heart {
-  display: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 
-.solid-heart.favourited {
-  display: inline;
+.animation-heart {
+  width: 0px;
+  height: 0px;
+  transform: translateX(10px) translateY(10px);
 }
 
-.solid-heart-animation {
-  /* color: aquamarine; */
-  /* display: none; */
-  visibility: hidden;
+.outline-heart:hover ~ .solid-heart {
+  width: 20px;
+  height: 20px;
   opacity: 1;
-  z-index: 1;
-  transition: none;
 }
 
-.solid-heart-animation.favourited {
-  visibility: visible;
-  font-size: 60px;
+[id^=favourite-button]:checked + label > .solid-heart {
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+}
+
+[id^=favourite-button]:checked + label > .animation-heart {
+  width: 60px;
+  height: 60px;
   transform: translateX(-20px) translateY(-20px);
   opacity: 0;
   transition: all 0.8s;
 }
-
-.outline-heart:hover ~ .solid-heart {
-  display: inline;
-}
-
-/* @keyframes clickFavourite {
-  from {
-    font-size: 20px;
-    opacity: 1;
-  }
-  to {
-    font-size: 60px;
-    transform: translateX(-20px) translateY(-20px);
-    opacity: 0;
-  }
-} */
