@@ -12,6 +12,7 @@ export function NavBar() {
       <NavLink to='/page1'>Page 1</NavLink>
       <NavLink to='/page2'>Page 2</NavLink>
       <NavLink to='/guest/favourites'>Favourites{favouritesNumber > 0 ? `(${favouritesNumber})` : ""}</NavLink>
+      <NavLink to='/login'>Login</NavLink>
     </div>
   )
 }

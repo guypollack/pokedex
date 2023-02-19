@@ -5,6 +5,7 @@ import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
 import { PokemonPage } from './pages/PokemonPage.js';
 import { Favourites } from './pages/Favourites/Favourites.js';
+import { LoginPage } from './pages/LoginPage/LoginPage.js';
 import './App.css';
 
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/guest/favourites",
     element: <Favourites />
+  },
+  {
+    path: "/login",
+    element: <LoginPage />
   }
 ]);
 
