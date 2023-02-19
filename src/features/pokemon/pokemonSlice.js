@@ -204,13 +204,13 @@ export const selectFilteredPokemon = (state) => {
   const filters = Object.entries(state.pokemon.filters);
   const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
   // console.log(filteredCategories);
-  if (filteredCategories.length === 0 && state.pokemon.searchTerm === "") {
+  if ((filteredCategories.length === 0 && state.pokemon.searchTerm === "") || !state.pokemon.dataFetched) {
     // console.log("A");
     // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
-    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => key < state.pokemon.displayCount + 1));
-  } else if (!state.pokemon.dataFetched) {
+    return state.pokemon.allPokemon;
+  } else if (filteredCategories.length === 0) {
     // console.log("B");
-    return state.pokemon.filteredPokemonSnapshot;
+    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.includes(state.pokemon.searchTerm)));
   } else {  
     // console.log("C");
     // START OF OLD METHOD
@@ -239,66 +239,57 @@ export const selectFilteredPokemon = (state) => {
     //
     //
     const filteredPokemonObj = {"types": [], "generations": [], "heights": [], "weights": []};
-    const nameFilteredPokemon = [];
     
-    let filteredPokemonArray2;
+    //Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.includes(state.pokemon.searchTerm)));
+    const searchTermFilteredPokemonArray = Object.keys(state.pokemon.allPokemon).filter(key => state.pokemon.allPokemon[key].name.includes(state.pokemon.searchTerm));
 
-    for (let i = 1; i < 1009; i++) {
-      // console.log(state.pokemon.allPokemon[i].name);
-      // console.log(state.pokemon.searchTerm);
-      // console.log(state.pokemon.allPokemon[i].name.includes(state.pokemon.searchTerm));
-      if (state.pokemon.allPokemon[i].name.includes(state.pokemon.searchTerm)) {
-        console.log(state.pokemon.allPokemon[i].name);
 
-        if (filteredCategories.length === 0) {
-          nameFilteredPokemon.push(i);
+    for (let i of searchTermFilteredPokemonArray) {
+      for (let filterName of filteredCategories) {
+        //
+        console.log(filterName);
+        // console.log(state.pokemon.filters[filterName].length === 0);
+        //
+        if (state.pokemon.searchTypes["inCategory"] === "and") {
+          //"AND" within categories
+          if (state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+            // console.log(i);
+            filteredPokemonObj[filterName].push(i);
+          }
         } else {
-          for (let filterName of filteredCategories) {
-            //
-            // console.log(filterName);
-            // console.log(state.pokemon.filters[filterName].length === 0);
-            //
-            if (state.pokemon.searchTypes["inCategory"] === "and") {
-              //"AND" within categories
-              if (state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
-                filteredPokemonObj[filterName].push(i);
-              }
-            } else {
-              //"OR" within categories
-              if (state.pokemon.filters[filterName].some(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
-                filteredPokemonObj[filterName].push(i);
-              }
-            }
+          //"OR" within categories
+          if (state.pokemon.filters[filterName].some(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
+            filteredPokemonObj[filterName].push(i);
           }
         }
-
       }
-      // console.log("A");
       // console.log(filteredPokemonObj);
+    }
+    // console.log("A");
+    // console.log(filteredPokemonObj);
 
-      // console.log("B");
-      // console.log(Object.values(filteredPokemonObj).flat(1));
+    // console.log("B");
+    // console.log(Object.values(filteredPokemonObj).flat(1));
 
-      if (filteredCategories.length === 0) {
-        filteredPokemonArray2 = nameFilteredPokemon.slice(0, state.pokemon.displayCount);
-      } else if (state.pokemon.searchTypes["betweenCategory"] === "and") {
-        //"AND" between categories
-        filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).filter(value => {
-          return filteredCategories.every(category => filteredPokemonObj[category].includes(value));
-        }).slice(0,state.pokemon.displayCount);
-      } else {
-        //"OR" between categories
-        filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).slice(0,state.pokemon.displayCount);
-      // 
-      }
+    let filteredPokemonArray2;
+    if (state.pokemon.searchTypes["betweenCategory"] === "and") {
+      //"AND" between categories
+      filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index).filter(value => {
+        return filteredCategories.every(category => filteredPokemonObj[category].includes(value));
+      });
+    } else {
+      //"OR" between categories
+      filteredPokemonArray2 = Object.values(filteredPokemonObj).flat(1).filter((value, index, self) => self.indexOf(value) === index);
+    // 
     }
     // console.log("C");
-    // console.log(filteredPokemonArray2);
+    console.log(filteredPokemonArray2);
     //
     //
     // END OF NEW METHOD
 
-    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray2.includes(+key))); //the + in +key is needed to convert string to number
+    const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray2.includes(key))); // now removed the + in +key is needed to convert string to number
+    console.log(filteredPokemon);
     return filteredPokemon;
   }
 }

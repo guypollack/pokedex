@@ -1,5 +1,5 @@
 import React from "react";
-import { removeFilter, setDisplayCount, selectNumberOfFilters } from "../../features/pokemon/pokemonSlice";
+import { removeFilter, setDisplayCount, selectNumberOfFilters, selectSearchTerm } from "../../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromFilterList } from "../../features/filters/filtersSlice";
 import "./FilterBlock.css"
@@ -7,6 +7,7 @@ import "./FilterBlock.css"
 export function FilterBlock({property, value, filterNumber}) {
   const dispatch = useDispatch();
   const numberOfFilters = useSelector(selectNumberOfFilters);
+  const searchTerm = useSelector(selectSearchTerm);
   let numberStart;
 
   if (property === "Height" || property === "Weight") {
@@ -14,7 +15,7 @@ export function FilterBlock({property, value, filterNumber}) {
   }
 
   function handleClick(e) {
-    dispatch(setDisplayCount(numberOfFilters > 1 ? 50 : 100));
+    dispatch(setDisplayCount((numberOfFilters + searchTerm.length) > 0 ? 50 : 100));
     dispatch(removeFilter({"property": property.toLowerCase() + "s", "value": value.toLowerCase()}));
     dispatch(removeFromFilterList([property, value.toString()]));
   }
