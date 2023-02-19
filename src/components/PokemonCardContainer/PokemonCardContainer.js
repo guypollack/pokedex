@@ -33,7 +33,7 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   // },[])
 
   function handleClickCard(e) {
-    alert("Card clicked");
+    // alert("Card clicked");
     navigate("/pokemon/"+name);
   }
 
