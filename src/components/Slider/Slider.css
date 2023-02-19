@@ -71,14 +71,18 @@
   /* opacity: 0.2; */
 }
 
-.slider-container > div:nth-child(odd) {
+.slider-container > div:nth-child(odd) > p {
   opacity: 1;
   font-weight: bold;
 }
 
-.slider-container > div:nth-child(even) {
+.slider-container > div:nth-child(even) > p {
   opacity: 0.2;
   font-weight: normal;
+}
+
+.slider-value {
+  transition: all 0.2s linear;
 }
 
 [id$="checkbox"] {
@@ -91,12 +95,12 @@
 }
 
 
-[id$="checkbox"]:checked ~ div:nth-child(odd) {
+[id$="checkbox"]:checked ~ div:nth-child(odd) > p {
   opacity: 0.2;
   font-weight: normal;
 }
 
-[id$="checkbox"]:checked ~ div:nth-child(even) {
+[id$="checkbox"]:checked ~ div:nth-child(even) > p {
   opacity: 1;
   font-weight: bold;
 }
