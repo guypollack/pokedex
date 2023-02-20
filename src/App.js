@@ -6,6 +6,7 @@ import { Page2 } from './pages/Page2.js';
 import { PokemonPage } from './pages/PokemonPage.js';
 import { Favourites } from './pages/Favourites/Favourites.js';
 import { LoginPage } from './pages/LoginPage/LoginPage.js';
+import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js'; 
 import './App.css';
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />
+  },
+  {
+    path: "/myaccount",
+    element: <MyAccountPage /> 
   }
 ]);
 

@@ -7,6 +7,7 @@ import { selectUsers, setCurrentUser, addUser, selectCreateAccountUsername, setC
 export function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const users = useSelector(selectUsers);
   const createAccountUsername = useSelector(selectCreateAccountUsername);
   const createAccountPassword = useSelector(selectCreateAccountPassword);
   const createAccountPassword2 = useSelector(selectCreateAccountPassword2);
@@ -33,7 +34,7 @@ export function LoginPage() {
     if (successMessage === "Account created and logged in") {
       setTimeout(() => {
         dispatch(setSuccessMessage(""));
-        dispatch(setCurrentUser(createAccountUsername));
+        dispatch(setCurrentUser(users[users.length -1]["username"]));
         navigate("/");
       },2000)
     }

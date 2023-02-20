@@ -59,6 +59,7 @@ export const usersSlice = createSlice({
 
 export const { addUser, setCurrentUser, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setSuccessMessage } = usersSlice.actions;
 
+export const selectUsers = (state) => state.users.users;
 export const selectCurrentUser = (state) => state.users.currentUser;
 export const selectCreateAccountUsername = (state) => state.users.createAccountUsername;
 export const selectCreateAccountPassword = (state) => state.users.createAccountPassword;
