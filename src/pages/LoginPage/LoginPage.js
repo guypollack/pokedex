@@ -30,18 +30,6 @@ export function LoginPage() {
     dispatch(loginUser());
   }
 
-  useEffect(() => {
-    if (loginSuccessMessage === "Login successful") {
-      setTimeout(() => {
-        dispatch(setLoginSuccessMessage(""));
-        dispatch(setCurrentUser(loginUsername));
-        dispatch(setLoginUsername(""));
-        dispatch(setLoginPassword(""));
-        navigate("/");
-      },2000)
-    }
-  },[loginSuccessMessage]);
-
   function handleChangeCreateAccountUsername(e) {
     dispatch(setCreateAccountUsername(e.target.value));
   }
@@ -59,17 +47,34 @@ export function LoginPage() {
   }
 
   useEffect(() => {
+    if (loginSuccessMessage === "Login successful") {
+      setTimeout(() => {
+        dispatch(setCurrentUser(loginUsername));
+        navigate("/");
+      },2000)
+    }
+  },[loginSuccessMessage]);
+
+  useEffect(() => {
     if (createAccountSuccessMessage === "Account created and logged in") {
       setTimeout(() => {
-        dispatch(setCreateAccountSuccessMessage(""));
         dispatch(setCurrentUser(createAccountUsername));
-        dispatch(setCreateAccountUsername(""));
-        dispatch(setCreateAccountPassword(""));
-        dispatch(setCreateAccountPassword2(""));
         navigate("/");
       },2000)
     }
   },[createAccountSuccessMessage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setLoginSuccessMessage(""));
+      dispatch(setLoginUsername(""));
+      dispatch(setLoginPassword(""));
+      dispatch(setCreateAccountSuccessMessage(""));
+      dispatch(setCreateAccountUsername(""));
+      dispatch(setCreateAccountPassword(""));
+      dispatch(setCreateAccountPassword2(""));
+    }
+  },[])
 
   return (
     <div>
