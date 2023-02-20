@@ -1,14 +1,15 @@
 import React from 'react';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon } from '../../features/pokemon/pokemonSlice.js';
 import { selectFavourites } from '../../features/favourites/favouritesSlice.js';
-import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import { selectCurrentUser } from '../../features/users/usersSlice.js';
+import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer.js';
 
-export function Favourites() {
-
+export function FavouritesPage() {
+  const currentUser = useSelector(selectCurrentUser);
   const allPokemon = useSelector(selectAllPokemon);
-  const favourites = useSelector(selectFavourites);
+  const favourites = useSelector(selectFavourites)[currentUser];
   // const firstTenArray = Object.entries(allPokemon).slice(0,10);
   // console.log(firstTenArray);
   // const favouritePokemonArray = Object.entries(allPokemon).filter(([key, value]) => favourites.includes(key));

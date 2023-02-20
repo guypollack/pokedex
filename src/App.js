@@ -4,7 +4,7 @@ import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
 import { PokemonPage } from './pages/PokemonPage.js';
-import { Favourites } from './pages/Favourites/Favourites.js';
+import { FavouritesPage } from './pages/FavouritesPage/FavouritesPage.js';
 import { LoginPage } from './pages/LoginPage/LoginPage.js';
 import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js'; 
 import './App.css';
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
     element: <PokemonPage />
   },
   {
-    path: "/guest/favourites",
-    element: <Favourites />
+    path: "/favourites",
+    element: <FavouritesPage />
   },
   {
     path: "/login",
