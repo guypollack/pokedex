@@ -15,9 +15,9 @@ export function NavBar() {
       <NavLink to='/page1'>Page 1</NavLink>
       <NavLink to='/page2'>Page 2</NavLink>
       <NavLink to='/guest/favourites'>Favourites{favouritesNumber > 0 ? `(${favouritesNumber})` : ""}</NavLink>
-      {(currentUser !== "") && <NavLink to='/myaccount'>My Account</NavLink>}
-      {(currentUser === "") && <NavLink to='/login'>Login</NavLink>}
-      {(currentUser !== "") && <NavLink to="/" onClick={() => dispatch(setCurrentUser(""))}>Logout</NavLink>}
+      {(currentUser !== "guest") && <NavLink to='/myaccount'>My Account</NavLink>}
+      {(currentUser === "guest") && <NavLink to='/login'>Login</NavLink>}
+      {(currentUser !== "guest") && <NavLink to="/" onClick={() => dispatch(setCurrentUser("guest"))}>Logout</NavLink>}
     </div>
   )
 }
