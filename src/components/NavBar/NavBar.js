@@ -17,7 +17,7 @@ export function NavBar() {
       <NavLink to='/guest/favourites'>Favourites{favouritesNumber > 0 ? `(${favouritesNumber})` : ""}</NavLink>
       {(currentUser !== "") && <NavLink to='/myaccount'>My Account</NavLink>}
       {(currentUser === "") && <NavLink to='/login'>Login</NavLink>}
-      {(currentUser !== "") && <NavLink to="/" onClick={() => useDispatch(setCurrentUser(""))}>Logout</NavLink>}
+      {(currentUser !== "") && <NavLink to="/" onClick={() => dispatch(setCurrentUser(""))}>Logout</NavLink>}
     </div>
   )
 }

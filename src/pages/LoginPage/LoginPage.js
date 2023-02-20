@@ -34,7 +34,10 @@ export function LoginPage() {
     if (successMessage === "Account created and logged in") {
       setTimeout(() => {
         dispatch(setSuccessMessage(""));
-        dispatch(setCurrentUser(users[users.length -1]["username"]));
+        dispatch(setCurrentUser(createAccountUsername));
+        dispatch(setCreateAccountUsername(""));
+        dispatch(setCreateAccountPassword(""));
+        dispatch(setCreateAccountPassword2(""));
         navigate("/");
       },2000)
     }

@@ -23,11 +23,8 @@ export const usersSlice = createSlice({
         if (state.createAccountPassword === state.createAccountPassword2) {
           if (!state.users.map(user => user["username"]).includes(state.createAccountUsername)) {
             state.users.push({"username": state.createAccountUsername, "password": state.createAccountPassword});
-            state.createAccountUsername = "";
-            state.createAccountPassword = "";
-            state.createAccountPassword2 = "";
-            state.warning = "";
             state.successMessage = "Account created and logged in";
+            state.warning = "";
           } else {
             state.warning = "Username already exists";
           }
