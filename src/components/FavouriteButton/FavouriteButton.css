@@ -15,6 +15,17 @@
   opacity: 0;
 }
 
+.heart-icon-container {
+  /* border: 1px solid red; */
+  display: flex;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: -8px;
+  padding: 0;
+}
+
 .outline-heart, .solid-heart, .animation-heart, .xmark-heart {
   position: absolute;
 }
@@ -27,12 +38,16 @@
   width: 0;
   height: 0;
   opacity: 0;
+  /* display: none; */
+  visibility: hidden;
 }
 
 .animation-heart {
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
+  /* display: none; */
   transform: translateX(10px) translateY(10px);
+  visibility: hidden;
 }
 
 .xmark-heart {
@@ -43,21 +58,34 @@
 }
 
 .outline-heart:hover ~ .solid-heart {
+  visibility: visible;
   width: 20px;
   height: 20px;
   opacity: 1;
 }
 
 [id^=favourite-button]:checked + label > .solid-heart {
+  visibility: visible;
   width: 20px;
   height: 20px;
   opacity: 1;
 }
 
 [id^=favourite-button]:checked + label > .animation-heart {
+  visibility: visible;
   width: 60px;
   height: 60px;
   transform: translateX(-20px) translateY(-20px);
   opacity: 0;
   transition: all 0.8s;
+  animation: visibleToHidden 0.8s linear 0s 1 normal forwards;
+}
+
+@keyframes visibleToHidden {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
 }

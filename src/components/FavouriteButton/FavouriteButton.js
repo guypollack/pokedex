@@ -27,7 +27,7 @@ export function FavouriteButton({number}) {
     return (
       <div className="favourite-button">
         <input type="checkbox" id={`favourite-button-${number}`} checked={favourited} onClick={handleClick} onChange={handleChange}></input>
-        <label htmlFor={`favourite-button-${number}`} onClick={handleClick} >
+        <label className="heart-icon-container" htmlFor={`favourite-button-${number}`} onClick={handleClick} >
           <FontAwesomeIcon className="outline-heart" icon={outlineHeart} />
           <FontAwesomeIcon className="solid-heart" icon={solidHeart} />
           <FontAwesomeIcon className="animation-heart" icon={solidHeart} />
