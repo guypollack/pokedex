@@ -13,9 +13,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const favourites = useSelector(selectFavourites);
-  const favourited = favourites.includes(number);
 
   let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
@@ -55,7 +52,6 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       name={name}
       id={id}
       imageUrl={imageUrl}
-      favourited={favourited}
       onClickCard={handleClickCard}
       handleMouseOver={handleMouseOver}
       handleMouseOut={handleMouseOut}

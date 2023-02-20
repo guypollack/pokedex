@@ -1,17 +1,22 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { toggleFavourite } from "../../features/favourites/favouritesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFavourite, selectFavourites } from "../../features/favourites/favouritesSlice";
+import { selectCurrentUser } from "../../features/users/usersSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as outlineHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 import "./FavouriteButton.css";
 
-export function FavouriteButton({favourited, number}) {
+export function FavouriteButton({number}) {
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+
+  const favourites = useSelector(selectFavourites);
+  const favourited = favourites[currentUser].includes(number);  
 
   function handleChange(e) {
-    dispatch(toggleFavourite(number));
+    dispatch(toggleFavourite({"username": currentUser, "pokemon": number}));
   }
 
   function handleClick(e) {
