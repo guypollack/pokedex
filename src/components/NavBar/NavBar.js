@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectFavourites } from '../../features/favourites/favouritesSlice';
-import { selectCurrentUser } from '../../features/users/usersSlice';
+import { selectCurrentUser, setCurrentUser } from '../../features/users/usersSlice';
 import "./NavBar.css";
 
 export function NavBar() {
+  const dispatch = useDispatch();
   const favouritesNumber = useSelector(selectFavourites).length;
   const currentUser = useSelector(selectCurrentUser);
   return (
@@ -16,6 +17,7 @@ export function NavBar() {
       <NavLink to='/guest/favourites'>Favourites{favouritesNumber > 0 ? `(${favouritesNumber})` : ""}</NavLink>
       {(currentUser !== "") && <NavLink to='/myaccount'>My Account</NavLink>}
       {(currentUser === "") && <NavLink to='/login'>Login</NavLink>}
+      {(currentUser !== "") && <NavLink to="/" onClick={() => useDispatch(setCurrentUser(""))}>Logout</NavLink>}
     </div>
   )
 }
