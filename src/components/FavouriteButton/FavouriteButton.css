@@ -15,8 +15,11 @@
   opacity: 0;
 }
 
-.outline-heart, .solid-heart, .animation-heart {
+.outline-heart, .solid-heart, .animation-heart, .xmark-heart {
   position: absolute;
+}
+
+.outline-heart, .solid-heart, .animation-heart {
   cursor: pointer;
 }
 
@@ -30,6 +33,13 @@
   width: 0px;
   height: 0px;
   transform: translateX(10px) translateY(10px);
+}
+
+.xmark-heart {
+  cursor: not-allowed;
+  color: gray;
+  opacity: 0.3;
+  right: -5px;
 }
 
 .outline-heart:hover ~ .solid-heart {
