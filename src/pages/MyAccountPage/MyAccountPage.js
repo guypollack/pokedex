@@ -33,8 +33,19 @@ export function MyAccountPage() {
       dispatch(setCurrentUser(renameUsername));
       dispatch(setRenameUsername(""));
       dispatch(setRenamePassword(""));
+      setTimeout(() => {
+        dispatch(setRenameSuccessMessage(""));
+      },2000);
     }
-  },[renameSuccessMessage])
+  },[renameSuccessMessage]);
+
+  useEffect(() => {
+    if (changePasswordSuccessMessage === "Password updated") {
+      setTimeout(() => {
+        dispatch(setChangePasswordSuccessMessage(""));
+      },2000);
+    }
+  },[changePasswordSuccessMessage]);
 
   useEffect(() => {
     return () => {
