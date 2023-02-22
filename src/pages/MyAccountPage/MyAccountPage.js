@@ -120,6 +120,18 @@ export function MyAccountPage() {
     dispatch(prepareToDelete());
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      if (e.target.id.includes("change-password-")) {
+        handleClickChangePassword();
+      } else if (e.target.id.includes("rename-user-")) {
+        handleClickUpdateUsername();
+      } else if (e.target.id.includes("delete-account-")) {
+        handleClickDeleteAccount();
+      } 
+    }
+  }
+
   return (
     <div>
       <NavBar />
@@ -127,11 +139,11 @@ export function MyAccountPage() {
       <h3>{user}</h3>
       <h3>Change Password</h3>
       <label htmlFor="change-password-current">Current Password</label>
-      <input type="password" id="change-password-current" value={currentPassword} onChange={handleChangePasswordCurrentPassword}></input>
+      <input type="password" id="change-password-current" value={currentPassword} onChange={handleChangePasswordCurrentPassword} onKeyDown={handleKeyDown}></input>
       <label htmlFor="change-password-new-1">New Password</label>
-      <input type="password" id="change-password-new-1" value={newPassword1} onChange={handleChangePasswordNewPassword1}></input>
+      <input type="password" id="change-password-new-1" value={newPassword1} onChange={handleChangePasswordNewPassword1} onKeyDown={handleKeyDown}></input>
       <label htmlFor="change-password-new-2">Retype New Password</label>
-      <input type="password" id="change-password-new-2" value={newPassword2} onChange={handleChangePasswordNewPassword2}></input>
+      <input type="password" id="change-password-new-2" value={newPassword2} onChange={handleChangePasswordNewPassword2} onKeyDown={handleKeyDown}></input>
       <button onClick={handleClickChangePassword}>Update</button>
       <p>{changePasswordWarning}</p>
       <p>{changePasswordSuccessMessage}</p>
@@ -139,17 +151,17 @@ export function MyAccountPage() {
       <label htmlFor="rename-user-current-username">Current Username</label>
       <input id="rename-user-current-username" type="text" value={user} disabled></input>
       <label htmlFor="rename-user-password">Password</label>
-      <input type="password" id="rename-user-password" value={renamePassword} onChange={handleChangeRenamePassword}></input>
+      <input type="password" id="rename-user-password" value={renamePassword} onChange={handleChangeRenamePassword} onKeyDown={handleKeyDown}></input>
       <label htmlFor="rename-user-new-username">New Username</label>
-      <input type="text" id="rename-user-new-username" value={renameUsername} onChange={handleChangeRenameUsername}></input>
+      <input type="text" id="rename-user-new-username" value={renameUsername} onChange={handleChangeRenameUsername} onKeyDown={handleKeyDown}></input>
       <button onClick={handleClickUpdateUsername}>Update</button>
       <p>{renameWarning}</p>
       <p>{renameSuccessMessage}</p>
       <h3>Delete Account</h3>
       <label htmlFor="delete-account-password">Password</label>
-      <input type="password" id="delete-account-password" value={deleteAccountPassword} onChange={handleChangeDeleteAccountPassword}></input>
+      <input type="password" id="delete-account-password" value={deleteAccountPassword} onChange={handleChangeDeleteAccountPassword} onKeyDown={handleKeyDown}></input>
       <label htmlFor="delete-account-confirmation">I understand that deleting my account is permanent and cannot be undone</label>
-      <input type="checkbox" id="delete-account-confirmation" value={deleteAccountConfirmation} onChange={handleChangeDeleteAccountConfirmation}></input>
+      <input type="checkbox" id="delete-account-confirmation" value={deleteAccountConfirmation} onChange={handleChangeDeleteAccountConfirmation} onKeyDown={handleKeyDown}></input>
       <button onClick={handleClickDeleteAccount}>Delete Account</button>
       <p>{deleteAccountWarning}</p>
       <p>{deleteAccountSuccessMessage}</p>

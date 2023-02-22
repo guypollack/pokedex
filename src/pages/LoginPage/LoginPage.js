@@ -47,6 +47,16 @@ export function LoginPage() {
     dispatch(addUser({type: "newUser"}));
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      if (e.target.id.includes("login-")) {
+        handleClickLogin();
+      } else if (e.target.id.includes("create-account-")) {
+        handleClickCreateAccount();
+      }
+    }
+  }
+
   useEffect(() => {
     if (loginSuccessMessage === "Login successful") {
       setTimeout(() => {
@@ -84,19 +94,19 @@ export function LoginPage() {
       <h2>This is the Login Page</h2>
       <h3>Login</h3>
       <label htmlFor="login-username">Username</label>
-      <input type="text" value={loginUsername} onChange={handleChangeLoginUsername}></input>
+      <input type="text" id="login-username" value={loginUsername} onChange={handleChangeLoginUsername} onKeyDown={handleKeyDown}></input>
       <label htmlFor="login-password">Password</label>
-      <input type="password" value={loginPassword} onChange={handleChangeLoginPassword}></input>
+      <input type="password" id="login-password"  value={loginPassword} onChange={handleChangeLoginPassword} onKeyDown={handleKeyDown}></input>
       <button onClick={handleClickLogin}>Login</button>
       <p className="login-warning">{loginWarning}</p>
       <p className="login-success-message">{loginSuccessMessage}</p>
       <h3>Create account</h3>
       <label htmlFor="create-account-username">Username</label>
-      <input type="text" value={createAccountUsername} onChange={handleChangeCreateAccountUsername}></input>
+      <input type="text" id="create-account-username" value={createAccountUsername} onChange={handleChangeCreateAccountUsername} onKeyDown={handleKeyDown}></input>
       <label htmlFor="create-account-password">Password</label>
-      <input type="password" value={createAccountPassword} onChange={handleChangeCreateAccountPassword}></input>
-      <label htmlFor="create-account-password-very">Retype password</label>
-      <input type="password" value={createAccountPassword2} onChange={handleChangeCreateAccountPassword2}></input>
+      <input type="password" id="create-account-password" value={createAccountPassword} onChange={handleChangeCreateAccountPassword} onKeyDown={handleKeyDown}></input>
+      <label htmlFor="create-account-password-verify">Retype password</label>
+      <input type="password" id="create-account-password-verify" value={createAccountPassword2} onChange={handleChangeCreateAccountPassword2} onKeyDown={handleKeyDown}></input>
       <button onClick={handleClickCreateAccount}>Create Account</button>
       <p className="create-account-warning">{createAccountWarning}</p>
       <p className="create-account-success-message">{createAccountSuccessMessage}</p>
