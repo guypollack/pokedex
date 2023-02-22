@@ -44,7 +44,7 @@ export function LoginPage() {
   }
 
   function handleClickCreateAccount() {
-    dispatch(addUser());
+    dispatch(addUser({type: "newUser"}));
   }
 
   useEffect(() => {

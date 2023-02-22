@@ -25,11 +25,17 @@ export const favouritesSlice = createSlice({
     },
     addUserToFavourites: (state, action) => {
       state.favourites[action.payload] = [];
+    },
+    removeUserFromFavourites: (state, action) => {
+      state.favourites = Object.fromEntries(Object.entries(state.favourites).filter(([username, favourites]) => username !== action.payload.username));
+    },
+    copyFavourites: (state, action) => {
+      state.favourites[action.payload.user2] = state.favourites[action.payload.user1];
     }
   }
 });
 
 export const selectFavourites = (state) => state.favourites.favourites;
-export const { addToFavourites, removeFromFavourites, toggleFavourite, addUserToFavourites } = favouritesSlice.actions;
+export const { addToFavourites, removeFromFavourites, toggleFavourite, addUserToFavourites, removeUserFromFavourites, copyFavourites } = favouritesSlice.actions;
 
 export default favouritesSlice.reducer;

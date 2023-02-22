@@ -12,6 +12,10 @@ const initialState = {
   createAccountPassword2: "",
   createAccountWarning: "",
   createAccountSuccessMessage: "",
+  renameUsername: "",
+  renamePassword: "",
+  renameWarning: "",
+  renameSuccessMessage: ""
 };
 
 export const usersSlice = createSlice({
@@ -63,27 +67,73 @@ export const usersSlice = createSlice({
     setCreateAccountSuccessMessage: (state, action) => {
       state.createAccountSuccessMessage = action.payload;
     },
-    addUser: (state) => {
-      if (state.createAccountUsername === "" || state.createAccountPassword === "" || state.createAccountPassword2 === "") {
+    addUser: (state, action) => {
+      let areAnyFieldsBlank;
+      let doPasswordsMatchEachOther;
+      let doesUsernameExist;
+      let isPasswordCorrect;
+
+      if (action.payload.type === "newUser") {
+        areAnyFieldsBlank = state.createAccountUsername === "" || state.createAccountPassword === "" || state.createAccountPassword2 === "";
+        doPasswordsMatchEachOther = state.createAccountPassword === state.createAccountPassword2;
+        doesUsernameExist = state.users.map(user => user["username"]).includes(state.createAccountUsername);
+      }
+
+      if (action.payload.type === "renameUser") {
+        areAnyFieldsBlank = state.renameUsername === "" || state.renamePassword === "";
+        doesUsernameExist = state.users.map(user => user["username"]).includes(state.renameUsername);
+        isPasswordCorrect = state.users[state.users.map(user => user["username"]).indexOf(state.currentUser)]["password"] === state.renamePassword;
+      }
+
+      if (areAnyFieldsBlank) {
         state.createAccountWarning = "Do not leave any fields blank";
+        state.renameWarning = "Do not leave any fields blank";
       } else {
-        if (state.createAccountPassword === state.createAccountPassword2) {
-          if (!state.users.map(user => user["username"]).includes(state.createAccountUsername)) {
-            state.users.push({"username": state.createAccountUsername, "password": state.createAccountPassword});
-            state.createAccountSuccessMessage = "Account created and logged in";
-            state.createAccountWarning = "";
+        if (action.payload.type === "newUser") {
+          if (doPasswordsMatchEachOther) {
+            if (!doesUsernameExist) {
+              state.users.push({"username": state.createAccountUsername, "password": state.createAccountPassword});
+              state.createAccountSuccessMessage = "Account created and logged in";
+              state.createAccountWarning = "";
+            } else {
+              state.createAccountWarning = "Username already exists";
+            }
           } else {
-            state.createAccountWarning = "Username already exists";
+            state.createAccountWarning = "Passwords don't match";
           }
-        } else {
-          state.createAccountWarning = "Passwords don't match";
+        } else if (action.payload.type === "renameUser") {
+          if (!doesUsernameExist) {
+            if (isPasswordCorrect) {
+              state.users.push({"username": state.renameUsername, "password": state.renamePassword});
+              state.renameSuccessMessage = `Username changed to ${state.renameUsername}`;
+              state.renameWarning = "";
+            } else {
+              state.renameWarning = "Username and password do not match";
+            }
+          } else {
+            state.renameWarning = "Username already exists"
+          }
         }
       }
-    }
+    },
+    removeUser: (state, action) => {
+      state.users = state.users.filter(user => user.username !== action.payload);
+    },
+    setRenameUsername: (state, action) => {
+      state.renameUsername = action.payload;
+      state.renameWarning = "";
+    },
+    setRenamePassword: (state, action) => {
+      state.renamePassword = action.payload;
+      state.renameWarning = "";
+    },
+    setRenameSuccessMessage: (state, action) => {
+      state.renameSuccessMessage = action.payload;
+    },
   }
 });
 
-export const { loginUser, addUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage } = usersSlice.actions;
+export const { loginUser, addUser, removeUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage, setRenameUsername, setRenamePassword, setRenameSuccessMessage } = usersSlice.actions;
 
 export const selectUsers = (state) => state.users.users;
 export const selectCurrentUser = (state) => state.users.currentUser;
@@ -96,5 +146,9 @@ export const selectCreateAccountPassword = (state) => state.users.createAccountP
 export const selectCreateAccountPassword2 = (state) => state.users.createAccountPassword2;
 export const selectCreateAccountWarning = (state) => state.users.createAccountWarning;
 export const selectCreateAccountSuccessMessage = (state) => state.users.createAccountSuccessMessage;
+export const selectRenameUsername = (state) => state.users.renameUsername;
+export const selectRenamePassword = (state) => state.users.renamePassword;
+export const selectRenameWarning = (state) => state.users.renameWarning;
+export const selectRenameSuccessMessage = (state) => state.users.renameSuccessMessage;
 
 export default usersSlice.reducer;
