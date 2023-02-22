@@ -8,7 +8,7 @@ export async function findMainColor(source, width, height) {
 
   await loadImage(source, canvas, ctx);
 
-  const {red, green, blue, alpha} = mainColor(canvas, ctx, 16);
+  const {red, green, blue, alpha} = mainColor(canvas, ctx, 20.5);
 
   const outlineColor = {
     "r": red,
