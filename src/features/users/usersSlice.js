@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
   users: [],
@@ -20,7 +21,12 @@ const initialState = {
   renameUsername: "",
   renamePassword: "",
   renameWarning: "",
-  renameSuccessMessage: ""
+  renameSuccessMessage: "",
+  deleteAccountPassword: "",
+  deleteAccountConfirmation: false,
+  deleteAccountWarning: "",
+  deleteAccountSuccessMessage: "",
+  canCurrentAccountBeDeleted: false
 };
 
 export const usersSlice = createSlice({
@@ -183,10 +189,38 @@ export const usersSlice = createSlice({
     setRenameSuccessMessage: (state, action) => {
       state.renameSuccessMessage = action.payload;
     },
+    setDeleteAccountPassword: (state, action) => {
+      state.deleteAccountPassword = action.payload;
+      state.deleteAccountWarning = "";
+    },
+    setDeleteAccountConfirmation: (state, action) => {
+      state.deleteAccountConfirmation = action.payload;
+      state.deleteAccountWarning = "";
+    },
+    setDeleteAccountWarning: (state, action) => {
+      state.deleteAccountWarning = action.payload;
+    },
+    setDeleteAccountSuccessMessage: (state, action) => {
+      state.deleteAccountSuccessMessage = action.payload;
+    },
+    prepareToDelete: (state) => {
+      const areAnyFieldsBlank = state.deleteAccountPassword === "" || state.deleteAccountConfirmation === false;
+      const isPasswordCorrect = state.users[state.users.map(user => user["username"]).indexOf(state.currentUser)]["password"] === state.deleteAccountPassword;
+
+      if (areAnyFieldsBlank) {
+        state.deleteAccountWarning = "Do not leave any fields blank";
+      } else {
+        if (isPasswordCorrect) {
+          state.canCurrentAccountBeDeleted = true;
+        } else {
+          state.deleteAccountWarning = "Incorrect password";
+        }
+      }
+    }
   }
 });
 
-export const { loginUser, addUser, removeUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage, setChangePasswordCurrentPassword, setChangePasswordNewPassword1, setChangePasswordNewPassword2, setChangePasswordWarning, setChangePasswordSuccessMessage, changePassword, setRenameUsername, setRenamePassword, setRenameSuccessMessage } = usersSlice.actions;
+export const { loginUser, addUser, removeUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage, setChangePasswordCurrentPassword, setChangePasswordNewPassword1, setChangePasswordNewPassword2, setChangePasswordWarning, setChangePasswordSuccessMessage, changePassword, setRenameUsername, setRenamePassword, setRenameSuccessMessage, setDeleteAccountPassword, setDeleteAccountConfirmation, setDeleteAccountWarning, setDeleteAccountSuccessMessage, prepareToDelete } = usersSlice.actions;
 
 export const selectUsers = (state) => state.users.users;
 export const selectCurrentUser = (state) => state.users.currentUser;
@@ -208,5 +242,10 @@ export const selectRenameUsername = (state) => state.users.renameUsername;
 export const selectRenamePassword = (state) => state.users.renamePassword;
 export const selectRenameWarning = (state) => state.users.renameWarning;
 export const selectRenameSuccessMessage = (state) => state.users.renameSuccessMessage;
+export const selectDeleteAccountPassword = (state) => state.users.deleteAccountPassword;
+export const selectDeleteAccountConfirmation = (state) => state.users.deleteAccountConfirmation;
+export const selectDeleteAccountWarning = (state) => state.users.deleteAccountWarning;
+export const selectDeleteAccountSuccessMessage = (state) => state.users.deleteAccountSuccessMessage;
+export const selectCanCurrentAccountBeDeleted = (state) => state.users.canCurrentAccountBeDeleted;
 
 export default usersSlice.reducer;

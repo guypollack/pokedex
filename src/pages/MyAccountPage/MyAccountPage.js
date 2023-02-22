@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavBar } from '../../components/NavBar/NavBar.js'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser, selectChangePasswordCurrentPassword, setChangePasswordCurrentPassword, selectChangePasswordNewPassword1, setChangePasswordNewPassword1, selectChangePasswordNewPassword2, setChangePasswordNewPassword2, selectChangePasswordWarning, setChangePasswordWarning, selectChangePasswordSuccessMessage, setChangePasswordSuccessMessage, changePassword, selectRenameUsername, setRenameUsername, selectRenamePassword, setRenamePassword, selectRenameWarning, selectRenameSuccessMessage, setRenameSuccessMessage, addUser, removeUser, setCurrentUser } from '../../features/users/usersSlice.js';
+import { selectCurrentUser, selectChangePasswordCurrentPassword, setChangePasswordCurrentPassword, selectChangePasswordNewPassword1, setChangePasswordNewPassword1, selectChangePasswordNewPassword2, setChangePasswordNewPassword2, selectChangePasswordWarning, setChangePasswordWarning, selectChangePasswordSuccessMessage, setChangePasswordSuccessMessage, changePassword, selectRenameUsername, setRenameUsername, selectRenamePassword, setRenamePassword, selectRenameWarning, selectRenameSuccessMessage, setRenameSuccessMessage, selectDeleteAccountPassword, setDeleteAccountPassword, selectDeleteAccountConfirmation, setDeleteAccountConfirmation, selectDeleteAccountWarning, setDeleteAccountWarning, selectDeleteAccountSuccessMessage, setDeleteAccountSuccessMessage, selectCanCurrentAccountBeDeleted, addUser, removeUser, setCurrentUser, prepareToDelete } from '../../features/users/usersSlice.js';
 import { copyFavourites, removeUserFromFavourites } from '../../features/favourites/favouritesSlice.js';
 import { useNavigate } from 'react-router';
 
@@ -18,6 +18,11 @@ export function MyAccountPage() {
   const renamePassword = useSelector(selectRenamePassword);
   const renameWarning = useSelector(selectRenameWarning);
   const renameSuccessMessage = useSelector(selectRenameSuccessMessage);
+  const deleteAccountPassword = useSelector(selectDeleteAccountPassword);
+  const deleteAccountConfirmation = useSelector(selectDeleteAccountConfirmation);
+  const deleteAccountWarning = useSelector(selectDeleteAccountWarning);
+  const deleteAccountSuccessMessage = useSelector(selectDeleteAccountSuccessMessage);
+  const canCurrentAccountBeDeleted = useSelector(selectCanCurrentAccountBeDeleted);
 
   useEffect(() => {
     if (user === "guest") {
@@ -57,8 +62,23 @@ export function MyAccountPage() {
       dispatch(setRenameUsername(""));
       dispatch(setRenamePassword(""));
       dispatch(setRenameSuccessMessage(""));
+      dispatch(setDeleteAccountPassword(""));
+      dispatch(setDeleteAccountConfirmation(false));
+      dispatch(setDeleteAccountWarning(""));
+      dispatch(setDeleteAccountSuccessMessage(""));
     }
-  },[])
+  },[]);
+
+  useEffect(() => {
+    if (canCurrentAccountBeDeleted) {
+      dispatch(setDeleteAccountSuccessMessage("Account deleted"));
+      setTimeout(() => {
+        dispatch(removeUser(user));
+        dispatch(removeUserFromFavourites({"username": user}));
+        dispatch(setCurrentUser("guest"));
+      },1000)
+    }
+  },[canCurrentAccountBeDeleted])
 
   function handleChangeRenameUsername(e) {
     dispatch(setRenameUsername(e.target.value));
@@ -88,6 +108,18 @@ export function MyAccountPage() {
     dispatch(changePassword());
   }
 
+  function handleChangeDeleteAccountPassword(e) {
+    dispatch(setDeleteAccountPassword(e.target.value));
+  }
+
+  function handleChangeDeleteAccountConfirmation(e) {
+    dispatch(setDeleteAccountConfirmation(e.target.value));
+  }
+
+  function handleClickDeleteAccount() {
+    dispatch(prepareToDelete());
+  }
+
   return (
     <div>
       <NavBar />
@@ -113,6 +145,14 @@ export function MyAccountPage() {
       <button onClick={handleClickUpdateUsername}>Update</button>
       <p>{renameWarning}</p>
       <p>{renameSuccessMessage}</p>
+      <h3>Delete Account</h3>
+      <label htmlFor="delete-account-password">Password</label>
+      <input type="password" id="delete-account-password" value={deleteAccountPassword} onChange={handleChangeDeleteAccountPassword}></input>
+      <label htmlFor="delete-account-confirmation">I understand that deleting my account is permanent and cannot be undone</label>
+      <input type="checkbox" id="delete-account-confirmation" value={deleteAccountConfirmation} onChange={handleChangeDeleteAccountConfirmation}></input>
+      <button onClick={handleClickDeleteAccount}>Delete Account</button>
+      <p>{deleteAccountWarning}</p>
+      <p>{deleteAccountSuccessMessage}</p>
     </div>
   )
 }
