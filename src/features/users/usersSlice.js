@@ -12,6 +12,11 @@ const initialState = {
   createAccountPassword2: "",
   createAccountWarning: "",
   createAccountSuccessMessage: "",
+  changePasswordCurrentPassword: "",
+  changePasswordNewPassword1: "",
+  changePasswordNewPassword2: "",
+  changePasswordWarning: "",
+  changePasswordSuccessMessage: "",
   renameUsername: "",
   renamePassword: "",
   renameWarning: "",
@@ -119,6 +124,54 @@ export const usersSlice = createSlice({
     removeUser: (state, action) => {
       state.users = state.users.filter(user => user.username !== action.payload);
     },
+    setChangePasswordCurrentPassword: (state, action) => {
+      state.changePasswordCurrentPassword = action.payload;
+      state.changePasswordWarning = "";
+    },
+    setChangePasswordNewPassword1: (state, action) => {
+      state.changePasswordNewPassword1 = action.payload;
+      state.changePasswordWarning = "";
+    },
+    setChangePasswordNewPassword2: (state, action) => {
+      state.changePasswordNewPassword2 = action.payload;
+      state.changePasswordWarning = "";
+    },
+    setChangePasswordWarning: (state, action) => {
+      state.changePasswordWarning = action.payload;
+    },
+    setChangePasswordSuccessMessage: (state, action) => {
+      state.changePasswordSuccessMessage = action.payload;
+    },
+    changePassword: (state) => {
+      const areAnyFieldsBlank = state.changePasswordCurrentPassword === "" || state.changePasswordNewPassword1 === "" || state.changePasswordNewPassword2 === "";
+      const isPasswordCorrect = state.users[state.users.map(user => user["username"]).indexOf(state.currentUser)]["password"] === state.changePasswordCurrentPassword;
+      const doPasswordsMatchEachOther = state.changePasswordNewPassword1 === state.changePasswordNewPassword2;
+      const isPasswordSameAsPrevious = state.changePasswordNewPassword1 === state.changePasswordCurrentPassword;
+
+      if (areAnyFieldsBlank) {
+        state.changePasswordWarning = "Do not leave any fields blank";
+      } else {
+        if (isPasswordCorrect) {
+          if (doPasswordsMatchEachOther) {
+            if (!isPasswordSameAsPrevious) {
+              state.users[state.users.map(user => user["username"]).indexOf(state.currentUser)]["password"] = state.changePasswordNewPassword1;
+              state.changePasswordCurrentPassword = "";
+              state.changePasswordNewPassword1 = "";
+              state.changePasswordNewPassword2 = "";
+              state.changePasswordWarning = "";
+              state.changePasswordSuccessMessage = "Password updated";
+            } else {
+              state.changePasswordWarning = "New password cannot be the same as current password";
+            }
+          } else {
+            state.changePasswordWarning = "Passwords don't match";
+          }
+        } else {
+          state.changePasswordWarning = "Username and password do not match";
+        }
+      }
+
+    },
     setRenameUsername: (state, action) => {
       state.renameUsername = action.payload;
       state.renameWarning = "";
@@ -133,7 +186,7 @@ export const usersSlice = createSlice({
   }
 });
 
-export const { loginUser, addUser, removeUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage, setRenameUsername, setRenamePassword, setRenameSuccessMessage } = usersSlice.actions;
+export const { loginUser, addUser, removeUser, setCurrentUser, setLoginUsername, setLoginPassword, setLoginSuccessMessage, setCreateAccountUsername, setCreateAccountPassword, setCreateAccountPassword2, setCreateAccountSuccessMessage, setChangePasswordCurrentPassword, setChangePasswordNewPassword1, setChangePasswordNewPassword2, setChangePasswordWarning, setChangePasswordSuccessMessage, changePassword, setRenameUsername, setRenamePassword, setRenameSuccessMessage } = usersSlice.actions;
 
 export const selectUsers = (state) => state.users.users;
 export const selectCurrentUser = (state) => state.users.currentUser;
@@ -146,6 +199,11 @@ export const selectCreateAccountPassword = (state) => state.users.createAccountP
 export const selectCreateAccountPassword2 = (state) => state.users.createAccountPassword2;
 export const selectCreateAccountWarning = (state) => state.users.createAccountWarning;
 export const selectCreateAccountSuccessMessage = (state) => state.users.createAccountSuccessMessage;
+export const selectChangePasswordCurrentPassword = (state) => state.users.changePasswordCurrentPassword;
+export const selectChangePasswordNewPassword1 = (state) => state.users.changePasswordNewPassword1;
+export const selectChangePasswordNewPassword2 = (state) => state.users.changePasswordNewPassword2;
+export const selectChangePasswordWarning = (state) => state.users.changePasswordWarning;
+export const selectChangePasswordSuccessMessage = (state) => state.users.changePasswordSuccessMessage;
 export const selectRenameUsername = (state) => state.users.renameUsername;
 export const selectRenamePassword = (state) => state.users.renamePassword;
 export const selectRenameWarning = (state) => state.users.renameWarning;

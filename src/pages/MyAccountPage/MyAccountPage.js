@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavBar } from '../../components/NavBar/NavBar.js'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser, selectRenameUsername, setRenameUsername, selectRenamePassword, setRenamePassword, selectRenameWarning, selectRenameSuccessMessage, setRenameSuccessMessage, addUser, removeUser, setCurrentUser } from '../../features/users/usersSlice.js';
+import { selectCurrentUser, selectChangePasswordCurrentPassword, setChangePasswordCurrentPassword, selectChangePasswordNewPassword1, setChangePasswordNewPassword1, selectChangePasswordNewPassword2, setChangePasswordNewPassword2, selectChangePasswordWarning, setChangePasswordWarning, selectChangePasswordSuccessMessage, setChangePasswordSuccessMessage, changePassword, selectRenameUsername, setRenameUsername, selectRenamePassword, setRenamePassword, selectRenameWarning, selectRenameSuccessMessage, setRenameSuccessMessage, addUser, removeUser, setCurrentUser } from '../../features/users/usersSlice.js';
 import { copyFavourites, removeUserFromFavourites } from '../../features/favourites/favouritesSlice.js';
 import { useNavigate } from 'react-router';
 
@@ -9,6 +9,11 @@ export function MyAccountPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
+  const currentPassword = useSelector(selectChangePasswordCurrentPassword);
+  const newPassword1 = useSelector(selectChangePasswordNewPassword1);
+  const newPassword2 = useSelector(selectChangePasswordNewPassword2);
+  const changePasswordWarning = useSelector(selectChangePasswordWarning);
+  const changePasswordSuccessMessage = useSelector(selectChangePasswordSuccessMessage);
   const renameUsername = useSelector(selectRenameUsername);
   const renamePassword = useSelector(selectRenamePassword);
   const renameWarning = useSelector(selectRenameWarning);
@@ -33,6 +38,11 @@ export function MyAccountPage() {
 
   useEffect(() => {
     return () => {
+      dispatch(setChangePasswordCurrentPassword(""));
+      dispatch(setChangePasswordNewPassword1(""));
+      dispatch(setChangePasswordNewPassword2(""));
+      dispatch(setChangePasswordWarning(""));
+      dispatch(setChangePasswordSuccessMessage(""));
       dispatch(setRenameUsername(""));
       dispatch(setRenamePassword(""));
       dispatch(setRenameSuccessMessage(""));
@@ -51,11 +61,37 @@ export function MyAccountPage() {
     dispatch(addUser({"type": "renameUser"}));
   }
 
+  function handleChangePasswordCurrentPassword(e) {
+    dispatch(setChangePasswordCurrentPassword(e.target.value));
+  }
+
+  function handleChangePasswordNewPassword1(e) {
+    dispatch(setChangePasswordNewPassword1(e.target.value));
+  }
+
+  function handleChangePasswordNewPassword2(e) {
+    dispatch(setChangePasswordNewPassword2(e.target.value));
+  }
+
+  function handleClickChangePassword(e) {
+    dispatch(changePassword());
+  }
+
   return (
     <div>
       <NavBar />
       <h2>This is the My Account Page</h2>
       <h3>{user}</h3>
+      <h3>Change Password</h3>
+      <label htmlFor="change-password-current">Current Password</label>
+      <input type="password" id="change-password-current" value={currentPassword} onChange={handleChangePasswordCurrentPassword}></input>
+      <label htmlFor="change-password-new-1">New Password</label>
+      <input type="password" id="change-password-new-1" value={newPassword1} onChange={handleChangePasswordNewPassword1}></input>
+      <label htmlFor="change-password-new-2">Retype New Password</label>
+      <input type="password" id="change-password-new-2" value={newPassword2} onChange={handleChangePasswordNewPassword2}></input>
+      <button onClick={handleClickChangePassword}>Update</button>
+      <p>{changePasswordWarning}</p>
+      <p>{changePasswordSuccessMessage}</p>
       <h3>Update Username</h3>
       <label htmlFor="rename-user-current-username">Current Username</label>
       <input id="rename-user-current-username" type="text" value={user} disabled></input>
