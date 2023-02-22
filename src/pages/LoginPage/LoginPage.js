@@ -52,7 +52,7 @@ export function LoginPage() {
       setTimeout(() => {
         dispatch(setCurrentUser(loginUsername));
         navigate("/");
-      },2000)
+      },1000)
     }
   },[loginSuccessMessage]);
 
@@ -62,7 +62,7 @@ export function LoginPage() {
       setTimeout(() => {
         dispatch(setCurrentUser(createAccountUsername));
         navigate("/");
-      },2000)
+      },1000)
     }
   },[createAccountSuccessMessage]);
 
