@@ -83,6 +83,7 @@ export const usersSlice = createSlice({
       let doPasswordsMatchEachOther;
       let doesUsernameExist;
       let isPasswordCorrect;
+      let isUsernameSameAsPrevious;
 
       if (action.payload.type === "newUser") {
         areAnyFieldsBlank = state.createAccountUsername === "" || state.createAccountPassword === "" || state.createAccountPassword2 === "";
@@ -94,6 +95,7 @@ export const usersSlice = createSlice({
         areAnyFieldsBlank = state.renameUsername === "" || state.renamePassword === "";
         doesUsernameExist = state.users.map(user => user["username"]).includes(state.renameUsername);
         isPasswordCorrect = state.users[state.users.map(user => user["username"]).indexOf(state.currentUser)]["password"] === state.renamePassword;
+        isUsernameSameAsPrevious = state.renameUsername === state.currentUser;
       }
 
       if (areAnyFieldsBlank) {
@@ -113,16 +115,20 @@ export const usersSlice = createSlice({
             state.createAccountWarning = "Passwords don't match";
           }
         } else if (action.payload.type === "renameUser") {
-          if (!doesUsernameExist) {
-            if (isPasswordCorrect) {
+          if (isPasswordCorrect) {
+            if (!doesUsernameExist) {
               state.users.push({"username": state.renameUsername, "password": state.renamePassword});
               state.renameSuccessMessage = `Username changed to ${state.renameUsername}`;
               state.renameWarning = "";
             } else {
-              state.renameWarning = "Username and password do not match";
+              if (isUsernameSameAsPrevious) {
+                state.renameWarning = "New username cannot be the same as current username";
+              } else {
+                state.renameWarning = "Username already exists";
+              }
             }
           } else {
-            state.renameWarning = "Username already exists"
+            state.renameWarning = "Username and password do not match";
           }
         }
       }
