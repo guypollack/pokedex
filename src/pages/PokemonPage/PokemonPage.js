@@ -57,7 +57,9 @@ export function PokemonPage() {
       <NavBar />
       <h1>{name}</h1>
       <div className="pokemon-page-flex-container">
-        <img src={imageUrl}></img>
+        <div className="pokemon-page-image-container">
+          <img src={imageUrl}></img>
+        </div>
         <div className="pokemon-page-data-container">
           <h3>Number:</h3>
           <h3>{number}</h3>
