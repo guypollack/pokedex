@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync } from '../features/pokemon/pokemonSlice.js';
+import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync } from '../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../components/NavBar/NavBar.js'
 
 export function PokemonPage() {
@@ -14,6 +14,13 @@ export function PokemonPage() {
   const { name, types, height, weight } = pokemonPageData;
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   
+  useEffect(() => {
+    return () => {
+      dispatch(setPokemonPageDataFetched(false));
+    }
+  },[])
+
+
   // useEffect(() => {
   //   if (!allPokemonFetched) {
   //     dispatch(fetchAllPokemonAsync());

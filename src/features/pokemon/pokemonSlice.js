@@ -193,6 +193,9 @@ export const pokemonSlice = createSlice({
       } else {
         state.searchTerm = action.payload.toString().toLowerCase();
       }
+    },
+    setPokemonPageDataFetched: (state, action) => {
+      state.pokemonPageDataFetched = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -354,7 +357,7 @@ export const selectInCategorySearchType  = (state) => state.pokemon.inCategorySe
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
 export const selectSearchTerm = (state) => state.pokemon.searchTerm;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm } = pokemonSlice.actions;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
