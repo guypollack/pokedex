@@ -124,7 +124,12 @@ export const fetchPokemonSpeciesByIndexAsync = createAsyncThunk(
   async (index) => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+index+"/");
     const json = await response.json();
-    const description = json.flavor_text_entries[0].flavor_text;
+    let description = "hello hello";
+    if (json.flavor_text_entries.length > 0) {
+      description = json.flavor_text_entries[0].flavor_text;
+    } else {
+      description = "";
+    }
     return description;
   }
 );
