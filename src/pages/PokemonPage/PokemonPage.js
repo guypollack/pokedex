@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, fetchPokemonSpeciesByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
+import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonSpeciesByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import "./PokemonPage.css";
@@ -12,6 +12,8 @@ export function PokemonPage() {
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
   const pokemonPageData = useSelector(selectPokemonPageData);
+  const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
+  const description = useSelector(selectPokemonPageDescription);
   // const {name, url, imageUrl} = useSelector(selectAllPokemon)[number];
   const { name, generation, types, height, weight } = pokemonPageData;
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
@@ -39,8 +41,14 @@ export function PokemonPage() {
     }
   },[pokemonPageDataFetched]);
 
+  useEffect(() => {
+    if (!pokemonPageDescriptionFetched) {
+      dispatch(fetchPokemonSpeciesByIndexAsync(number));
+    }
+  },[pokemonPageDescriptionFetched]);
+
   // consider deleting if statement because data is loading fast
-  if (!pokemonPageDataFetched) {
+  if (!pokemonPageDataFetched || !pokemonPageDescriptionFetched) {
     return (
       <div>
         <NavBar />
@@ -68,7 +76,7 @@ export function PokemonPage() {
           <h3>{height}m</h3>
           <h3>Weight:</h3>
           <h3>{weight}kg</h3>
-          <h4 className="two-column-cell">Placeholder this is the placeholder alsdnks sjkndkjf dnf slner rmmnas wkwen w weewwe</h4>
+          <h4 className="two-column-cell">{description}</h4>
         </div>
       </div>
     </div>

@@ -208,6 +208,9 @@ export const pokemonSlice = createSlice({
     },
     setPokemonPageDataFetched: (state, action) => {
       state.pokemonPageDataFetched = action.payload;
+    },
+    setPokemonPageDescriptionFetched: (state, action) => {
+      state.pokemonPageDescriptionFetched = action.payload;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -258,9 +261,11 @@ export const selectStatus = (state) => state.pokemon.status;
 export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetched;
 export const selectDataFetched = (state) => state.pokemon.dataFetched;
 export const selectPokemonPageDataFetched = (state) => state.pokemon.pokemonPageDataFetched;
+export const selectPokemonPageDescriptionFetched = (state) => state.pokemon.pokemonPageDescriptionFetched;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
 export const selectPokemonPageData = (state) => state.pokemon.pokemonPageData;
+export const selectPokemonPageDescription = (state) => state.pokemon.pokemonPageDescription;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
 export const selectFilteredPokemon = (state) => {
   // console.log("B")
@@ -376,7 +381,7 @@ export const selectInCategorySearchType  = (state) => state.pokemon.inCategorySe
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
 export const selectSearchTerm = (state) => state.pokemon.searchTerm;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched } = pokemonSlice.actions;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
