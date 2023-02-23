@@ -23,6 +23,21 @@ export function FavouriteButton({number}) {
     e.stopPropagation();
   }
 
+  function handleClickXmarkHeart(e) {
+    e.stopPropagation();
+    if (document.querySelectorAll(".xmark-tooltip").length > 0) return;
+
+    const tooltip = document.createElement("p");
+    tooltip.classList.add("xmark-tooltip");
+    const tooltipText = document.createTextNode("Log in to add Pokémon to your favourites");
+    const currentCard = document.querySelectorAll(".pokemon-card")[+number - 1];
+    tooltip.appendChild(tooltipText);
+    currentCard.appendChild(tooltip);
+    setTimeout(() => {
+      currentCard.removeChild(tooltip)
+    },2000); 
+  }
+
   if (currentUser !== "guest") {
     return (
       <div className="favourite-button">
@@ -37,7 +52,7 @@ export function FavouriteButton({number}) {
   } else {
     return (
       <div className="favourite-button">
-        <FontAwesomeIcon className="xmark-heart" icon={xmarkHeart} title="Login to add Pokémon to your favourites" onClick={handleClick} />
+        <FontAwesomeIcon className="xmark-heart" icon={xmarkHeart} onClick={handleClickXmarkHeart} />
       </div>
     )
   }

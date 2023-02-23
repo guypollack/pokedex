@@ -81,11 +81,34 @@
   animation: visibleToHidden 0.8s linear 0s 1 normal forwards;
 }
 
+.xmark-tooltip {
+  width: 115px;
+  height: 25px;
+  border-radius: 12px;
+  background-color: gainsboro;
+  position: absolute;
+  left: 160px;
+  bottom: -25px;
+  font-size: 10px;
+  padding: 5px;
+  z-index: 1;
+  animation: fadeOpacity 500ms linear 1200ms 1 normal forwards;
+}
+
 @keyframes visibleToHidden {
   from {
     visibility: visible;
   }
   to {
     visibility: hidden;
+  }
+}
+
+@keyframes fadeOpacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
