@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync } from '../features/pokemon/pokemonSlice.js';
-import { NavBar } from '../components/NavBar/NavBar.js'
+import { NavBar } from '../components/NavBar/NavBar.js';
+import { TypeBlock } from '../components/TypeBlock/TypeBlock.js';
 
 export function PokemonPage() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ export function PokemonPage() {
       <div className="pokemon-data-container">
         <img src={imageUrl}></img>
         <h3>Type: {types.toString()}</h3>
+        {types.map(type => <TypeBlock type={type}/>)}
         <h3>Height: {height}m</h3>
         <h3>Weight: {weight}kg</h3>
       </div>
