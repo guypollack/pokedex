@@ -5,17 +5,17 @@ import { selectAllPokemon } from '../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../components/NavBar/NavBar.js'
 
 export function PokemonPage() {
-  const { pokemonNumber } = useParams();
-  const {name, url, imageUrl} = useSelector(selectAllPokemon)[pokemonNumber];
+  const { number } = useParams();
+  const {name, url, imageUrl} = useSelector(selectAllPokemon)[number];
   
   useEffect(() => {
-    console.log(name);
+    // console.log(name);
   })
 
   return (
     <div>
       <NavBar />
-      <h1>{pokemonNumber}</h1>
+      <h1>{number}</h1>
       <h2>This is the pokemon page</h2>
     </div>
   )
