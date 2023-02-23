@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
+import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import { FavouriteButton } from "../../components/FavouriteButton/FavouriteButton.js";
@@ -15,7 +16,7 @@ export function PokemonPage() {
   const pokemonPageData = useSelector(selectPokemonPageData);
   const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
   const description = useSelector(selectPokemonPageDescription);
-  // const {name, url, imageUrl} = useSelector(selectAllPokemon)[number];
+  const user = useSelector(selectCurrentUser);
   const { name, generation, types, height, weight } = pokemonPageData;
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   
@@ -77,6 +78,8 @@ export function PokemonPage() {
           <h3>{weight}kg</h3>
           <h4 className="two-column-cell">{description}</h4>
           <div className="two-column-cell favourite-button-container">
+            {user === "guest" && <p>Log in to add pokémon to favourites</p>}
+            {user !== "guest" && <p>Add to favourites</p>}
             <FavouriteButton />
           </div>
         </div>

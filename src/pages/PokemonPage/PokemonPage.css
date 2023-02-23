@@ -21,6 +21,26 @@
   border: 1px solid black;
 }
 
+.favourite-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.favourite-button-container > * {
+  /* border: 1px solid red; */
+  margin-right: 10px;
+}
+
+.favourite-button-container > p {
+  font-size: 14px;
+}
+
+.pokemon-page-data-container > .favourite-button-container > .favourite-button {
+  position: relative;
+  top: 12px;
+  right: 5px;
+}
+
 .pokemon-page-types-container {
   display: flex;
   flex-direction: row;
