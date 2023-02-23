@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
+import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, fetchPokemonSpeciesByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import "./PokemonPage.css";
@@ -20,6 +20,10 @@ export function PokemonPage() {
     return () => {
       dispatch(setPokemonPageDataFetched(false));
     }
+  },[])
+
+  useEffect(() => {
+    dispatch(fetchPokemonSpeciesByIndexAsync(number));
   },[])
 
 

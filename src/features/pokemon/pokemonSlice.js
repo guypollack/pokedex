@@ -20,7 +20,9 @@ const initialState = {
   filteredPokemonSnapshot: {},
   searchTerm: "",
   pokemonPageData: {},
-  pokemonPageDataFetched: false
+  pokemonPageDataFetched: false,
+  pokemonPageDescription: "",
+  pokemonPageDescriptionFetched: false
 };
 
 
@@ -114,6 +116,16 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
     weight = json.weight / 10;
 
     return {name, types, generation, height, weight};
+  }
+);
+
+export const fetchPokemonSpeciesByIndexAsync = createAsyncThunk(
+  'pokemon/fetchPokemonSpeciesByIndexAsync',
+  async (index) => {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+index+"/");
+    const json = await response.json();
+    const description = json.flavor_text_entries[0].flavor_text;
+    return description;
   }
 );
 
@@ -227,6 +239,13 @@ export const pokemonSlice = createSlice({
       .addCase(fetchPokemonDataByIndexAsync.fulfilled, (state, action) => {
         state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
         state.pokemonPageDataFetched = true;
+      })
+      .addCase(fetchPokemonSpeciesByIndexAsync.pending, (state) => {
+        state.pokemonPageDescriptionFetched = false;
+      })
+      .addCase(fetchPokemonSpeciesByIndexAsync.fulfilled, (state, action) => {
+        state.pokemonPageDescription = action.payload;
+        state.pokemonPageDescriptionFetched = true;
       });
   },
 });
