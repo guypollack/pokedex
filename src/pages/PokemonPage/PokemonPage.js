@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
+import { FavouriteButton } from "../../components/FavouriteButton/FavouriteButton.js";
 import "./PokemonPage.css";
 
 export function PokemonPage() {
@@ -74,6 +75,9 @@ export function PokemonPage() {
           <h3>Weight:</h3>
           <h3>{weight}kg</h3>
           <h4 className="two-column-cell">{description}</h4>
+          <div className="two-column-cell favourite-button-container">
+            <FavouriteButton />
+          </div>
         </div>
       </div>
     </div>
