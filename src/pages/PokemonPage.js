@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { NavBar } from '../components/NavBar/NavBar.js'
 
 export function PokemonPage() {
-  const { pokemonName } = useParams();
+  const { pokemonNumber } = useParams();
   return (
     <div>
       <NavBar />
-      <h1>{pokemonName}</h1>
+      <h1>{pokemonNumber}</h1>
       <h2>This is the pokemon page</h2>
     </div>
   )
