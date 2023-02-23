@@ -80,7 +80,7 @@ export function PokemonPage() {
           <div className="two-column-cell favourite-button-container">
             {user === "guest" && <p>Log in to add pokémon to favourites</p>}
             {user !== "guest" && <p>Add to favourites</p>}
-            <FavouriteButton />
+            <FavouriteButton number={number} />
           </div>
         </div>
       </div>
