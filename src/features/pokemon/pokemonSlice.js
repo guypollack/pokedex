@@ -126,7 +126,7 @@ export const fetchPokemonSpeciesByIndexAsync = createAsyncThunk(
     const json = await response.json();
     let description = "hello hello";
     if (json.flavor_text_entries.length > 0) {
-      description = json.flavor_text_entries[0].flavor_text;
+      description = json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text;
     } else {
       description = "";
     }
