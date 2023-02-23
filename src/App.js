@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider, redirect, useNavigate } from "reac
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
-import { PokemonPage } from './pages/PokemonPage.js';
+import { PokemonPage } from './pages/PokemonPage/PokemonPage.js';
 import { FavouritesPage } from './pages/FavouritesPage/FavouritesPage.js';
 import { LoginPage } from './pages/LoginPage/LoginPage.js';
 import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js'; 
