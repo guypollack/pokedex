@@ -15,7 +15,7 @@ export function FilterBlock({property, value, filterNumber}) {
   }
 
   function handleClick(e) {
-    dispatch(setDisplayCount((numberOfFilters + searchTerm.length) > 0 ? 50 : 100));
+    dispatch(setDisplayCount((numberOfFilters > 1 || searchTerm.length > 0) ? 50 : 100));
     dispatch(removeFilter({"property": property.toLowerCase() + "s", "value": value.toLowerCase()}));
     dispatch(removeFromFilterList([property, value.toString()]));
   }
