@@ -22,6 +22,7 @@ export function PokemonPage() {
   useEffect(() => {
     return () => {
       dispatch(setPokemonPageDataFetched(false));
+      dispatch(setPokemonPageDescriptionFetched(false));
     }
   },[])
 
