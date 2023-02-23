@@ -218,6 +218,9 @@ export const pokemonSlice = createSlice({
         state.weights = {...state.weights, ...action.payload.weights};
         state.dataFetched = true;
       })
+      .addCase(fetchPokemonDataByIndexAsync.pending, (state) => {
+        state.pokemonPageDataFetched = false;
+      })
       .addCase(fetchPokemonDataByIndexAsync.fulfilled, (state, action) => {
         state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
         state.pokemonPageDataFetched = true;
