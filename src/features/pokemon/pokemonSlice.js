@@ -18,7 +18,9 @@ const initialState = {
   betweenCategorySearchType: "and",
   searchTypes: {"inCategory": "and", "betweenCategory": "and"},
   filteredPokemonSnapshot: {},
-  searchTerm: ""
+  searchTerm: "",
+  pokemonPageData: {},
+  pokemonPageDataFetched: false
 };
 
 
@@ -57,6 +59,8 @@ export const fetchPokemonDataAsync = createAsyncThunk(
     const heights = {};
     const weights = {};
 
+    const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
+
     for (let i = start; i < end; i++) {
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
@@ -66,8 +70,6 @@ export const fetchPokemonDataAsync = createAsyncThunk(
       } else {
         types[i] = [pokemonTypes, pokemonTypes];
       }
-
-      const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
 
       for (let [generation, boundary] of Object.entries(generationBoundaries)) {
         if (i <= boundary) {
@@ -82,6 +84,39 @@ export const fetchPokemonDataAsync = createAsyncThunk(
     return {types, generations, heights, weights};
   }
 );
+
+export const fetchPokemonDataByIndexAsync = createAsyncThunk(
+  'pokemon/fetchPokemonDataByIndexAsync',
+  async (index) => {
+    // alert("Fetching pokemon types");
+    // console.log("fetching pokemon data");
+    let types;
+    let generation;
+    let height;
+    let weight;
+
+    const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
+
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+index+"/");
+    const json = await response.json();
+    const name = json.forms[0].name;
+    const pokemonTypes = json.types.map(t => t.type.name);
+    types = pokemonTypes;    
+
+    for (let [gen, boundary] of Object.entries(generationBoundaries)) {
+      if (index <= boundary) {
+        generation = gen;
+        break;
+      }
+    }
+    
+    height = json.height / 10;
+    weight = json.weight / 10;
+
+    return {name, types, generation, height, weight};
+  }
+);
+
 
 export const pokemonSlice = createSlice({
   name: "pokemon",
@@ -182,6 +217,10 @@ export const pokemonSlice = createSlice({
         state.heights = {...state.heights, ...action.payload.heights};
         state.weights = {...state.weights, ...action.payload.weights};
         state.dataFetched = true;
+      })
+      .addCase(fetchPokemonDataByIndexAsync.fulfilled, (state, action) => {
+        state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
+        state.pokemonPageDataFetched = true;
       });
   },
 });
@@ -193,8 +232,10 @@ export const pokemonSlice = createSlice({
 export const selectStatus = (state) => state.pokemon.status;
 export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetched;
 export const selectDataFetched = (state) => state.pokemon.dataFetched;
+export const selectPokemonPageDataFetched = (state) => state.pokemon.pokemonPageDataFetched;
 export const selectCount = (state) => state.counter.value;
 export const selectAllPokemon = (state) => state.pokemon.allPokemon;
+export const selectPokemonPageData = (state) => state.pokemon.pokemonPageData;
 export const selectVisiblePokemon = (state) => Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
 export const selectFilteredPokemon = (state) => {
   // console.log("B")
