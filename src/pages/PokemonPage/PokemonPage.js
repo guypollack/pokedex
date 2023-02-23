@@ -76,7 +76,7 @@ export function PokemonPage() {
           <h3>{height}m</h3>
           <h3>Weight:</h3>
           <h3>{weight}kg</h3>
-          <h4 className="two-column-cell">{description}</h4>
+          <h4 className="two-column-cell description">{description}</h4>
           <div className="two-column-cell favourite-button-container">
             {user === "guest" && <p>Log in to add pokémon to favourites</p>}
             {user !== "guest" && <p>Add to favourites</p>}
