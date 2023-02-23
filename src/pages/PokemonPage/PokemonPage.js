@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonSpeciesByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
+import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import "./PokemonPage.css";
@@ -24,11 +24,6 @@ export function PokemonPage() {
     }
   },[])
 
-  useEffect(() => {
-    dispatch(fetchPokemonSpeciesByIndexAsync(number));
-  },[])
-
-
   // useEffect(() => {
   //   if (!allPokemonFetched) {
   //     dispatch(fetchAllPokemonAsync());
@@ -43,7 +38,7 @@ export function PokemonPage() {
 
   useEffect(() => {
     if (!pokemonPageDescriptionFetched) {
-      dispatch(fetchPokemonSpeciesByIndexAsync(number));
+      dispatch(fetchPokemonDescriptionByIndexAsync(number));
     }
   },[pokemonPageDescriptionFetched]);
 

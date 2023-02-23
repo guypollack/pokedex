@@ -119,12 +119,12 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
   }
 );
 
-export const fetchPokemonSpeciesByIndexAsync = createAsyncThunk(
-  'pokemon/fetchPokemonSpeciesByIndexAsync',
+export const fetchPokemonDescriptionByIndexAsync = createAsyncThunk(
+  'pokemon/fetchPokemonDescriptionByIndexAsync',
   async (index) => {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+index+"/");
     const json = await response.json();
-    let description = "hello hello";
+    let description;
     if (json.flavor_text_entries.length > 0) {
       description = json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text;
     } else {
@@ -248,10 +248,10 @@ export const pokemonSlice = createSlice({
         state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
         state.pokemonPageDataFetched = true;
       })
-      .addCase(fetchPokemonSpeciesByIndexAsync.pending, (state) => {
+      .addCase(fetchPokemonDescriptionByIndexAsync.pending, (state) => {
         state.pokemonPageDescriptionFetched = false;
       })
-      .addCase(fetchPokemonSpeciesByIndexAsync.fulfilled, (state, action) => {
+      .addCase(fetchPokemonDescriptionByIndexAsync.fulfilled, (state, action) => {
         state.pokemonPageDescription = action.payload;
         state.pokemonPageDescriptionFetched = true;
       });
