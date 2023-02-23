@@ -1,8 +1,8 @@
-.pokemon-page-flex-container {
-  display: flex;
-  flex-direction: row;
+.pokemon-page-grid-container {
+  display: grid;
+  grid-template-columns: 500px 1fr;
   border: 1px solid black;
-  height: 500px;
+  height: 500px; 
 }
 
 
@@ -60,9 +60,10 @@
   grid-column: 1 / span 2;
 }
 
-@media screen and (max-width: 720px) {
-  .pokemon-page-flex-container {
-    flex-direction: column;
+@media screen and (max-width: 750px) {
+  .pokemon-page-grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 500px 1fr;
   }
 
   .pokemon-page-data-container {

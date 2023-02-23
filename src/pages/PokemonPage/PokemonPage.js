@@ -59,7 +59,7 @@ export function PokemonPage() {
     <div>
       <NavBar />
       <h1>{name}</h1>
-      <div className="pokemon-page-flex-container">
+      <div className="pokemon-page-grid-container">
         <div className="pokemon-page-image-container">
           <img src={imageUrl}></img>
         </div>
