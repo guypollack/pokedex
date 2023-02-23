@@ -1,22 +1,32 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectAllPokemon } from '../features/pokemon/pokemonSlice.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllPokemonAsync, selectAllPokemonFetched ,selectAllPokemon } from '../features/pokemon/pokemonSlice.js';
 import { NavBar } from '../components/NavBar/NavBar.js'
 
 export function PokemonPage() {
+  const dispatch = useDispatch();
   const { number } = useParams();
-  const {name, url, imageUrl} = useSelector(selectAllPokemon)[number];
+  const allPokemonFetched = useSelector(selectAllPokemonFetched);
+  // const {name, url, imageUrl} = useSelector(selectAllPokemon)[number];
+  let name;
+  let url;
+  let imageUrl;
   
   useEffect(() => {
-    // console.log(name);
-  })
+    if (!allPokemonFetched) {
+      dispatch(fetchAllPokemonAsync());
+    }
+  },[allPokemonFetched])
+
 
   return (
     <div>
       <NavBar />
-      <h1>{number}</h1>
-      <h2>This is the pokemon page</h2>
+      {/* <h1>{name}</h1> */}
+      <div className="pokemon-data-container">
+        {/* <img src={imageUrl}></img> */}
+      </div>
     </div>
   )
 }
