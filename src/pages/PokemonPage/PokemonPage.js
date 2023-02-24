@@ -56,7 +56,7 @@ export function PokemonPage() {
   }
 
   return (
-    <div>
+    <div className="pokemon-page">
       <NavBar />
       <h1>{name}</h1>
       <div className="pokemon-page-grid-container">

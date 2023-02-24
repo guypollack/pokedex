@@ -1,3 +1,16 @@
+/* Move html and body rules to general page? */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid green; */
+}
+
+.pokemon-page {
+  height: 100%;
+  /* border: 4px solid orange; */
+}
+
 .pokemon-page-grid-container {
   display: grid;
   grid-template-columns: 500px 1fr;
@@ -65,18 +78,42 @@
 @media screen and (max-width: 750px) {
   .pokemon-page-grid-container {
     width: 100%;
-    grid-template-columns: 100%;
-    grid-template-rows: 300px 70%;
-    border: 1px solid blue;
+    height: 100%;
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: 250px minmax(0,1fr);
+    /* border: 1px solid blue; */
+  }
+
+  .pokemon-page-image-container {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* border: 1px solid red; */
   }
 
   .pokemon-page-image-container > img {
-    width: 100%;
-    height: 100%;
-    border: 1px solid red;
+    /* width: 100%;
+    height: 100%; */
+    /* border: 1px solid red; */
   }
 
   .pokemon-page-data-container {
-    grid-template-rows: repeat(5, 12%) 30% 10%;
+    grid-template-columns: 120px 1fr;
+    grid-template-rows: repeat(5, 10%) 30% 10%;
+    /* border: 1px solid red; */
+  }
+
+  /* .description {
+    align-self: start;
+  } */
+
+  .pokemon-page-data-container > h4 {
+    margin-block-start: 0;
+    margin-block-start: 0;
+  }
+
+  .pokemon-page-data-container > .favourite-button-container {
+    text-align: right;
+    /* border: 1px solid red; */
   }
 }
