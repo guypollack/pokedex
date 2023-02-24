@@ -12,8 +12,8 @@ export function NavBar() {
   return (
     <div className="nav-bar">
       <NavLink to='/'>Home</NavLink>
-      <NavLink to='/page1'>Page 1</NavLink>
-      <NavLink to='/page2'>Page 2</NavLink>
+      {/* <NavLink to='/page1'>Page 1</NavLink> */}
+      {/* <NavLink to='/page2'>Page 2</NavLink> */}
       <NavLink to='/favourites'>Favourites{favouritesNumber > 0 ? `(${favouritesNumber})` : ""}</NavLink>
       {(currentUser !== "guest") && <NavLink to='/myaccount'>My Account</NavLink>}
       {(currentUser === "guest") && <NavLink to='/login'>Login</NavLink>}
