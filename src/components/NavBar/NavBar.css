@@ -1,3 +1,19 @@
+.nav-bar {
+  border: 1px solid green;
+}
+
 a {
   margin-left: 20px;
+}
+
+@media screen and (max-width: 750px) {
+  .nav-bar {
+    display: flex;
+    justify-content: center;
+  }
+
+  a {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
