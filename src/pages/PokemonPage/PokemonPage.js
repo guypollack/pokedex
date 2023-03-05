@@ -72,7 +72,7 @@ export function PokemonPage() {
           <h3>{generation}</h3>
           <h3>Type:</h3>
           <div className="pokemon-page-types-container">
-            {types.map(type => <TypeBlock type={type}/>)}
+            {types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
           </div>
           <h3>Height:</h3>
           <h3>{height}m</h3>
