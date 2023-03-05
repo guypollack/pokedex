@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-import { findMainColor } from "../../util/findMainColor";
 import { addOutline, removeOutline } from "../../util/addRemoveOutline";
-import { selectFavourites, addToFavourites, removeFromFavourites } from "../../features/favourites/favouritesSlice";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 // import "./PokemonCardContainer.css";
 
@@ -11,10 +8,8 @@ export function PokemonCardContainer({number, name, imageUrl}) {
   // console.log("A");
   // console.log(number);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let imageClassName = "pokemon-card-image";
   const id = `${name}-card-image`;
 
   useEffect(() => {

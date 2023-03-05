@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useNavigate } from 'react-router';
-import { selectUsers, setCurrentUser, loginUser, addUser, selectLoginUsername, setLoginUsername, selectLoginPassword, setLoginPassword, selectLoginWarning, setLoginWarning, selectLoginSuccessMessage, setLoginSuccessMessage, selectCreateAccountUsername, setCreateAccountUsername, selectCreateAccountPassword, setCreateAccountPassword, selectCreateAccountPassword2, setCreateAccountPassword2, selectCreateAccountWarning, selectCreateAccountSuccessMessage, setCreateAccountSuccessMessage } from '../../features/users/usersSlice.js';
+import { setCurrentUser, loginUser, addUser, selectLoginUsername, setLoginUsername, selectLoginPassword, setLoginPassword, selectLoginWarning, selectLoginSuccessMessage, setLoginSuccessMessage, selectCreateAccountUsername, setCreateAccountUsername, selectCreateAccountPassword, setCreateAccountPassword, selectCreateAccountPassword2, setCreateAccountPassword2, selectCreateAccountWarning, selectCreateAccountSuccessMessage, setCreateAccountSuccessMessage } from '../../features/users/usersSlice.js';
 import { addUserToFavourites } from '../../features/favourites/favouritesSlice.js';
 
 export function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const users = useSelector(selectUsers);
   const loginUsername = useSelector(selectLoginUsername);
   const loginPassword = useSelector(selectLoginPassword);
   const loginWarning = useSelector(selectLoginWarning);

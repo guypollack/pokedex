@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCategory, selectOperator, selectValue, setSelectorValue, selectFilterList, addToFilterList } from "../../features/filters/filtersSlice";
+import { selectCategory, selectOperator, selectValue, setSelectorValue, addToFilterList } from "../../features/filters/filtersSlice";
 import { Slider } from '../../components/Slider/Slider'; 
 import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
 import  { SearchBar } from "../SearchBar/SearchBar"
-import { addFilter, selectFilters, setDisplayCount, selectSearchTypes } from "../../features/pokemon/pokemonSlice";
+import { addFilter, setDisplayCount, selectSearchTypes } from "../../features/pokemon/pokemonSlice";
 import "./FilterCreator.css";
 
 export function FilterCreator() {

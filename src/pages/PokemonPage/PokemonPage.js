@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, selectAllPokemonFetched, selectAllPokemon, selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
+import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
@@ -11,7 +11,6 @@ import "./PokemonPage.css";
 export function PokemonPage() {
   const dispatch = useDispatch();
   const { number } = useParams();
-  const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
   const pokemonPageData = useSelector(selectPokemonPageData);
   const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);

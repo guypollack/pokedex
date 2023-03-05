@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { findMainColor } from '../../util/findMainColor';
 import { doesPokemonFitFilter } from './pokemonSliceHelperFunctions';
 
 const initialState = {
@@ -277,7 +276,6 @@ export const selectFilteredPokemon = (state) => {
   // console.log("selectFilteredPokemon running");
   // console.log(visiblePokemonArray);
   // alert("Getting filtered pokemon");
-  const filters = Object.entries(state.pokemon.filters);
   const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
   // console.log(filteredCategories);
   if ((filteredCategories.length === 0 && state.pokemon.searchTerm === "") || !state.pokemon.dataFetched) {
