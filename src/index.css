@@ -1,7 +1,11 @@
+@font-face {
+  font-family: "Pokemon GB";
+  src: url("//db.onlinewebfonts.com/t/831e1f4da157d96bc996f8c9f5f1e578.woff2") format("woff2");
+}
+
 html, body {
   height: 100%;
   width: 100%;
-  /* border: 1px solid green; */
 }
 
 body {
