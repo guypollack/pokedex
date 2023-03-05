@@ -49,11 +49,18 @@ export function PokemonPage() {
 
   // consider deleting if statement because data is loading fast
   if (!pokemonPageDataFetched || !pokemonPageDescriptionFetched) {
+    // alert("A");
     return (
-      <div>
+    <div className="pokemon-page">
+      <div className="pokemon-page-header">
         <NavBar />
-        {/* <h3>Data is loading...</h3> */}
+        <h1>{name}</h1>
       </div>
+      <div className="pokemon-page-loading-container">
+        <ArrowContainer side="left" number={number} />
+        <ArrowContainer side="right" number={number} />
+      </div>
+    </div>
     )
   }
 

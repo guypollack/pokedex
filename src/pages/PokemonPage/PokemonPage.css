@@ -8,6 +8,14 @@
   /* border: 4px solid orange; */
 }
 
+.pokemon-page-loading-container {
+  height: 502px;
+  width: calc(100vw + 0px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .pokemon-page-content-container {
   display: flex;
   align-items: center;
@@ -104,6 +112,10 @@
   .pokemon-page {
     height: 100vh;
     min-height: 650px;
+  }
+
+  .pokemon-page-loading-container {
+    height: calc(100% - 100px);
   }
 
   .pokemon-page-content-container {
