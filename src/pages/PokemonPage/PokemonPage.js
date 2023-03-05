@@ -21,11 +21,13 @@ export function PokemonPage() {
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   
   useEffect(() => {
+    dispatch(setPokemonPageDataFetched(false));
+    dispatch(setPokemonPageDescriptionFetched(false));
     return () => {
       dispatch(setPokemonPageDataFetched(false));
       dispatch(setPokemonPageDescriptionFetched(false));
     }
-  },[])
+  },[number])
 
   // useEffect(() => {
   //   if (!allPokemonFetched) {
@@ -50,7 +52,7 @@ export function PokemonPage() {
     return (
       <div>
         <NavBar />
-        <h3>Data is loading...</h3>
+        {/* <h3>Data is loading...</h3> */}
       </div>
     )
   }
