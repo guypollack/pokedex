@@ -62,7 +62,7 @@ export function PokemonPage() {
         <h1>{name}</h1>
       </div>
       <div className="pokemon-page-content-container">
-        <ArrowContainer side="left" visibility={number > 1 ? "visible" : "hidden"}/>
+        <ArrowContainer side="left" number={number} />
         <div className="pokemon-page-grid-container">
           <div className="pokemon-page-image-container">
             <img src={imageUrl}></img>
@@ -88,7 +88,7 @@ export function PokemonPage() {
             </div>
           </div>
         </div>
-        <ArrowContainer side="right" visibility={number < 1008 ? "visible" : "hidden"} />
+        <ArrowContainer side="right" number={number} />
       </div>
     </div>
   )
