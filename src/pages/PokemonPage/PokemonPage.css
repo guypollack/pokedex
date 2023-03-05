@@ -20,14 +20,15 @@
 .pokemon-page-data-container {
   width: 100%;
   display: grid;
+  padding-left: 10px;
   grid-template-rows: repeat(5, 10%) 40% 10%;
   grid-template-columns: 120px 180px;
   align-items: baseline;
-  border: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .pokemon-page-data-container > * {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .favourite-button-container {
@@ -98,6 +99,8 @@
   .pokemon-page-data-container {
     grid-template-columns: 120px 1fr;
     grid-template-rows: repeat(5, 10%) 1fr 10%;
+    border-left: none;
+    border-top: 1px solid black;
     /* border: 4px solid red; */
   }
 
