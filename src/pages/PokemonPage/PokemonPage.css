@@ -1,11 +1,3 @@
-/* Move html and body rules to general page? */
-
-html, body {
-  height: 100%;
-  width: 100%;
-  /* border: 1px solid green; */
-}
-
 .pokemon-page {
   height: 100vh;
   /* border: 4px solid orange; */
