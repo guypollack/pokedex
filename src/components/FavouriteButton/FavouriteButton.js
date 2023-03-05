@@ -26,7 +26,7 @@ export function FavouriteButton({number}) {
   function handleClickXmarkHeart(e) {
     e.stopPropagation();
     if (document.querySelectorAll(".xmark-tooltip").length > 0) return;
-    if (document.querySelectorAll(".pokemon-card-container").length === 0) return; // to stop function execution on PokemonPage
+    if (document.querySelectorAll(".pokemon-card").length === 0) return; // to stop function execution on PokemonPage
 
     const tooltip = document.createElement("p");
     tooltip.classList.add("xmark-tooltip");
