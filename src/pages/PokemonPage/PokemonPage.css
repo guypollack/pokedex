@@ -8,6 +8,26 @@
   /* border: 4px solid orange; */
 }
 
+.pokemon-page-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.arrow-container {
+  margin: 0 20px;
+  font-size: 30px;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.arrow-container:hover {
+  opacity: 1;
+}
+
+.arrow-container.hidden {
+  visibility: hidden;
+}
+
 .pokemon-page-grid-container {
   display: grid;
   grid-template-columns: 500px 1fr;

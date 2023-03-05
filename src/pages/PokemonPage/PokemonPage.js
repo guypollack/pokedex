@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
+import { ArrowContainer } from './ArrowContainer.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import { FavouriteButton } from "../../components/FavouriteButton/FavouriteButton.js";
 import "./PokemonPage.css";
@@ -60,30 +61,34 @@ export function PokemonPage() {
         <NavBar />
         <h1>{name}</h1>
       </div>
-      <div className="pokemon-page-grid-container">
-        <div className="pokemon-page-image-container">
-          <img src={imageUrl}></img>
-        </div>
-        <div className="pokemon-page-data-container">
-          <h3>Number:</h3>
-          <h3>{number}</h3>
-          <h3>Generation:</h3>
-          <h3>{generation}</h3>
-          <h3>Type:</h3>
-          <div className="pokemon-page-types-container">
-            {types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
+      <div className="pokemon-page-content-container">
+        <ArrowContainer side="left" visibility={number > 1 ? "visible" : "hidden"}/>
+        <div className="pokemon-page-grid-container">
+          <div className="pokemon-page-image-container">
+            <img src={imageUrl}></img>
           </div>
-          <h3>Height:</h3>
-          <h3>{height}m</h3>
-          <h3>Weight:</h3>
-          <h3>{weight}kg</h3>
-          <h4 className="two-column-cell description">{description}</h4>
-          <div className="two-column-cell favourite-button-container">
-            {user === "guest" && <p>Log in to add pokémon to favourites</p>}
-            {user !== "guest" && <p>Add to favourites</p>}
-            <FavouriteButton number={number} />
+          <div className="pokemon-page-data-container">
+            <h3>Number:</h3>
+            <h3>{number}</h3>
+            <h3>Generation:</h3>
+            <h3>{generation}</h3>
+            <h3>Type:</h3>
+            <div className="pokemon-page-types-container">
+              {types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
+            </div>
+            <h3>Height:</h3>
+            <h3>{height}m</h3>
+            <h3>Weight:</h3>
+            <h3>{weight}kg</h3>
+            <h4 className="two-column-cell description">{description}</h4>
+            <div className="two-column-cell favourite-button-container">
+              {user === "guest" && <p>Log in to add pokémon to favourites</p>}
+              {user !== "guest" && <p>Add to favourites</p>}
+              <FavouriteButton number={number} />
+            </div>
           </div>
         </div>
+        <ArrowContainer side="right" visibility={number < 1008 ? "visible" : "hidden"} />
       </div>
     </div>
   )
