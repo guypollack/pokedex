@@ -1,30 +1,21 @@
 import React, { useEffect } from 'react';
-import { MyButton } from '../../components/MyButton';
-import { FilterButton } from '../../components/FilterButton/FilterButton';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { clearFilterList } from '../../features/filters/filtersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, setBounds, setIsLoading, makeVisible, selectAllPokemon, selectVisiblePokemon, selectFilteredPokemon, selectFilters, selectStatus, selectAllPokemonFetched, selectDataFetched, selectLBound, selectUBound, selectIsLoading, clearFilters, selectNumberOfFilters, resetSearchTypes, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
   // console.log("HomePage rendering");
   const dispatch = useDispatch();
 
-  const allPokemon = useSelector(selectAllPokemon);
-  const visiblePokemon = useSelector(selectVisiblePokemon);
-  const status = useSelector(selectStatus);
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const dataFetched = useSelector(selectDataFetched);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
-  const lBound = useSelector(selectLBound);
-  const uBound = useSelector(selectUBound);
   const isLoading = useSelector(selectIsLoading);
-  const numberOfFilters = useSelector(selectNumberOfFilters);
   const searchTerm = useSelector(selectSearchTerm);
 
   // dispatch(fetchAllPokemonAsync());
