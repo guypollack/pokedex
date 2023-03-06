@@ -30,7 +30,7 @@ export const gameSlice = createSlice({
         state.score++;
       }
 
-      state.round++;
+      if (state.round < 5) state.round++;
 
       state.searchTerm = "";
     }
