@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { selectCurrentPokemon, setCurrentPokemon, setAllNames } from '../../features/game/gameSlice';
+import { selectCurrentPokemon, setCurrentPokemon, setAllNames, selectRound, selectScore } from '../../features/game/gameSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
@@ -21,6 +21,8 @@ export function GamePage() {
   const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
   const currentPokemon = useSelector(selectCurrentPokemon);
+  const round = useSelector(selectRound);
+  const score = useSelector(selectScore);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -33,7 +35,7 @@ export function GamePage() {
       // dispatch(fetchPokemonDataAsync());
     } else {
       const randomNumber = Math.floor(Math.random() * 1009) + 1;
-      const pokemonData = {"number": randomNumber, "name": allPokemon[randomNumber]["name"], "imageUrl": allPokemon[randomNumber]["imageUrl"]};
+      const pokemonData = {"number": randomNumber, "name": nameFormatter(allPokemon[randomNumber]["name"]), "imageUrl": allPokemon[randomNumber]["imageUrl"]};
       dispatch(setCurrentPokemon(pokemonData));
       const allNames = Object.values(allPokemon).map(pokemon => nameFormatter(pokemon["name"]));
       dispatch(setAllNames(allNames));
@@ -56,6 +58,8 @@ export function GamePage() {
       <h1>Hello World!</h1>
       <h2>This is the game page</h2>
       <h3>Number: {currentPokemon["number"]}</h3>
+      <h3>Round: {round}/5</h3>
+      <h3>Score: {score}/5</h3>
       <img className="game-page-picture" src={currentPokemon["imageUrl"]}></img>
       <GuessBar />
       {/* <FiltersContainer />  */}

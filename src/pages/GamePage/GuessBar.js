@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSearchTerm, setSearchTerm, selectFilteredNames } from "../../features/game/gameSlice";
+import { selectSearchTerm, setSearchTerm, selectFilteredNames, markAnswer } from "../../features/game/gameSlice";
 
 export function GuessBar() {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ export function GuessBar() {
       <datalist id="guess-bar-options">
         {filteredNames.map((name, index) => <option value={name} className="filtered-name-option" key={`filtered-name-option-${+index+1}`} />)}
       </datalist>
+      <button onClick={() => dispatch(markAnswer())}>Check</button>
     </div>
   )
 }
