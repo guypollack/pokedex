@@ -5,6 +5,7 @@ import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import { GuessBar } from './GuessBar';
 import "./GamePage.css";
 
 export function GamePage() {
@@ -53,6 +54,7 @@ export function GamePage() {
       <h2>This is the game page</h2>
       <h3>Number: {currentPokemon["number"]}</h3>
       <img className="game-page-picture" src={currentPokemon["imageUrl"]}></img>
+      <GuessBar />
       {/* <FiltersContainer />  */}
       {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
     </div>

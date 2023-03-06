@@ -14,11 +14,15 @@ export const gameSlice = createSlice({
   reducers: {
     setCurrentPokemon: (state, action) => {
       state.currentPokemon = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
     }
   }
 });
 
 export const selectCurrentPokemon = (state) => state.game.currentPokemon;
-export const { setCurrentPokemon } = gameSlice.actions;
+export const selectSearchTerm = (state) => state.game.searchTerm;
+export const { setCurrentPokemon, setSearchTerm } = gameSlice.actions;
 
 export default gameSlice.reducer;
