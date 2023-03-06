@@ -18,6 +18,7 @@ export function NavBar() {
       {(currentUser !== "guest") && <NavLink to='/myaccount'>My Account</NavLink>}
       {(currentUser === "guest") && <NavLink to='/login'>Login</NavLink>}
       {(currentUser !== "guest") && <NavLink to="/" onClick={() => dispatch(setCurrentUser("guest"))}>Logout</NavLink>}
+      <NavLink to="/game">Game</NavLink>
     </div>
   )
 }

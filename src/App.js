@@ -7,6 +7,7 @@ import { PokemonPage } from './pages/PokemonPage/PokemonPage.js';
 import { FavouritesPage } from './pages/FavouritesPage/FavouritesPage.js';
 import { LoginPage } from './pages/LoginPage/LoginPage.js';
 import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js'; 
+import { GamePage } from './pages/GamePage/GamePage.js';
 import './App.css';
 
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/myaccount",
     element: <MyAccountPage /> 
+  },
+  {
+    path: "/game",
+    element: <GamePage />
   }
 ]);
 
