@@ -32,7 +32,7 @@ export const gameSlice = createSlice({
     },
     markAnswer: (state) => {
       
-      if (state.currentPokemon["name"].toLowerCase().trim() === state.searchTerm.toLowerCase().trim()) {
+      if (state.questionPokemon[state.round - 1]["name"].toLowerCase().trim() === state.searchTerm.toLowerCase().trim()) {
         state.score++;
       }
 
