@@ -6,5 +6,6 @@ export function nameFormatter(name) {
   for (const elem of nameArray) {
     nameString += elem.slice(0,1).toUpperCase() + elem.slice(1) + " ";
   }
+  nameString = nameString.trim();
   return nameString;
 }
