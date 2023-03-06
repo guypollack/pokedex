@@ -27,7 +27,7 @@ export const gameSlice = createSlice({
 
 export const selectCurrentPokemon = (state) => state.game.currentPokemon;
 export const selectSearchTerm = (state) => state.game.searchTerm;
-export const selectFilteredNames = (state) => state.game.allNames.filter(name => name.toLowerCase().includes(state.game.searchTerm.toLowerCase()));
+export const selectFilteredNames = (state) => state.game.searchTerm !== "" ? state.game.allNames.filter(name => name.toLowerCase().includes(state.game.searchTerm.toLowerCase())) : [];
 export const { setCurrentPokemon, setSearchTerm, setAllNames } = gameSlice.actions;
 
 export default gameSlice.reducer;
