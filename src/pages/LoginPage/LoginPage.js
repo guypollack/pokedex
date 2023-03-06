@@ -60,7 +60,8 @@ export function LoginPage() {
     if (loginSuccessMessage === "Login successful") {
       setTimeout(() => {
         dispatch(setCurrentUser(loginUsername));
-        navigate("/");
+        // navigate("/");
+        navigate(-1);
       },1000)
     }
   },[loginSuccessMessage]);
@@ -70,7 +71,8 @@ export function LoginPage() {
       dispatch(addUserToFavourites(createAccountUsername));
       setTimeout(() => {
         dispatch(setCurrentUser(createAccountUsername));
-        navigate("/");
+        // navigate("/");
+        navigate(-1);
       },1000)
     }
   },[createAccountSuccessMessage]);
