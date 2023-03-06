@@ -4,6 +4,7 @@ import { nameFormatter } from '../../util/nameFormatter';
 const initialState = {
   searchTerm: "",
   currentPokemon: {number: 0, name: "", imageUrl: ""},
+  questionPokemon: [],
   pokemonSuggestions: [],
   allNames: [],
   score: 0,
@@ -18,6 +19,9 @@ export const gameSlice = createSlice({
   reducers: {
     setCurrentPokemon: (state, action) => {
       state.currentPokemon = action.payload;
+    },
+    addPokemonToQuestions: (state, action) => {
+      state.questionPokemon.push(action.payload);
     },
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
@@ -44,12 +48,13 @@ export const gameSlice = createSlice({
 });
 
 export const selectCurrentPokemon = (state) => state.game.currentPokemon;
+export const selectQuestionPokemon = (state) => state.game.questionPokemon;
 export const selectSearchTerm = (state) => state.game.searchTerm;
 export const selectFilteredNames = (state) => state.game.searchTerm !== "" ? state.game.allNames.filter(name => name.toLowerCase().includes(state.game.searchTerm.toLowerCase())) : [];
 export const selectScore = (state) => state.game.score;
 export const selectRound = (state) => state.game.round;
 export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
-export const { setCurrentPokemon, setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer } = gameSlice.actions;
+export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -8,5 +8,13 @@
 }
 
 .game-page-picture.hidden {
-  visibility: hidden;
+  display: none;
+}
+
+.game-page-name {
+  display: none;
+}
+
+.game-page-name.revealed {
+  display: block;
 }
