@@ -1,4 +1,5 @@
 import React from "react";
+import { nameFormatter } from '../../util/nameFormatter.js';
 import { FavouriteButton } from "../FavouriteButton/FavouriteButton";
 
 import "./PokemonCard.css";
@@ -10,7 +11,7 @@ export function PokemonCard({number, name, id, imageUrl, onClickCard, onClickFav
       <FavouriteButton onClick={onClickFavourite} number={number}/>
       <div className="pokemon-card-details">
         <p>{number}</p>
-        <p>{name}</p>
+        <p>{nameFormatter(name)}</p>
       </div>
     </div>
   )

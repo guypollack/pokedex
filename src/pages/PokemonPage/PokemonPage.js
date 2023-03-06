@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { nameFormatter } from '../../util/nameFormatter.js';
 import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { NavBar } from '../../components/NavBar/NavBar.js';
@@ -18,6 +19,7 @@ export function PokemonPage() {
   const description = useSelector(selectPokemonPageDescription);
   const user = useSelector(selectCurrentUser);
   const { name, generation, types, height, weight } = pokemonPageData;
+  const formattedName = nameFormatter(name);
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   
   useEffect(() => {
@@ -54,7 +56,7 @@ export function PokemonPage() {
     <div className="pokemon-page">
       <div className="pokemon-page-header">
         <NavBar />
-        <h1>{name}</h1>
+        <h1>{formattedName}</h1>
       </div>
       <div className="pokemon-page-loading-container">
         <ArrowContainer side="left" number={number} />
@@ -68,7 +70,7 @@ export function PokemonPage() {
     <div className="pokemon-page">
       <div className="pokemon-page-header">
         <NavBar />
-        <h1>{name}</h1>
+        <h1>{formattedName}</h1>
       </div>
       <div className="pokemon-page-content-container">
         <ArrowContainer side="left" number={number} />
