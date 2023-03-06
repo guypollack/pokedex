@@ -43,6 +43,14 @@ export function GamePage() {
   },[allPokemonFetched])
 
   useEffect(() => {
+    if (allPokemonFetched) {
+      const randomNumber = Math.floor(Math.random() * 1009) + 1;
+      const pokemonData = {"number": randomNumber, "name": nameFormatter(allPokemon[randomNumber]["name"]), "imageUrl": allPokemon[randomNumber]["imageUrl"]};
+      dispatch(setCurrentPokemon(pokemonData));
+    }
+  },[round])
+
+  useEffect(() => {
     return (() => {
       dispatch(setFilteredPokemonSnapshot(filteredPokemon));
     })
