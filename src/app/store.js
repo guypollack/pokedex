@@ -4,6 +4,7 @@ import pokemonReducer from '../features/pokemon/pokemonSlice';
 import favouritesReducer from '../features/favourites/favouritesSlice';
 import filtersReducer from '../features/filters/filtersSlice';
 import usersReducer from '../features/users/usersSlice';
+import gameSlice from '../features/game/gameSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     pokemon: pokemonReducer,
     favourites: favouritesReducer,
     filters: filtersReducer,
-    users: usersReducer
+    users: usersReducer,
+    game: gameSlice
   },
 });
 
