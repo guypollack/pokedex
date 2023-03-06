@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { selectCurrentPokemon, setCurrentPokemon } from '../../features/game/gameSlice';
+import { selectCurrentPokemon, setCurrentPokemon, setAllNames } from '../../features/game/gameSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { nameFormatter } from '../../util/nameFormatter';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 import { GuessBar } from './GuessBar';
@@ -34,6 +35,8 @@ export function GamePage() {
       const randomNumber = Math.floor(Math.random() * 1009) + 1;
       const pokemonData = {"number": randomNumber, "name": allPokemon[randomNumber]["name"], "imageUrl": allPokemon[randomNumber]["imageUrl"]};
       dispatch(setCurrentPokemon(pokemonData));
+      const allNames = Object.values(allPokemon).map(pokemon => nameFormatter(pokemon["name"]));
+      dispatch(setAllNames(allNames));
     }
   },[allPokemonFetched])
 
