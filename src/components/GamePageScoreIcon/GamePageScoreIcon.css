@@ -1,0 +1,34 @@
+.game-page-score-icon {
+  position: relative;
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+}
+
+.game-page-score-icon.correct {
+  background-color: greenyellow;
+}
+
+.game-page-score-icon.incorrect {
+  background-color: red;
+}
+
+.game-page-score-icon-placeholder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background-color: gray; */
+}
+
+.game-page-score-icon-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-page-score-icon-image-container > img {
+  width: 60px;
+  height: 60px;
+}

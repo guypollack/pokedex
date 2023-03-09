@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import { GamePageScoreIcon } from '../../components/GamePageScoreIcon/GamePageScoreIcon';
 import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
 import { GuessBar } from './GuessBar';
 import "./GamePage.css";
@@ -77,6 +78,7 @@ export function GamePage() {
       <h3>Number: {currentPokemon["number"]}</h3>
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
+      <GamePageScoreIcon />
       {questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
       <GuessBar />
       {/* <FiltersContainer />  */}
