@@ -1,0 +1,5 @@
+.game-page-score-container {
+  display: flex;
+  width: fit-content;
+  /* border: 1px solid red; */
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { GamePageScoreIcon } from "../GamePageScoreIcon/GamePageScoreIcon";
 import { useSelector } from "react-redux";
 import { selectQuestionPokemon, selectScores } from "../../features/game/gameSlice";
+import "./GamePageScoreContainer.css";
 
 export function GamePageScoreContainer() {
 
@@ -9,7 +10,7 @@ export function GamePageScoreContainer() {
   const scores = useSelector(selectScores);
 
   return (
-    <div>
+    <div className="game-page-score-container">
       {imageUrls.map((url, index) => <GamePageScoreIcon imageUrl={url} mark={scores[index]} />)}
     </div>
   )
