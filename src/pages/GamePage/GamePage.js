@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
 import { GuessBar } from './GuessBar';
 import "./GamePage.css";
 
@@ -76,16 +77,11 @@ export function GamePage() {
       <h3>Number: {currentPokemon["number"]}</h3>
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
-      <img draggable="false" className={`game-page-picture${round === 1 ? "" : " hidden"}`} src={questionPokemon[0]["imageUrl"]}></img>
-      <h4 className="game-page-name">{questionPokemon[0]["name"]}</h4>
-      <img draggable="false" className={`game-page-picture${round === 2 ? "" : " hidden"}`} src={questionPokemon[1]["imageUrl"]}></img>
-      <h4 className="game-page-name">{questionPokemon[1]["name"]}</h4>
-      <img draggable="false" className={`game-page-picture${round === 3 ? "" : " hidden"}`} src={questionPokemon[2]["imageUrl"]}></img>
-      <h4 className="game-page-name">{questionPokemon[2]["name"]}</h4>
-      <img draggable="false" className={`game-page-picture${round === 4 ? "" : " hidden"}`} src={questionPokemon[3]["imageUrl"]}></img>
-      <h4 className="game-page-name">{questionPokemon[3]["name"]}</h4>
-      <img draggable="false" className={`game-page-picture${round === 5 ? "" : " hidden"}`} src={questionPokemon[4]["imageUrl"]}></img>
-      <h4 className="game-page-name">{questionPokemon[4]["name"]}</h4>
+      <GamePagePicture classNameVisibility={round === 1 ? "" : " hidden"} imageUrl={questionPokemon[0]["imageUrl"]} name={questionPokemon[0]["name"]} />
+      <GamePagePicture classNameVisibility={round === 2 ? "" : " hidden"} imageUrl={questionPokemon[1]["imageUrl"]} name={questionPokemon[1]["name"]} />
+      <GamePagePicture classNameVisibility={round === 3 ? "" : " hidden"} imageUrl={questionPokemon[2]["imageUrl"]} name={questionPokemon[2]["name"]} />
+      <GamePagePicture classNameVisibility={round === 4 ? "" : " hidden"} imageUrl={questionPokemon[3]["imageUrl"]} name={questionPokemon[3]["name"]} />
+      <GamePagePicture classNameVisibility={round === 5 ? "" : " hidden"} imageUrl={questionPokemon[4]["imageUrl"]} name={questionPokemon[4]["name"]} />
       <GuessBar />
       {/* <FiltersContainer />  */}
       {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
