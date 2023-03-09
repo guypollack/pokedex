@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid, setPokemonSuggestions } from "../../features/game/gameSlice";
+import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid } from "../../features/game/gameSlice";
 
 export function GuessBar() {
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ export function GuessBar() {
   function handleSubmit(e) {
     if (isMarkingInProgress) return;
     if (isAnswerValid || e.type === "keydown") {
-      dispatch(setPokemonSuggestions([]));
       document.querySelectorAll(".game-page-picture")[round - 1].classList.add("revealed");
       document.querySelectorAll(".game-page-name")[round - 1].classList.add("revealed");
       dispatch(setIsMarkingInProgress(true));
