@@ -15,7 +15,7 @@ export function GuessBar() {
   }
 
   function handleKeyDown(e) {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e.key === "Unidentified") {
       if (isAnswerValid) {
         handleSubmit(e);
         return;
