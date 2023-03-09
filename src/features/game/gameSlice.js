@@ -8,6 +8,7 @@ const initialState = {
   pokemonSuggestions: [],
   allNames: [],
   score: 0,
+  scores: [0,0,0,0,0],
   round: 1,
   isAnswerValid: false,
   isMarkingInProgress: false
@@ -30,10 +31,11 @@ export const gameSlice = createSlice({
     setAllNames: (state, action) => {
       state.allNames = action.payload;
     },
-    markAnswer: (state) => {
+    markAnswer: (state, action) => {
       
       if (state.questionPokemon[state.round - 1]["name"].toLowerCase().trim() === state.searchTerm.toLowerCase().trim()) {
         state.score++;
+        state.scores[action.payload] = 1;
       }
 
       if (state.round < 5) state.round++;
@@ -52,6 +54,7 @@ export const selectQuestionPokemon = (state) => state.game.questionPokemon;
 export const selectSearchTerm = (state) => state.game.searchTerm;
 export const selectFilteredNames = (state) => state.game.searchTerm !== "" ? state.game.allNames.filter(name => name.toLowerCase().includes(state.game.searchTerm.toLowerCase())) : [];
 export const selectScore = (state) => state.game.score;
+export const selectScores = (state) => state.game.scores;
 export const selectRound = (state) => state.game.round;
 export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
