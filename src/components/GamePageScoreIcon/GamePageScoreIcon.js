@@ -1,14 +1,13 @@
 import React from "react";
 import "./GamePageScoreIcon.css";
 
-export function GamePageScoreIcon() {
+export function GamePageScoreIcon({imageUrl}) {
 
-  // 96 x 96 px
   return (
     <div className="game-page-score-icon">
       <div className="game-page-score-icon-placeholder"></div>
       <div className="game-page-score-icon-image-container">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/77.png"></img>
+        <img src={`https://images.weserv.nl/?url=${imageUrl}&w=80&h=80`}></img>
       </div>
     </div>
   )
