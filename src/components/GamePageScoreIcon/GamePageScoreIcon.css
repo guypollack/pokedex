@@ -17,7 +17,12 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  /* background-color: gray; */
+  background-color: gray;
+  opacity: 0.5;
+}
+
+.game-page-score-icon.revealed > .game-page-score-icon-placeholder {
+  opacity: 0;
 }
 
 .game-page-score-icon-image-container {
