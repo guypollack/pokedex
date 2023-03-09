@@ -47,6 +47,9 @@ export const gameSlice = createSlice({
     },
     setIsMarkingInProgress: (state, action) => {
       state.isMarkingInProgress = action.payload;
+    },
+    setPokemonSuggestions: (state, action) => {
+      state.pokemonSuggestions = action.payload;
     }
   }
 });
@@ -60,6 +63,6 @@ export const selectScores = (state) => state.game.scores;
 export const selectRound = (state) => state.game.round;
 export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
-export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer } = gameSlice.actions;
+export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer, setPokemonSuggestions } = gameSlice.actions;
 
 export default gameSlice.reducer;

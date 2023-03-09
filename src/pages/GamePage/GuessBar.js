@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid } from "../../features/game/gameSlice";
+import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid, setPokemonSuggestions } from "../../features/game/gameSlice";
 
 export function GuessBar() {
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ export function GuessBar() {
   function handleSubmit(e) {
     if (isMarkingInProgress) return;
     if (isAnswerValid || e.type === "keydown") {
+      dispatch(setPokemonSuggestions([]));
       document.querySelectorAll(".game-page-picture")[round - 1].classList.add("revealed");
       document.querySelectorAll(".game-page-name")[round - 1].classList.add("revealed");
       dispatch(setIsMarkingInProgress(true));
@@ -48,7 +49,7 @@ export function GuessBar() {
     <div>
       <label htmlFor="guess-bar">Guess</label>
       <input type="text" id="guess-bar" value={searchTerm} list="guess-bar-options" onChange={handleChange} onKeyDown={handleKeyDown}></input>
-      <datalist id="guess-bar-options">
+      <datalist id="guess-bar-options" >
         {filteredNames.map((name, index) => <option value={name} className="filtered-name-option" key={`filtered-name-option-${+index+1}`} />)}
       </datalist>
       <button onClick={handleSubmit}>Check</button>
