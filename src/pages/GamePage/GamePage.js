@@ -77,11 +77,7 @@ export function GamePage() {
       <h3>Number: {currentPokemon["number"]}</h3>
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
-      <GamePagePicture classNameVisibility={round === 1 ? "" : " hidden"} imageUrl={questionPokemon[0]["imageUrl"]} name={questionPokemon[0]["name"]} />
-      <GamePagePicture classNameVisibility={round === 2 ? "" : " hidden"} imageUrl={questionPokemon[1]["imageUrl"]} name={questionPokemon[1]["name"]} />
-      <GamePagePicture classNameVisibility={round === 3 ? "" : " hidden"} imageUrl={questionPokemon[2]["imageUrl"]} name={questionPokemon[2]["name"]} />
-      <GamePagePicture classNameVisibility={round === 4 ? "" : " hidden"} imageUrl={questionPokemon[3]["imageUrl"]} name={questionPokemon[3]["name"]} />
-      <GamePagePicture classNameVisibility={round === 5 ? "" : " hidden"} imageUrl={questionPokemon[4]["imageUrl"]} name={questionPokemon[4]["name"]} />
+      {questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
       <GuessBar />
       {/* <FiltersContainer />  */}
       {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
