@@ -17,7 +17,7 @@ export function GuessBar() {
   function handleKeyDown(e) {
     if (e.key === "Enter") {
       if (isAnswerValid) {
-        handleSubmit();
+        handleSubmit(e);
         return;
       } else if (document.querySelectorAll(".filtered-name-option").length > 0) {
         const topSuggestion = document.querySelectorAll(".filtered-name-option")[0].value;
