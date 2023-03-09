@@ -76,15 +76,15 @@ export function GamePage() {
       <h3>Number: {currentPokemon["number"]}</h3>
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
-      <img className={`game-page-picture${round === 1 ? "" : " hidden"}`} src={questionPokemon[0]["imageUrl"]}></img>
+      <img draggable="false" className={`game-page-picture${round === 1 ? "" : " hidden"}`} src={questionPokemon[0]["imageUrl"]}></img>
       <h4 className="game-page-name">{questionPokemon[0]["name"]}</h4>
-      <img className={`game-page-picture${round === 2 ? "" : " hidden"}`} src={questionPokemon[1]["imageUrl"]}></img>
+      <img draggable="false" className={`game-page-picture${round === 2 ? "" : " hidden"}`} src={questionPokemon[1]["imageUrl"]}></img>
       <h4 className="game-page-name">{questionPokemon[1]["name"]}</h4>
-      <img className={`game-page-picture${round === 3 ? "" : " hidden"}`} src={questionPokemon[2]["imageUrl"]}></img>
+      <img draggable="false" className={`game-page-picture${round === 3 ? "" : " hidden"}`} src={questionPokemon[2]["imageUrl"]}></img>
       <h4 className="game-page-name">{questionPokemon[2]["name"]}</h4>
-      <img className={`game-page-picture${round === 4 ? "" : " hidden"}`} src={questionPokemon[3]["imageUrl"]}></img>
+      <img draggable="false" className={`game-page-picture${round === 4 ? "" : " hidden"}`} src={questionPokemon[3]["imageUrl"]}></img>
       <h4 className="game-page-name">{questionPokemon[3]["name"]}</h4>
-      <img className={`game-page-picture${round === 5 ? "" : " hidden"}`} src={questionPokemon[4]["imageUrl"]}></img>
+      <img draggable="false" className={`game-page-picture${round === 5 ? "" : " hidden"}`} src={questionPokemon[4]["imageUrl"]}></img>
       <h4 className="game-page-name">{questionPokemon[4]["name"]}</h4>
       <GuessBar />
       {/* <FiltersContainer />  */}
