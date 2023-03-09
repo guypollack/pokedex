@@ -41,6 +41,10 @@ export function GuessBar() {
         dispatch(markAnswer(round - 1));
         dispatch(setIsMarkingInProgress(false));
       },3000);
+      
+      setTimeout(() => {
+        document.querySelector("#guess-bar").focus();
+      },3010);
     }
   }
 
