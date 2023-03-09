@@ -36,7 +36,6 @@ export function GuessBar() {
         // document.querySelector(".game-page-picture").classList.remove("hidden");
         dispatch(markAnswer(round - 1));
         dispatch(setIsMarkingInProgress(false));
-        document.querySelectorAll(".game-page-score-icon")[round - 1].classList.add("revealed");
       },3000);
     }
   }

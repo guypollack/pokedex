@@ -20,11 +20,8 @@
   transition: opacity 1s linear;
 }
 
-.game-page-score-icon.revealed > .game-page-score-icon-placeholder {
-  opacity: 0;
-}
-
-.game-page-score-icon.correct > .game-page-score-icon-placeholder {
+.game-page-score-icon.correct > .game-page-score-icon-placeholder,
+.game-page-score-icon.incorrect > .game-page-score-icon-placeholder {
   opacity: 0;
 }
 

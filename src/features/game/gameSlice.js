@@ -8,7 +8,7 @@ const initialState = {
   pokemonSuggestions: [],
   allNames: [],
   score: 0,
-  scores: [0,0,0,0,0],
+  scores: ["","","","",""],
   round: 1,
   isAnswerValid: false,
   isMarkingInProgress: false
@@ -36,6 +36,8 @@ export const gameSlice = createSlice({
       if (state.questionPokemon[state.round - 1]["name"].toLowerCase().trim() === state.searchTerm.toLowerCase().trim()) {
         state.score++;
         state.scores[action.payload] = 1;
+      } else {
+        state.scores[action.payload] = 0;
       }
 
       if (state.round < 5) state.round++;
