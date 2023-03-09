@@ -12,7 +12,9 @@ export function GamePageScoreIcon({imageUrl, mark}) {
 
   return (
     <div className={"game-page-score-icon" + classNameMarkModifier}>
-      <div className="game-page-score-icon-placeholder"></div>
+      <div className="game-page-score-icon-placeholder">
+        <h1>?</h1>
+      </div>
       <div className="game-page-score-icon-image-container">
         <img src={`https://images.weserv.nl/?url=${imageUrl}&w=80&h=80`}></img>
       </div>
