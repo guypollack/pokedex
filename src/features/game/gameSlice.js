@@ -10,7 +10,8 @@ const initialState = {
   scores: ["","","","",""],
   round: 1,
   isAnswerValid: false,
-  isMarkingInProgress: false
+  isMarkingInProgress: false,
+  isGameFinished: false
 };
 
 export const gameSlice = createSlice({
@@ -46,6 +47,9 @@ export const gameSlice = createSlice({
     },
     setIsMarkingInProgress: (state, action) => {
       state.isMarkingInProgress = action.payload;
+    },
+    setIsGameFinished: (state, action) => {
+      state.isGameFinished = action.payload;
     }
   }
 });
@@ -59,6 +63,7 @@ export const selectScores = (state) => state.game.scores;
 export const selectRound = (state) => state.game.round;
 export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
-export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer } = gameSlice.actions;
+export const selectIsGameFinished = (state) => state.game.isGameFinished;
+export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer, setIsGameFinished } = gameSlice.actions;
 
 export default gameSlice.reducer;

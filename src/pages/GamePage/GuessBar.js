@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid } from "../../features/game/gameSlice";
+import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid, selectIsGameFinished, setIsGameFinished } from "../../features/game/gameSlice";
 
 export function GuessBar() {
   const dispatch = useDispatch();
@@ -9,6 +9,7 @@ export function GuessBar() {
   const isAnswerValid = useSelector(selectIsAnswerValid);
   const isMarkingInProgress = useSelector(selectIsMarkingInProgress)
   const round = useSelector(selectRound);
+  const isGameFinished = useSelector(selectIsGameFinished);
 
   function handleChange(e) {
     dispatch(setSearchTerm(e.target.value));
@@ -45,6 +46,12 @@ export function GuessBar() {
       setTimeout(() => {
         document.querySelector("#guess-bar").focus();
       },3010);
+
+      if (round === 5) {
+        setTimeout(() => {
+          dispatch(setIsGameFinished(true));
+        }, 4000);
+      }
     }
   }
 

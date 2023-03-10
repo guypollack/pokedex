@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon } from '../../features/game/gameSlice';
+import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished } from '../../features/game/gameSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
@@ -27,6 +27,7 @@ export function GamePage() {
   const questionPokemon = useSelector(selectQuestionPokemon);
   const round = useSelector(selectRound);
   const score = useSelector(selectScore);
+  const isGameFinished = useSelector(selectIsGameFinished);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -80,7 +81,7 @@ export function GamePage() {
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
       <GamePageScoreContainer />
-      {questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
+      {!isGameFinished && questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
       <GuessBar />
       {/* <FiltersContainer />  */}
       {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
