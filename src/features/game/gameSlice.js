@@ -52,7 +52,6 @@ export const gameSlice = createSlice({
       state.isGameFinished = action.payload;
     },
     resetGame: (state) => {
-      alert("A");
       state.searchTerm = "";
       state.questionPokemon = [];
       state.score = 0;

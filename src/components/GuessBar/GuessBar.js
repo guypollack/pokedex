@@ -36,8 +36,11 @@ export function GuessBar() {
       document.querySelectorAll(".game-page-name")[round - 1].classList.add("revealed");
       setTimeout(() => {
         // document.querySelector(".game-page-picture").classList.add("hidden");
-        document.querySelectorAll(".game-page-picture")[round - 1].classList.remove("revealed");
-        document.querySelectorAll(".game-page-name")[round - 1].classList.remove("revealed");
+        if (round !== 5) {
+          document.querySelectorAll(".game-page-picture")[round - 1].classList.remove("revealed");
+          document.querySelectorAll(".game-page-name")[round - 1].classList.remove("revealed");
+        }
+        
         // document.querySelector(".game-page-picture").classList.remove("hidden");
         dispatch(markAnswer(round - 1));
         dispatch(setIsMarkingInProgress(false));
@@ -50,7 +53,7 @@ export function GuessBar() {
       if (round === 5) {
         setTimeout(() => {
           dispatch(setIsGameFinished(true));
-        }, 4000);
+        }, 3010);
       }
     }
   }
