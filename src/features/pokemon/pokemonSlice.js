@@ -98,9 +98,12 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
 
     const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
 
+    const nameResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1&offset=" + (index - 1));
+    const nameJson = await nameResponse.json();
+    const name = nameJson.results[0].name;
+
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+index+"/");
     const json = await response.json();
-    const name = json.forms[0].name;
     const pokemonTypes = json.types.map(t => t.type.name);
     types = pokemonTypes;    
 
