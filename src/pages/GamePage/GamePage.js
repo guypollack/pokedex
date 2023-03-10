@@ -10,6 +10,7 @@ import { GamePageScoreContainer } from '../../components/GamePageScoreContainer/
 import { GamePageScoreIcon } from '../../components/GamePageScoreIcon/GamePageScoreIcon';
 import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
 import { GuessBar } from '../../components/GuessBar/GuessBar';
+import { NewGameButton } from '../../components/NewGameButton/NewGameButton';
 import "./GamePage.css";
 
 export function GamePage() {
@@ -82,6 +83,7 @@ export function GamePage() {
       <h3>Score: {score}/5</h3>
       <GamePageScoreContainer />
       {!isGameFinished && questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
+      {isGameFinished && <NewGameButton />}
       <GuessBar />
       {/* <FiltersContainer />  */}
       {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
