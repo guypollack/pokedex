@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished } from '../../features/game/gameSlice';
+import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished, resetGame } from '../../features/game/gameSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
@@ -12,6 +12,7 @@ import { GamePagePicture } from '../../components/GamePagePicture/GamePagePictur
 import { GuessBar } from '../../components/GuessBar/GuessBar';
 import { NewGameButton } from '../../components/NewGameButton/NewGameButton';
 import "./GamePage.css";
+import { selectCurrentUser } from '../../features/users/usersSlice';
 
 export function GamePage() {
   // console.log("HomePage rendering");
@@ -29,8 +30,15 @@ export function GamePage() {
   const round = useSelector(selectRound);
   const score = useSelector(selectScore);
   const isGameFinished = useSelector(selectIsGameFinished);
+  const user = useSelector(selectCurrentUser);
 
   // dispatch(fetchAllPokemonAsync());
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetGame());
+    }
+  },[]);
 
   useEffect(() => {
     if (!allPokemonFetched) {
