@@ -9,7 +9,7 @@ import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/Poke
 import { GamePageScoreContainer } from '../../components/GamePageScoreContainer/GamePageScoreContainer';
 import { GamePageScoreIcon } from '../../components/GamePageScoreIcon/GamePageScoreIcon';
 import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
-import { GuessBar } from './GuessBar';
+import { GuessBar } from '../../components/GuessBar/GuessBar';
 import "./GamePage.css";
 
 export function GamePage() {
