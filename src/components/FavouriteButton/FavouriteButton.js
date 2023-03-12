@@ -8,7 +8,7 @@ import { faHeart as solidHeart, faHeartCircleXmark as xmarkHeart } from "@fortaw
 
 import "./FavouriteButton.css";
 
-export function FavouriteButton({number}) {
+export function FavouriteButton({number, index}) {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -31,7 +31,7 @@ export function FavouriteButton({number}) {
     const tooltip = document.createElement("p");
     tooltip.classList.add("xmark-tooltip");
     const tooltipText = document.createTextNode("Log in to add Pokémon to your favourites");
-    const currentCard = document.querySelectorAll(".pokemon-card")[+number - 1];
+    const currentCard = document.querySelectorAll(".pokemon-card")[+index];
     tooltip.appendChild(tooltipText);
     currentCard.appendChild(tooltip);
     setTimeout(() => {

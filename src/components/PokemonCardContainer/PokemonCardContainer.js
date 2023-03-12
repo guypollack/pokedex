@@ -4,7 +4,7 @@ import { addOutline, removeOutline } from "../../util/addRemoveOutline";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 // import "./PokemonCardContainer.css";
 
-export function PokemonCardContainer({number, name, imageUrl}) {
+export function PokemonCardContainer({number, name, imageUrl, index}) {
   // console.log("A");
   // console.log(number);
 
@@ -47,6 +47,7 @@ export function PokemonCardContainer({number, name, imageUrl}) {
       name={name}
       id={id}
       imageUrl={imageUrl}
+      index={index}
       onClickCard={handleClickCard}
       handleMouseOver={handleMouseOver}
       handleMouseOut={handleMouseOut}
