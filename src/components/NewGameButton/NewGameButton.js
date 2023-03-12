@@ -18,6 +18,8 @@ export function NewGameButton() {
       const pokemonData = {"number": randomNumber, "name": nameFormatter(allPokemon[randomNumber]["name"]), "imageUrl": allPokemon[randomNumber]["imageUrl"]};
       dispatch(addPokemonToQuestions(pokemonData));
     }
+
+    document.querySelector("#guess-bar").focus();
   }
 
   return (
