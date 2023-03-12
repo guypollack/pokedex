@@ -86,7 +86,6 @@ export function GamePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the game page</h2>
-      <h3>Number: {currentPokemon["number"]}</h3>
       <h3>Round: {round}/5</h3>
       <h3>Score: {score}/5</h3>
       <GamePageScoreContainer />
