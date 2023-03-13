@@ -211,7 +211,7 @@ export const pokemonSlice = createSlice({
       if (action.payload === " ") {
         state.searchTerm = "";
       } else {
-        state.searchTerm = action.payload.toString().toLowerCase();
+        state.searchTerm = action.payload.toString();
       }
     },
     setPokemonPageDataFetched: (state, action) => {
@@ -288,7 +288,7 @@ export const selectFilteredPokemon = (state) => {
     return state.pokemon.allPokemon;
   } else if (filteredCategories.length === 0) {
     // console.log("B");
-    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.includes(state.pokemon.searchTerm)));
+    return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.toLowerCase().includes(state.pokemon.searchTerm.toLowerCase())));
   } else {  
     // console.log("C");
     // START OF OLD METHOD
@@ -319,7 +319,12 @@ export const selectFilteredPokemon = (state) => {
     const filteredPokemonObj = {"types": [], "generations": [], "heights": [], "weights": []};
     
     //Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.includes(state.pokemon.searchTerm)));
-    const searchTermFilteredPokemonArray = Object.keys(state.pokemon.allPokemon).filter(key => state.pokemon.allPokemon[key].name.includes(state.pokemon.searchTerm));
+
+    // Object.keys(state.pokemon.allPokemon).forEach(key => {
+    //   console.log(key);
+    // })
+
+    const searchTermFilteredPokemonArray = Object.keys(state.pokemon.allPokemon).filter(key => state.pokemon.allPokemon[key].name.toLowerCase().includes(state.pokemon.searchTerm.toLowerCase()));
 
 
     for (let i of searchTermFilteredPokemonArray) {
