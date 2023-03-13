@@ -1,5 +1,5 @@
 .filter-creator {
-  width: 50%;
+  width: 100%;
   /* border: 1px solid black; */
   border-right: 1px solid black;
   margin: 10px;
@@ -12,10 +12,20 @@
 
 .selector {
   margin-right: 20px;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
 }
 
 .selector > label {
   margin-right: 10px;
+}
+
+.selector > p {
+  display: inline-block;
+  width: 40px;
+  margin: 0 5px;
+  text-align: right;
 }
 
 /* .filters-flex-container {
