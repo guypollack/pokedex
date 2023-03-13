@@ -45,7 +45,7 @@ export function FilterCreator() {
         <CategorySelector />
         {(category === "Height" || category === "Weight") && <OperatorSelector />}
         {(category !== "") && <ValueSelector />}
-        <button disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
+        <button className="add-filter-button" disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
       </div>
     </div>
   )

@@ -36,3 +36,7 @@
 .sliders-container {
   display: flex;
 }
+
+.add-filter-button {
+  height: 20px;
+}
