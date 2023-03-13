@@ -11,7 +11,7 @@ export function PokemonCard({number, name, id, imageUrl, index, onClickCard, onC
       <FavouriteButton onClick={onClickFavourite} number={number} index={index} />
       <div className="pokemon-card-details">
         <p>{number}</p>
-        <p>{nameFormatter(name)}</p>
+        <p>{name}</p>
       </div>
     </div>
   )

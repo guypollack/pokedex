@@ -15,7 +15,7 @@ export function NewGameButton() {
 
     for (let i = 0; i < 5; i++) {
       const randomNumber = Math.floor(Math.random() * 1009) + 1;
-      const pokemonData = {"number": randomNumber, "name": nameFormatter(allPokemon[randomNumber]["name"]), "imageUrl": allPokemon[randomNumber]["imageUrl"]};
+      const pokemonData = {"number": randomNumber, "name": allPokemon[randomNumber]["name"], "imageUrl": allPokemon[randomNumber]["imageUrl"]};
       dispatch(addPokemonToQuestions(pokemonData));
     }
 

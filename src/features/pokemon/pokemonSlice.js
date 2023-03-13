@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doesPokemonFitFilter } from './pokemonSliceHelperFunctions';
+import { nameFormatter } from '../../util/nameFormatter';
 
 const initialState = {
   allPokemon: {},
@@ -39,7 +40,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
       const pokemonNumber = i+1;
       const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
       allPokemon[pokemonNumber] = {
-        "name": results[i].name,
+        "name": nameFormatter(results[i].name),
         "url": results[i].url,
         "imageUrl" : imageUrl,
         "visible": true
@@ -100,7 +101,7 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
 
     const nameResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1&offset=" + (index - 1));
     const nameJson = await nameResponse.json();
-    const name = nameJson.results[0].name;
+    const name = nameFormatter(nameJson.results[0].name);
 
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+index+"/");
     const json = await response.json();

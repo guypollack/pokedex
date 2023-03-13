@@ -22,7 +22,7 @@ export function PokemonPage() {
   const favourites = useSelector(selectFavourites);
   const favourited = favourites[user].includes(number);
   const { name, generation, types, height, weight } = pokemonPageData;
-  const formattedName = nameFormatter(name);
+  // const formattedName = nameFormatter(name);
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
 
   let favouriteButtonMessage;
@@ -69,7 +69,7 @@ export function PokemonPage() {
     <div className="pokemon-page">
       <div className="pokemon-page-header">
         <NavBar />
-        <h1>{formattedName}</h1>
+        <h1>{name}</h1>
       </div>
       <div className="pokemon-page-loading-container">
         <ArrowContainer side="left" number={number} />
@@ -83,7 +83,7 @@ export function PokemonPage() {
     <div className="pokemon-page">
       <div className="pokemon-page-header">
         <NavBar />
-        <h1>{formattedName}</h1>
+        <h1>{name}</h1>
       </div>
       <div className="pokemon-page-content-container">
         <ArrowContainer side="left" number={number} />
