@@ -2,17 +2,14 @@
   border: 1px solid black;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  /* align-items: stretch; */
 }
 
 .filter-blocks-containers-flex {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
+  /* align-items: flex-start; */
+  width: 100%;
   /* border: 2px solid blue; */
-}
-
-.filter-blocks-containers-flex:nth-child(1) {
-  background-color: black;
 }

@@ -35,6 +35,6 @@ export function FilterBlock({property, value, filterNumber}) {
   
   return (
     <div className={`filter-block ${property.toLowerCase()} ${value.toLowerCase()}`} onClick={handleClick}>
-      <p>{property}: {valueFormatter(value)}</p>
+      <p>{valueFormatter(value)}</p>
     </div>)
 }
