@@ -37,8 +37,10 @@ export function FilterCreator() {
     <div className="filter-creator">
       <h2>Filter Creator</h2>
       <SearchBar />
-      <Slider heading="In category search type" type="inCategory" value1="AND" value2="OR" checked={inCategorySearchType === "or"} />
-      <Slider heading="Between category search type" type="betweenCategory" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"}/>
+      <div className="sliders-container">
+        <Slider heading="In category search type" type="inCategory" value1="AND" value2="OR" checked={inCategorySearchType === "or"} />
+        <Slider heading="Between category search type" type="betweenCategory" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"}/>
+      </div>
       <div className="selectors-flex-container">
         <CategorySelector />
         {(category === "Height" || category === "Weight") && <OperatorSelector />}

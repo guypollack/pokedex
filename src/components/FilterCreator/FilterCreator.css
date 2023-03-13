@@ -18,7 +18,11 @@
   margin-right: 10px;
 }
 
-.filters-flex-container {
+/* .filters-flex-container {
   display: flex;
   justify-content: flex-start;
+} */
+
+.sliders-container {
+  display: flex;
 }
