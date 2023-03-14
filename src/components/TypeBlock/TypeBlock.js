@@ -9,7 +9,7 @@ export function TypeBlock({type}) {
   }
   
   return (
-    <div className={`type-block type ${type}`}>
+    <div className={`type-block type-${type}`}>
       <p>{valueFormatter(type)}</p>
     </div>
   )
