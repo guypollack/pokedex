@@ -1,5 +1,5 @@
 .filter-block {
-  background-color: chocolate;
+  /* background-color: chocolate; */
   /* height: fit-content; */
   height: 30px;
   width: fit-content;
@@ -7,8 +7,9 @@
   white-space: nowrap;
   display: flex;
   /* flex-direction: row; */
+  justify-content: center;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 10px;
   margin-right: 5px;
   margin-bottom: 2px;
   border-radius: 5px;
@@ -23,15 +24,15 @@
   color: white;
 }
 
-.type.bug {
+.type-bug {
   background-color: rgb(114,159,63);
 }
 
-.type.dark {
+.type-dark {
   background-color: rgb(112,112,112);
 }
 
-.type.dragon {
+.type-dragon {
   background: linear-gradient(
     to bottom,
     rgb(83,163,207) 0%,
@@ -41,25 +42,25 @@
   );
 }
 
-.type.electric {
+.type-electric {
   color: black;
   background-color: rgb(238,212,52);
 }
 
-.type.fairy {
+.type-fairy {
   color: black;
   background-color: rgb(253,184,233);
 }
 
-.type.fighting {
+.type-fighting {
   background-color: rgb(213,103,35);
 }
 
-.type.fire {
+.type-fire {
   background-color: rgb(253,125,35);
 }
 
-.type.flying {
+.type-flying {
   color: black;
   background: linear-gradient(
     to bottom,
@@ -70,16 +71,16 @@
   );
 }
 
-.type.ghost {
+.type-ghost {
   background-color: rgb(123,98,163);
 }
 
-.type.grass {
+.type-grass {
   color: black;
   background-color: rgb(155,203,80);
 }
 
-.type.ground {
+.type-ground {
   color: black;
   background: linear-gradient(
     to bottom,
@@ -90,33 +91,332 @@
   );
 }
 
-.type.ice {
+.type-ice {
   color: black;
   background-color: rgb(81,195,231);
 }
 
-.type.normal {
+.type-normal {
   color: black;
   background-color: rgb(164,172,175);
 }
 
-.type.poison {
+.type-poison {
   background-color: rgb(185,127,201);
 }
 
-.type.psychic {
+.type-psychic {
   background-color: rgb(243,101,185);
 }
 
-.type.rock {
+.type-rock {
   background-color: rgb(162,140,32);
 }
 
-.type.steel {
+.type-steel {
   color: black;
   background-color: rgb(158,183,184);
 }
 
-.type.water {
+.type-water {
   background-color: rgb(69,146,196);
 }
+
+div[class*="filter-block generation"] {
+  width: 10px;
+  border-radius: 20px;
+}
+
+.generation-1 {
+  background-color: hsl(260, 100%, 90%);
+}
+
+.generation-2 {
+  background-color: hsl(260, 100%, 80%);
+}
+
+.generation-3 {
+  background-color: hsl(260, 100%, 70%);
+}
+
+.generation-4 {
+  background-color: hsl(260, 100%, 60%);
+}
+
+.generation-5 {
+  background-color: hsl(260, 100%, 50%);
+}
+
+.generation-6 {
+  background-color: hsl(260, 100%, 40%);
+}
+
+.generation-7 {
+  background-color: hsl(260, 100%, 30%);
+}
+
+.generation-8 {
+  background-color: hsl(260, 100%, 20%);
+}
+
+.generation-9 {
+  background-color: hsl(260, 100%, 10%);
+}
+
+div[class*="filter-block height"] {
+  width: 29px;
+  position: relative;
+  border-radius: 0;
+  margin-right: 25px;
+}
+
+.height-0 {
+  background-color: hsl(17, 100%, 90%);
+  border-color: hsl(17, 100%, 90%);
+}
+
+.height-1 {
+  background-color: hsl(17, 100%, 82%);
+  border-color: hsl(17, 100%, 82%);
+}
+
+.height-2 {
+  background-color: hsl(17, 100%, 74%);
+  border-color: hsl(17, 100%, 74%);
+}
+
+.height-3 {
+  background-color: hsl(17, 100%, 66%);
+  border-color: hsl(17, 100%, 66%);
+}
+
+.height-4 {
+  background-color: hsl(17, 100%, 58%);
+  border-color: hsl(17, 100%, 58%);
+}
+
+.height-5 {
+  background-color: hsl(17, 100%, 50%);
+  border-color: hsl(17, 100%, 50%);
+}
+
+.height-6 {
+  background-color: hsl(17, 100%, 42%);
+  border-color: hsl(17, 100%, 42%);
+}
+
+.height-7 {
+  background-color: hsl(17, 100%, 34%);
+  border-color: hsl(17, 100%, 34%);
+}
+
+.height-8 {
+  background-color: hsl(17, 100%, 26%);
+  border-color: hsl(17, 100%, 26%);
+}
+
+.height-9 {
+  background-color: hsl(17, 100%, 18%);
+  border-color: hsl(17, 100%, 18%);
+}
+
+.height-10 {
+  background-color: hsl(17, 100%, 10%);
+  border-color: hsl(17, 100%, 10%);
+}
+
+div[class*="filter-block height"]::before {
+  /* width: 10px; */
+  position: absolute;
+  content: "";
+  width: 0px;
+  height: 15px;
+  border: 7.5px solid transparent;
+  border-right-color: inherit;
+  right: 49px;
+}
+
+div[class*="filter-block height"]::after {
+  position: absolute;
+  content: "";
+  width: 0px;
+  height: 15px;
+  border: 7.5px solid transparent;
+  border-left-color: inherit;
+  left: 49px;
+}
+
+div[class*="filter-block weight"] {
+  width: 40px;
+  position: relative;
+  border-radius: 0;
+  margin-right: 35px;
+  /* background-color: transparent; */
+}
+
+div[class*="filter-block weight"] > p {
+  z-index: 1;
+}
+
+div[class*="filter-block weight"]::before,  div[class*="filter-block weight"]::after  {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  content: "";
+  border-left: 44px solid transparent;
+  border-right: 44px solid transparent;
+}
+
+div[class*="filter-block weight"]::before {
+  top: 15px;
+  border-top-width: 22px;
+  border-top-style: solid;
+}
+
+div[class*="filter-block weight"]::after {
+  bottom: 15px;
+  border-bottom-width: 22px;
+  border-bottom-style: solid;
+}
+
+.weight-0::before {
+  border-top-color: hsl(120, 100%, 85%);
+}
+
+.weight-0::after {
+  border-bottom-color: hsl(120, 100%, 85%);
+}
+
+.weight-100::before {
+  border-top-color: hsl(120, 100%, 77%);
+}
+
+.weight-100::after {
+  border-bottom-color: hsl(120, 100%, 77%);
+}
+
+.weight-200::before {
+  border-top-color: hsl(120, 100%, 69%);
+}
+
+.weight-200::after {
+  border-bottom-color: hsl(120, 100%, 69%);
+}
+
+.weight-300::before {
+  border-top-color: hsl(120, 100%, 61%);
+}
+
+.weight-300::after {
+  border-bottom-color: hsl(120, 100%, 61%);
+}
+
+.weight-400::before {
+  border-top-color: hsl(120, 100%, 53%);
+}
+
+.weight-400::after {
+  border-bottom-color: hsl(120, 100%, 53%);
+}
+
+.weight-500::before {
+  border-top-color: hsl(120, 100%, 45%);
+}
+
+.weight-500::after {
+  border-bottom-color: hsl(120, 100%, 45%);
+}
+
+.weight-600::before {
+  border-top-color: hsl(120, 100%, 37%);
+}
+
+.weight-600::after {
+  border-bottom-color: hsl(120, 100%, 37%);
+}
+
+.weight-700::before {
+  border-top-color: hsl(120, 100%, 29%);
+}
+
+.weight-700::after {
+  border-bottom-color: hsl(120, 100%, 29%);
+}
+
+.weight-800::before {
+  border-top-color: hsl(120, 100%, 21%);
+}
+
+.weight-800::after {
+  border-bottom-color: hsl(120, 100%, 21%);
+}
+
+.weight-900::before {
+  border-top-color: hsl(120, 100%, 13%);
+}
+
+.weight-900::after {
+  border-bottom-color: hsl(120, 100%, 13%);
+}
+
+.weight-1000::before {
+  border-top-color: hsl(120, 100%, 7%);
+}
+
+.weight-1000::after {
+  border-bottom-color: hsl(120, 100%, 7%);
+}
+
+
+/*
+.height-1 {
+  background-color: hsl(17, 100%, 82%);
+  border-color: hsl(17, 100%, 82%);
+}
+
+.height-2 {
+  background-color: hsl(17, 100%, 74%);
+  border-color: hsl(17, 100%, 74%);
+}
+
+.height-3 {
+  background-color: hsl(17, 100%, 66%);
+  border-color: hsl(17, 100%, 66%);
+}
+
+.height-4 {
+  background-color: hsl(17, 100%, 58%);
+  border-color: hsl(17, 100%, 58%);
+}
+
+.height-5 {
+  background-color: hsl(17, 100%, 50%);
+  border-color: hsl(17, 100%, 50%);
+}
+
+.height-6 {
+  background-color: hsl(17, 100%, 42%);
+  border-color: hsl(17, 100%, 42%);
+}
+
+.height-7 {
+  background-color: hsl(17, 100%, 34%);
+  border-color: hsl(17, 100%, 34%);
+}
+
+.height-8 {
+  background-color: hsl(17, 100%, 26%);
+  border-color: hsl(17, 100%, 26%);
+}
+
+.height-9 {
+  background-color: hsl(17, 100%, 18%);
+  border-color: hsl(17, 100%, 18%);
+}
+
+.height-10 {
+  background-color: hsl(17, 100%, 10%);
+  border-color: hsl(17, 100%, 10%);
+}
+
+ */

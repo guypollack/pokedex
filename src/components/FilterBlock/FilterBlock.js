@@ -32,9 +32,21 @@ export function FilterBlock({property, value, filterNumber}) {
         return val
     }
   }
+
+  function valueRounder(val) {
+    const valWithoutOperator = val.replace(">","").replace("<","").replace("=","");
+    switch (property) {
+      case "Height":
+        return Math.floor(+valWithoutOperator).toString();
+      case "Weight":
+        return (Math.floor(+valWithoutOperator / 100) * 100).toString();
+      default:
+        return val;
+    }
+  }
   
   return (
-    <div className={`filter-block ${property.toLowerCase()} ${value.toLowerCase()}`} onClick={handleClick}>
+    <div className={`filter-block ${property.toLowerCase()}-${valueRounder(value).toLowerCase()}`} onClick={handleClick}>
       <p>{valueFormatter(value)}</p>
     </div>)
 }
