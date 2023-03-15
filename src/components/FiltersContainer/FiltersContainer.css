@@ -13,3 +13,9 @@
   width: 100%;
   /* border: 2px solid blue; */
 }
+
+@media screen and (max-width: 880px) {
+  .filters-container {
+    flex-direction: column;
+  }
+}

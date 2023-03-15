@@ -2,3 +2,9 @@
   display: flex;
   flex-flow: row wrap;
 }
+
+@media screen and (max-width: 880px) {
+  .pokemon-flex-container {
+    justify-content: space-evenly;
+  }
+}
