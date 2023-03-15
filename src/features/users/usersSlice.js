@@ -134,6 +134,7 @@ export const usersSlice = createSlice({
     },
     removeUser: (state, action) => {
       state.users = state.users.filter(user => user.username !== action.payload);
+      state.canCurrentAccountBeDeleted = false;
     },
     setChangePasswordCurrentPassword: (state, action) => {
       state.changePasswordCurrentPassword = action.payload;
