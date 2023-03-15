@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter.js';
-import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync } from '../../features/pokemon/pokemonSlice.js';
+import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonPageDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync, selectDescriptionsFetched, fetchPokemonDescriptionsAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectDataFetched, fetchPokemonDataAsync } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { selectFavourites } from "../../features/favourites/favouritesSlice";
 import { NavBar } from '../../components/NavBar/NavBar.js';
@@ -14,20 +14,22 @@ import "./PokemonPage.css";
 export function PokemonPage() {
   const dispatch = useDispatch();
   const { number } = useParams();
-  // let name;
-  const allPokemonFetched = useSelector(selectAllPokemonFetched);
-  const allPokemon = useSelector(selectAllPokemon);
-  // let name = "";
-  // const name = useSelector(selectAllPokemon)[number]["name"];
-  const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
+  // const allPokemonFetched = useSelector(selectAllPokemonFetched);
+  // const allPokemon = useSelector(selectAllPokemon);
+  // const dataFetched = useSelector(selectDataFetched);
+  // const descriptionsFetched = useSelector(selectDescriptionsFetched);
+  // const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
   const pokemonPageData = useSelector(selectPokemonPageData);
-  const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
-  const description = useSelector(selectPokemonPageDescription);
+  // const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
+  // const description = useSelector(selectPokemonPageDescription);
   const user = useSelector(selectCurrentUser);
   const favourites = useSelector(selectFavourites);
   const favourited = favourites[user].includes(number);
-  const { generation, types, height, weight } = pokemonPageData;
-  // const formattedName = nameFormatter(name);
+  // const { generation, types, height, weight } = pokemonPageData;
+  // const typesV2 = useSelector(selectTypes)[number];
+  // const generationV2 = useSelector(selectGenerations)[number];
+  // const heightV2 = useSelector(selectHeights)[number];
+  // const weightV2 = useSelector(selectWeights)[number];
   const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
 
   let favouriteButtonMessage;
@@ -39,36 +41,31 @@ export function PokemonPage() {
   } else {
     favouriteButtonMessage = "Log in to add pokémon to favourites"
   }
-
-  useEffect(() => {
-    if (!allPokemonFetched) {
-      dispatch(fetchAllPokemonAsync());
-    }
-  },[allPokemonFetched])
   
   useEffect(() => {
-    dispatch(setPokemonPageDataFetched(false));
-    dispatch(setPokemonPageDescriptionFetched(false));
-    return () => {
-      dispatch(setPokemonPageDataFetched(false));
-      dispatch(setPokemonPageDescriptionFetched(false));
+    dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
+    // dispatch(setPokemonPageDescriptionFetched(false));
+    const startIndex = number <= 10 ? 1 : (+number - 10);
+    const endIndex = number >= 999 ? 1009 : (+number + 11);
+    for (let i = startIndex; i < endIndex; i++) {
+      if (!pokemonPageData[i]) {
+        dispatch(fetchPokemonPageDataByIndexAsync(i))
+      }
     }
+    // if (!descriptionsFetched) {
+    //   // dispatch(fetchPokemonDescriptionsAsync());
+    // }
+    // if (!allPokemonFetched) {
+    //   // dispatch(fetchAllPokemonAsync());
+    // }
+    // return () => {
+    //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
+    // }
   },[number])
 
-  useEffect(() => {
-    if (!pokemonPageDataFetched) {
-      dispatch(fetchPokemonDataByIndexAsync(number));
-    }
-  },[pokemonPageDataFetched]);
-
-  useEffect(() => {
-    if (!pokemonPageDescriptionFetched) {
-      dispatch(fetchPokemonDescriptionByIndexAsync(number));
-    }
-  },[pokemonPageDescriptionFetched]);
-
   // consider deleting if statement because data is loading fast
-  if (!pokemonPageDataFetched || !pokemonPageDescriptionFetched || !allPokemonFetched) {
+  if (!pokemonPageData[number]) {
+    console.log(number + "not yet loaded");
     // alert("A");
     return (
     <div className="pokemon-page">
@@ -83,12 +80,13 @@ export function PokemonPage() {
     )
   }
 
-  if (allPokemonFetched) {
+  // if (allPokemonFetched && dataFetched && descriptionsFetched) {
+  if (pokemonPageData[number]) {
     return (
       <div className="pokemon-page">
         <div className="pokemon-page-header">
           <NavBar />
-          <h1>{allPokemon[number].name}</h1>
+          <h1>{pokemonPageData[number].name}</h1>
         </div>
         <div className="pokemon-page-content-container">
           <ArrowContainer side="left" number={number} />
@@ -100,16 +98,16 @@ export function PokemonPage() {
               <h3>Number:</h3>
               <h3>{number}</h3>
               <h3>Generation:</h3>
-              <h3>{generation}</h3>
+              <h3>{pokemonPageData[number].generation}</h3>
               <h3>Type:</h3>
               <div className="pokemon-page-types-container">
-                {types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
+                {pokemonPageData[number].types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
               </div>
               <h3>Height:</h3>
-              <h3>{height}m</h3>
+              <h3>{pokemonPageData[number].height}m</h3>
               <h3>Weight:</h3>
-              <h3>{weight}kg</h3>
-              <h4 className="two-column-cell description">{description}</h4>
+              <h3>{pokemonPageData[number].weight}kg</h3>
+              <h4 className="two-column-cell description">{pokemonPageData[number].description}</h4>
               <div className="two-column-cell favourite-button-container">
                 <p>{favouriteButtonMessage}</p>
                 <FavouriteButton number={number} />

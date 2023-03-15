@@ -87,8 +87,8 @@ export const fetchPokemonDataAsync = createAsyncThunk(
   }
 );
 
-export const fetchPokemonDataByIndexAsync = createAsyncThunk(
-  'pokemon/fetchPokemonDataByIndexAsync',
+export const fetchPokemonPageDataByIndexAsync = createAsyncThunk(
+  'pokemon/fetchPokemonPageDataByIndexAsync',
   async (index) => {
     // alert("Fetching pokemon types");
     // console.log("fetching pokemon data");
@@ -102,6 +102,15 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
     const nameResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1&offset=" + (index - 1));
     const nameJson = await nameResponse.json();
     const name = nameFormatter(nameJson.results[0].name);
+
+    const descriptionResponse = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+index+"/");
+    const descriptionJson = await descriptionResponse.json();
+    let description;
+    if (descriptionJson.flavor_text_entries.length > 0) {
+      description = descriptionJson.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text;
+    } else {
+      description = "";
+    }
 
     const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+index+"/");
     const json = await response.json();
@@ -118,7 +127,7 @@ export const fetchPokemonDataByIndexAsync = createAsyncThunk(
     height = json.height / 10;
     weight = json.weight / 10;
 
-    return {name, types, generation, height, weight};
+    return {index, name, types, generation, height, weight, description};
   }
 );
 
@@ -136,7 +145,6 @@ export const fetchPokemonDescriptionByIndexAsync = createAsyncThunk(
     return description;
   }
 );
-
 
 export const pokemonSlice = createSlice({
   name: "pokemon",
@@ -244,11 +252,12 @@ export const pokemonSlice = createSlice({
         state.weights = {...state.weights, ...action.payload.weights};
         state.dataFetched = true;
       })
-      .addCase(fetchPokemonDataByIndexAsync.pending, (state) => {
+      .addCase(fetchPokemonPageDataByIndexAsync.pending, (state) => {
         state.pokemonPageDataFetched = false;
       })
-      .addCase(fetchPokemonDataByIndexAsync.fulfilled, (state, action) => {
-        state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
+      .addCase(fetchPokemonPageDataByIndexAsync.fulfilled, (state, action) => {
+        // state.pokemonPageData = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight]]);
+        state.pokemonPageData[action.payload.index] = Object.fromEntries([["name",action.payload.name],["types", action.payload.types],["generation", action.payload.generation],["height", action.payload.height],["weight", action.payload.weight],["description", action.payload.description]]);
         state.pokemonPageDataFetched = true;
       })
       .addCase(fetchPokemonDescriptionByIndexAsync.pending, (state) => {
