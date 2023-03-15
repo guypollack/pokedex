@@ -4,6 +4,7 @@ import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useNavigate } from 'react-router';
 import { setCurrentUser, loginUser, addUser, selectLoginUsername, setLoginUsername, selectLoginPassword, setLoginPassword, selectLoginWarning, selectLoginSuccessMessage, setLoginSuccessMessage, selectCreateAccountUsername, setCreateAccountUsername, selectCreateAccountPassword, setCreateAccountPassword, selectCreateAccountPassword2, setCreateAccountPassword2, selectCreateAccountWarning, selectCreateAccountSuccessMessage, setCreateAccountSuccessMessage } from '../../features/users/usersSlice.js';
 import { addUserToFavourites } from '../../features/favourites/favouritesSlice.js';
+import "./LoginPage.css";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -94,23 +95,25 @@ export function LoginPage() {
       <NavBar />
       <h2>This is the Login Page</h2>
       <h3>Login</h3>
-      <label htmlFor="login-username">Username</label>
-      <input type="text" id="login-username" value={loginUsername} onChange={handleChangeLoginUsername} onKeyDown={handleKeyDown}></input>
-      <label htmlFor="login-password">Password</label>
-      <input type="password" id="login-password"  value={loginPassword} onChange={handleChangeLoginPassword} onKeyDown={handleKeyDown}></input>
-      <button onClick={handleClickLogin}>Login</button>
-      <p className="login-warning">{loginWarning}</p>
-      <p className="login-success-message">{loginSuccessMessage}</p>
-      <h3>Create account</h3>
-      <label htmlFor="create-account-username">Username</label>
-      <input type="text" id="create-account-username" value={createAccountUsername} onChange={handleChangeCreateAccountUsername} onKeyDown={handleKeyDown}></input>
-      <label htmlFor="create-account-password">Password</label>
-      <input type="password" id="create-account-password" value={createAccountPassword} onChange={handleChangeCreateAccountPassword} onKeyDown={handleKeyDown}></input>
-      <label htmlFor="create-account-password-verify">Retype password</label>
-      <input type="password" id="create-account-password-verify" value={createAccountPassword2} onChange={handleChangeCreateAccountPassword2} onKeyDown={handleKeyDown}></input>
-      <button onClick={handleClickCreateAccount}>Create Account</button>
-      <p className="create-account-warning">{createAccountWarning}</p>
-      <p className="create-account-success-message">{createAccountSuccessMessage}</p>
+      <div className="login-page">
+        <label htmlFor="login-username">Username</label>
+        <input type="text" id="login-username" value={loginUsername} onChange={handleChangeLoginUsername} onKeyDown={handleKeyDown}></input>
+        <label htmlFor="login-password">Password</label>
+        <input type="password" id="login-password"  value={loginPassword} onChange={handleChangeLoginPassword} onKeyDown={handleKeyDown}></input>
+        <button onClick={handleClickLogin}>Login</button>
+        <p className="login-warning">{loginWarning}</p>
+        <p className="login-success-message">{loginSuccessMessage}</p>
+        <h3>Create account</h3>
+        <label htmlFor="create-account-username">Username</label>
+        <input type="text" id="create-account-username" value={createAccountUsername} onChange={handleChangeCreateAccountUsername} onKeyDown={handleKeyDown}></input>
+        <label htmlFor="create-account-password">Password</label>
+        <input type="password" id="create-account-password" value={createAccountPassword} onChange={handleChangeCreateAccountPassword} onKeyDown={handleKeyDown}></input>
+        <label htmlFor="create-account-password-verify">Retype password</label>
+        <input type="password" id="create-account-password-verify" value={createAccountPassword2} onChange={handleChangeCreateAccountPassword2} onKeyDown={handleKeyDown}></input>
+        <button onClick={handleClickCreateAccount}>Create Account</button>
+        <p className="create-account-warning">{createAccountWarning}</p>
+        <p className="create-account-success-message">{createAccountSuccessMessage}</p>
+      </div>
     </div>
   )
 }

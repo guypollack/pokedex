@@ -1,0 +1,22 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.login-page > input, .login-page > button {
+  margin-bottom: 15px;
+}
+
+.login-page > p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.login-page > input {
+  width: 200px;
+}
+
+.login-page > button {
+  width: 150px;
+}

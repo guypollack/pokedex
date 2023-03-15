@@ -1,0 +1,47 @@
+.update-details-section {
+  display: flex;
+}
+
+.change-password-section, .update-username-section {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.delete-account-section {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.my-account-page input, .my-account-page button {
+  margin-bottom: 15px;
+}
+
+.my-account-page p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.my-account-page input {
+  width: 200px;
+}
+
+.my-account-page button {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.delete-account-confirmation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  /* flex-direction: column; */
+}
+
+.delete-account-confirmation input {
+  width: 30px;
+}
