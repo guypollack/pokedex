@@ -2,7 +2,7 @@
   /* border: 1px solid green; */
 }
 
-a {
+.nav-bar > a {
   margin-left: 20px;
 }
 
@@ -15,7 +15,7 @@ a {
     margin: 0;
   }
 
-  a {
+  .nav-bar > a {
     margin-left: 10px;
     margin-right: 10px;
   }
