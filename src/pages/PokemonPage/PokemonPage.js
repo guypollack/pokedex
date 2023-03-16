@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter.js';
 import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonPageDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync, selectDescriptionsFetched, fetchPokemonDescriptionsAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectDataFetched, fetchPokemonDataAsync } from '../../features/pokemon/pokemonSlice.js';
@@ -13,6 +13,7 @@ import "./PokemonPage.css";
 
 export function PokemonPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { number } = useParams();
   // const allPokemonFetched = useSelector(selectAllPokemonFetched);
   // const allPokemon = useSelector(selectAllPokemon);
@@ -41,8 +42,12 @@ export function PokemonPage() {
   } else {
     favouriteButtonMessage = "Log in to add pokémon to favourites"
   }
-  
+
   useEffect(() => {
+    if (!(number >= 1 && number <= 1008)) {
+      navigate("/");
+      return;
+    }
     dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
     // dispatch(setPokemonPageDescriptionFetched(false));
     const startIndex = number <= 10 ? 1 : (+number - 10);
