@@ -1,11 +1,15 @@
+.my-account-page {
+  padding-left: 20px;
+}
+
 .update-details-section {
   display: flex;
+  flex-direction: row;
 }
 
 .change-password-section, .update-username-section {
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
   width: 300px;
   margin-right: 20px;
 }
@@ -14,7 +18,6 @@
   width: 800px;
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
 }
 
 .my-account-page input, .my-account-page button {
@@ -44,4 +47,22 @@
 
 .delete-account-confirmation input {
   width: 30px;
+}
+
+.my-account-page-username, .my-account-page-rename-success-message {
+  word-wrap: break-word;
+}
+
+.my-account-page-username {
+  width: 90%;
+}
+
+@media screen and (max-width: 880px) {
+  .update-details-section {
+    flex-direction: column;
+  }
+
+  .delete-account-section {
+    width: 90%;
+  }
 }

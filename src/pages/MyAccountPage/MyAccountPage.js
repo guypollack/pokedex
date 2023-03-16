@@ -137,8 +137,8 @@ export function MyAccountPage() {
     <div>
       <NavBar />
       <h2>This is the My Account Page</h2>
-      <h3>{user}</h3>
       <div className="my-account-page">
+        <h3 className="my-account-page-username">{user}</h3>
         <div className="update-details-section">
           <div className="change-password-section">
             <h3>Change Password</h3>
@@ -162,7 +162,7 @@ export function MyAccountPage() {
             <input type="text" id="rename-user-new-username" value={renameUsername} onChange={handleChangeRenameUsername} onKeyDown={handleKeyDown}></input>
             <button onClick={handleClickUpdateUsername}>Update</button>
             <p>{renameWarning}</p>
-            <p>{renameSuccessMessage}</p>
+            <p className="my-account-page-rename-success-message">{renameSuccessMessage}</p>
           </div>
         </div>
         <h3>Delete Account</h3>
