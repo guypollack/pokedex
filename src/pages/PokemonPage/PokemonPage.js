@@ -65,6 +65,7 @@ export function PokemonPage() {
   },[number])
 
   if (!(number >= 1 && number <= 1008)) {
+    const randomNumber = Math.floor(Math.random() * 1008) + 1;
     return (
       <div className="pokemon-page">
         <div className="pokemon-page-header">
@@ -73,6 +74,7 @@ export function PokemonPage() {
         <div className="pokemon-not-found-section">
           <h1>Pokemon not found!</h1>
           <img id="pokemon-not-found-image" src="https://i.ytimg.com/vi/_UzGgIz52YU/maxresdefault.jpg" />
+          <p>Click <a href={`/pokemon/${randomNumber}`}>here</a> to view a random Pokemon</p>
         </div>
       </div>
       
