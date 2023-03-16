@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished, resetGame } from '../../features/game/gameSlice';
+import { selectCurrentUser } from '../../features/users/usersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
-import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
@@ -12,11 +14,11 @@ import { GamePagePicture } from '../../components/GamePagePicture/GamePagePictur
 import { GuessBar } from '../../components/GuessBar/GuessBar';
 import { NewGameButton } from '../../components/NewGameButton/NewGameButton';
 import "./GamePage.css";
-import { selectCurrentUser } from '../../features/users/usersSlice';
 
 export function GamePage() {
   // console.log("HomePage rendering");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const dataFetched = useSelector(selectDataFetched);
@@ -33,6 +35,12 @@ export function GamePage() {
   const user = useSelector(selectCurrentUser);
 
   // dispatch(fetchAllPokemonAsync());
+
+  useEffect(() => {
+    if (user === "guest") {
+      navigate("/");
+    }
+  })
 
   useEffect(() => {
     return () => {
