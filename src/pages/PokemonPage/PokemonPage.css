@@ -107,6 +107,22 @@
   grid-column: 1 / span 2;
 }
 
+.pokemon-not-found-section {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.pokemon-not-found-section > h1 {
+  text-align: center;
+}
+
+#pokemon-not-found-image {
+  height: 225px;
+  width: 300px;
+  
+  object-fit: cover;
+}
+
 @media screen and (max-width: 880px) {
 
   .pokemon-page {
@@ -185,6 +201,5 @@
 
   .pokemon-page-data-container > .favourite-button-container > p {
     margin-bottom: 0;
-
-  }  
+  }
 }

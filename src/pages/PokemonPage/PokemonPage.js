@@ -44,10 +44,6 @@ export function PokemonPage() {
   }
 
   useEffect(() => {
-    if (!(number >= 1 && number <= 1008)) {
-      navigate("/");
-      return;
-    }
     dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
     // dispatch(setPokemonPageDescriptionFetched(false));
     const startIndex = number <= 10 ? 1 : (+number - 10);
@@ -68,9 +64,24 @@ export function PokemonPage() {
     // }
   },[number])
 
+  if (!(number >= 1 && number <= 1008)) {
+    return (
+      <div className="pokemon-page">
+        <div className="pokemon-page-header">
+          <NavBar />
+        </div>
+        <div className="pokemon-not-found-section">
+          <h1>Pokemon not found!</h1>
+          <img id="pokemon-not-found-image" src="https://i.ytimg.com/vi/_UzGgIz52YU/maxresdefault.jpg" />
+        </div>
+      </div>
+      
+    )
+  }
+
   // consider deleting if statement because data is loading fast
   if (!pokemonPageData[number]) {
-    console.log(number + "not yet loaded");
+    // console.log(number + "not yet loaded");
     // alert("A");
     return (
     <div className="pokemon-page">
