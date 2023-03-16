@@ -1,7 +1,13 @@
 .new-game-button-container {
-  width: 350px;
-  height: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 90px;
+  position: relative;
+  left: 30%;
+  top: 30%;
+}
+
+@media screen and (max-width: 880px) {
+  .new-game-button-container {
+    left: 0;
+    top: 40%;
+  }
 }

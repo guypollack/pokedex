@@ -1,0 +1,32 @@
+.game-page {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-page h2, .game-page h3 {
+  margin-block-start: 0;
+  /* margin-block-end: 0; */
+}
+
+.score-and-picture-container {
+  width: 210px;
+  height: 280px;
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 880px) {
+  .game-page {
+    align-items: center;
+  }
+
+  .score-and-picture-container {
+    width: 60vw;
+    max-width: 350px;
+    height: calc(60vw + 70px);
+    max-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -84,16 +84,20 @@ export function GamePage() {
   return (
     <div>
       <NavBar />
-      <h1>Hello World!</h1>
-      <h2>This is the game page</h2>
-      <h3>Round: {round}/5</h3>
-      <h3>Score: {score}/5</h3>
-      <GamePageScoreContainer />
-      {!isGameFinished && questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
-      {isGameFinished && <NewGameButton />}
-      <GuessBar />
-      {/* <FiltersContainer />  */}
-      {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
+      <div className="game-page">
+        <h1>Hello World!</h1>
+        <h2>This is the game page</h2>
+        <h3>Round: {round}/5</h3>
+        <h3>Score: {score}/5</h3>
+        <div className="score-and-picture-container">
+          <GamePageScoreContainer />
+          {!isGameFinished && questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
+          {isGameFinished && <NewGameButton />}
+        </div>
+        <GuessBar />
+        {/* <FiltersContainer />  */}
+        {/* {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>} */}
+      </div>
     </div>
   )
 }
