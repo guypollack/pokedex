@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
     element: <PokemonPage />
   },
   {
+    path: "/pokemon*",
+    element: <Navigate to="/pokemon/1" />
+  },
+  {
     path: "/favourites",
     element: <FavouritesPage />
   },
@@ -43,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/game",
     element: <GamePage />
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
   }
 ]);
 
