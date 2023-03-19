@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { toggleSearchType } from "../../features/pokemon/pokemonSlice";  
 import "./Slider.css";
 
-export function Slider({heading, type, value1, value2, checked}) {
+export function Slider({heading, value1, value2, checked, onChange}) {
   const dispatch = useDispatch();
   
   return (
     <div className="slider-flex-container">
       <h6>{heading}</h6>
       <div className="slider-container">
-        <input type="checkbox" id={`${heading}-checkbox`} checked={checked} onChange={() => dispatch(toggleSearchType(type))}></input>
+        <input type="checkbox" id={`${heading}-checkbox`} checked={checked} onChange={onChange}></input>
         <label htmlFor={`${heading}-checkbox`} className="slider-bar">
           <div className="slider-button"></div>
         </label>

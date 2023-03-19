@@ -6,7 +6,7 @@ import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
 import  { SearchBar } from "../SearchBar/SearchBar"
-import { addFilter, setDisplayCount, selectSearchTypes } from "../../features/pokemon/pokemonSlice";
+import { addFilter, setDisplayCount, selectSearchTypes, toggleSearchType } from "../../features/pokemon/pokemonSlice";
 import "./FilterCreator.css";
 
 export function FilterCreator() {
@@ -38,8 +38,8 @@ export function FilterCreator() {
       <h2>Filter Creator</h2>
       <SearchBar />
       <div className="sliders-container">
-        <Slider heading="In category search type" type="inCategory" value1="AND" value2="OR" checked={inCategorySearchType === "or"} />
-        <Slider heading="Between category search type" type="betweenCategory" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"}/>
+        <Slider heading="In category search type" value1="AND" value2="OR" checked={inCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("inCategory"))} />
+        <Slider heading="Between category search type" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("betweenCategory"))} />
       </div>
       <div className="selectors-flex-container">
         <CategorySelector />
