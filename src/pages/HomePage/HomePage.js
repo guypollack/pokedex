@@ -68,18 +68,12 @@ export function HomePage() {
 
   function handleFontChange() {
     dispatch(toggleFontStyle());
-    // document.body.style.fontFamily = "Press Start 2P";
-    // console.log(document.body.style);
     const body = document.getElementsByTagName('body')[0];
-    // body.style.fontFamily = "Press Start 2P";
-    // body.style.fontFamily = "Press+Start+2P";
-    if (!body.classList.contains("test")) {
-      body.classList.add("test");
+    if (!body.classList.contains("gameboy-mode")) {
+      body.classList.add("gameboy-mode");
     } else {
-      body.classList.remove("test");
+      body.classList.remove("gameboy-mode");
     }
-    
-    // console.log(window.getComputedStyle(body).getPropertyValue("font-family"));
     
   }
 
