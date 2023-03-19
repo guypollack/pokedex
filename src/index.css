@@ -95,6 +95,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.gameboy-mode * {
+  font-family: "Press Start 2P";
+}
+
+body.gameboy-mode h3 {
+  font-size: 16px;
+}
+
+body.gameboy-mode h4 {
+  font-size: 12px;
+}
+
+body.gameboy-mode h6 {
+  font-size: 8px;
+}
+
+body.gameboy-mode p, body.gameboy-mode label {
+  font-size: 9px;
+  line-height: 12px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
