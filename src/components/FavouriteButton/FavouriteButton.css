@@ -26,11 +26,11 @@
   padding: 0;
 }
 
-.outline-heart, .solid-heart, .animation-heart, .xmark-heart {
+.outline-heart, .solid-heart, .animation-heart, .xmark-heart, .gameboy-animation-heart {
   position: absolute;
 }
 
-.outline-heart, .solid-heart, .animation-heart {
+.outline-heart, .solid-heart, .animation-heart, .gameboy-animation-heart {
   cursor: pointer;
 }
 
@@ -57,6 +57,13 @@
   right: -5px;
 }
 
+.gameboy-animation-heart {
+  width: 0px;
+  height: 0px;
+  /* display: none; */
+  visibility: hidden;
+}
+
 .outline-heart:hover ~ .solid-heart {
   visibility: visible;
   width: 20px;
@@ -76,6 +83,28 @@
   width: 60px;
   height: 60px;
   transform: translateX(-20px) translateY(-20px);
+  opacity: 0;
+  transition: all 0.8s;
+  animation: visibleToHidden 0.8s linear 0s 1 normal forwards;
+}
+
+body.gameboy-mode [class*="-heart"] {
+  transform: translateY(-12px);
+}
+
+body.gameboy-mode [class*="-heart"] {
+  height: inherit;
+}
+
+body.gameboy-mode .gameboy-animation-heart {
+  transform: translateX(10px) translateY(-12px);
+}
+
+[id^=favourite-button]:checked + label > .gameboy-animation-heart {
+  visibility: visible;
+  width: 60px;
+  height: 60px;
+  transform: translateX(-20px) translateY(-30px);
   opacity: 0;
   transition: all 0.8s;
   animation: visibleToHidden 0.8s linear 0s 1 normal forwards;

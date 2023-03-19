@@ -5,6 +5,7 @@ import { selectCurrentUser } from "../../features/users/usersSlice";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as outlineHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart, faHeartCircleXmark as xmarkHeart } from "@fortawesome/free-solid-svg-icons";
+import { selectFontStyle } from "../../features/design/designSlice";
 
 import "./FavouriteButton.css";
 
@@ -13,7 +14,9 @@ export function FavouriteButton({number, index}) {
   const currentUser = useSelector(selectCurrentUser);
 
   const favourites = useSelector(selectFavourites);
-  const favourited = favourites[currentUser].includes(number);  
+  const favourited = favourites[currentUser].includes(number);
+
+  const fontStyle = useSelector(selectFontStyle);
 
   function handleChange(e) {
     dispatch(toggleFavourite({"username": currentUser, "pokemon": number}));
@@ -46,7 +49,8 @@ export function FavouriteButton({number, index}) {
         <label className="heart-icon-container" htmlFor={`favourite-button-${number}`} onClick={handleClick} >
           <FontAwesomeIcon className="outline-heart" icon={outlineHeart} />
           <FontAwesomeIcon className="solid-heart" icon={solidHeart} />
-          <FontAwesomeIcon className="animation-heart" icon={solidHeart} />
+          {fontStyle === "normal" && <FontAwesomeIcon className="animation-heart" icon={solidHeart} />}
+          {fontStyle === "gameboy" && <FontAwesomeIcon className="gameboy-animation-heart" icon={solidHeart} />}
         </label>  
       </div>
     )
