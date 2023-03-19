@@ -10,6 +10,7 @@ import { ArrowContainer } from './ArrowContainer.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import { FavouriteButton } from "../../components/FavouriteButton/FavouriteButton.js";
 import "./PokemonPage.css";
+import { selectFontStyle } from '../../features/design/designSlice.js';
 
 export function PokemonPage() {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ export function PokemonPage() {
   // const generationV2 = useSelector(selectGenerations)[number];
   // const heightV2 = useSelector(selectHeights)[number];
   // const weightV2 = useSelector(selectWeights)[number];
-  const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
+  const fontStyle = useSelector(selectFontStyle);
+  const imageUrl = fontStyle === "normal" ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png" : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
   let favouriteButtonMessage;
 

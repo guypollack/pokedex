@@ -55,6 +55,11 @@
   /* justify-content: flex-start; */
 }
 
+body.gameboy-mode .pokemon-page-image-container {
+  height: 240px;
+  border-right: none;
+}
+
 .pokemon-page-data-container {
   width: 100%;
   display: grid;
