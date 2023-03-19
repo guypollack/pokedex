@@ -65,6 +65,14 @@
   /* border-left: 1px solid black; */
 }
 
+body.gameboy-mode .pokemon-page-data-container {
+  grid-template-columns: 200px 1fr;
+}
+
+body.gameboy-mode .pokemon-page-data-container .favourite-button-container [class*="-heart"] {
+  bottom: -2px;
+}
+
 .pokemon-page-data-container > * {
   /* border: 1px solid black; */
 }
@@ -172,7 +180,7 @@
   }
 
   .pokemon-page-data-container {
-    grid-template-columns: 120px;
+    grid-template-columns: 120px 1fr;
     grid-template-rows: repeat(5, 10%) 1fr 10%;
     border-left: none;
     /* border-top: 1px solid black; */
