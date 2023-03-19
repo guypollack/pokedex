@@ -1,5 +1,6 @@
 import React from 'react';
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider, useSearchParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
@@ -8,8 +9,10 @@ import { FavouritesPage } from './pages/FavouritesPage/FavouritesPage.js';
 import { LoginPage } from './pages/LoginPage/LoginPage.js';
 import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js'; 
 import { GamePage } from './pages/GamePage/GamePage.js';
+import Sound from 'react-sound';
+import PokemonCenterMusic from  "../src/resources/sounds/pokemon-center.mp3";
+import { selectFontStyle } from './features/design/designSlice.js';
 import './App.css';
-
 
 const router = createBrowserRouter([
   {
@@ -57,8 +60,10 @@ const router = createBrowserRouter([
 
 
 function App() {
+  const fontStyle = useSelector(selectFontStyle);
   return (
     <div>
+      <Sound url={PokemonCenterMusic} playStatus={fontStyle === "normal" ? "PAUSED" : "PLAYING"} playbackRate={0.85} volume={20} />
       <RouterProvider router={router} />
     </div>
   );
