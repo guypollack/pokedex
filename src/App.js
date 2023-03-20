@@ -60,10 +60,11 @@ const router = createBrowserRouter([
 
 
 function App() {
+  const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
   return (
     <div>
-      <Sound url={PokemonCenterMusic} playStatus={playStatus} playbackRate={0.85} volume={20} loop={true} />
+      <Sound url={PokemonCenterMusic} playStatus={fontStyle === "normal" ? "PAUSED" : playStatus} playbackRate={0.85} volume={20} loop={true} />
       <RouterProvider router={router} />
     </div>
   );
