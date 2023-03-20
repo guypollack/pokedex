@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   /* border: 1px solid black; */
-  margin-top: 10px;
   margin-right: 20px;
-  align-items: center;
+  align-items: center;;
 }
 
 .slider-flex-container > * {
@@ -106,4 +105,14 @@
 [id$="checkbox"]:checked ~ div:nth-child(even) > p {
   opacity: 1;
   font-weight: bold;
+}
+
+.page-controls .slider-container > div:nth-child(3) > p {
+  font-family: Ubuntu, sans-serif;
+  font-size: 16px;
+}
+
+.page-controls .slider-container > div:nth-child(4) > p {
+  font-family: "Press Start 2P";
+  font-size: 12px;
 }
