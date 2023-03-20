@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser, setCurrentUser } from '../../features/users/usersSlice';
 import { selectFavourites } from '../../features/favourites/favouritesSlice';
+import { PageControls } from '../PageControls/PageControls';
 import "./NavBar.css";
 
 export function NavBar() {
@@ -19,6 +20,7 @@ export function NavBar() {
       {(currentUser !== "guest") && <NavLink to='/myaccount'>My Account</NavLink>}
       {(currentUser === "guest") && <NavLink to='/login'>Login</NavLink>}
       {(currentUser !== "guest") && <NavLink to="/" onClick={() => dispatch(setCurrentUser("guest"))}>Logout</NavLink>}
+      <PageControls /> 
     </div>
   )
 }
