@@ -110,6 +110,16 @@ body.gameboy-mode .gameboy-animation-heart {
   animation: visibleToHidden 0.8s linear 0s 1 normal forwards;
 }
 
+.pokemon-page [id^=favourite-button]:checked + label > .gameboy-animation-heart {
+  visibility: visible;
+  width: 60px;
+  height: 60px;
+  transform: translateX(-20px) translateY(8px);
+  opacity: 0;
+  transition: all 0.8s;
+  animation: visibleToHidden 0.8s linear 0s 1 normal forwards;
+}
+
 .xmark-tooltip {
   width: fit-content;
   min-width: 105px;
