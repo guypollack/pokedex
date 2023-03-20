@@ -1,0 +1,25 @@
+/* .page-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  border: 1px solid red;
+} */
+
+.page-controls p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.nav-bar > .page-controls {
+  position: absolute;
+  right: 0;
+}
+
+@media screen and (max-width: 880px) {
+  .nav-bar > .page-controls {
+    position: relative;
+    margin-left: 10px;
+  }
+  
+}
