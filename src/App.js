@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <PokemonPage />
   },
   {
-    path: "/pokemon*",
+    path: "/pokemon/*",
     element: <Navigate to="/pokemon/1" />
   },
   {
