@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { doesPokemonFitFilter } from './pokemonSliceHelperFunctions';
+import { doesPokemonFitFilter, correctName } from './pokemonSliceHelperFunctions';
 import { nameFormatter } from '../../util/nameFormatter';
 
 const initialState = {
@@ -40,7 +40,7 @@ export const fetchAllPokemonAsync = createAsyncThunk(
       const pokemonNumber = i+1;
       const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pokemonNumber + ".png";
       allPokemon[pokemonNumber] = {
-        "name": nameFormatter(results[i].name),
+        "name": correctName(nameFormatter(results[i].name)),
         "url": results[i].url,
         "imageUrl" : imageUrl,
         "visible": true
@@ -101,7 +101,7 @@ export const fetchPokemonPageDataByIndexAsync = createAsyncThunk(
 
     const nameResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1&offset=" + (index - 1));
     const nameJson = await nameResponse.json();
-    const name = nameFormatter(nameJson.results[0].name);
+    const name = correctName(nameFormatter(nameJson.results[0].name));
 
     const descriptionResponse = await fetch("https://pokeapi.co/api/v2/pokemon-species/"+index+"/");
     const descriptionJson = await descriptionResponse.json();
@@ -216,11 +216,7 @@ export const pokemonSlice = createSlice({
       state.filteredPokemonSnapshot = action.payload;
     },
     setSearchTerm: (state, action) => {
-      if (action.payload === " ") {
-        state.searchTerm = "";
-      } else {
-        state.searchTerm = action.payload.toString();
-      }
+      state.searchTerm = action.payload.toString();
     },
     setPokemonPageDataFetched: (state, action) => {
       state.pokemonPageDataFetched = action.payload;
