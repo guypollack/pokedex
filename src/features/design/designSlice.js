@@ -11,12 +11,7 @@ export const designSlice = createSlice({
   initialState,
   reducers: {
     toggleFontStyle: (state) => {
-      if (state.fontStyle === "normal") {
-        state.fontStyle = "gameboy";
-      } else {
-        state.fontStyle = "normal";
-        state.playStatus = "PAUSED";
-      }
+      state.fontStyle = state.fontStyle === "normal" ? "gameboy" : "normal";
       if (!state.fontToggled) {
         state.playStatus = "PLAYING";
       }
