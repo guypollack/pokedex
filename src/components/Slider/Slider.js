@@ -1,10 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux"; 
-import { toggleSearchType } from "../../features/pokemon/pokemonSlice";  
 import "./Slider.css";
 
 export function Slider({heading, value1, value2, checked, onChange}) {
-  const dispatch = useDispatch();
   
   return (
     <div className="slider-flex-container">
