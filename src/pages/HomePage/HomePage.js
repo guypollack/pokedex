@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { Slider } from '../../components/Slider/Slider';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
-import { selectFontStyle, toggleFontStyle } from '../../features/design/designSlice';
 
 export function HomePage() {
   // console.log("HomePage rendering");
@@ -19,7 +17,6 @@ export function HomePage() {
   const filteredPokemon = useSelector(selectFilteredPokemon);
   const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
-  const fontStyle = useSelector(selectFontStyle);
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -66,16 +63,6 @@ export function HomePage() {
     })
   },[filters, searchTerm])
 
-  function handleFontChange() {
-    dispatch(toggleFontStyle());
-    const body = document.getElementsByTagName('body')[0];
-    if (!body.classList.contains("gameboy-mode")) {
-      body.classList.add("gameboy-mode");
-    } else {
-      body.classList.remove("gameboy-mode");
-    }
-    
-  }
 
   // useEffect(() => {
   //   // console.log(filteredPokemon);
@@ -108,7 +95,6 @@ export function HomePage() {
       <NavBar />
       <h1>Hello World!</h1>
       <h2>This is the home page</h2>
-      <Slider heading="Font" value1="Normal" value2="Gameboy" checked={fontStyle === "gameboy"} onChange={handleFontChange} />
       {/* Slider({heading, type, value1, value2, checked}) { */}
       {/* <h3>lBound: {lBound.toString()}</h3> */}
       {/* <h3>uBound: {uBound.toString()}</h3> */}
