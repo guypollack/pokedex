@@ -111,8 +111,9 @@ body.gameboy-mode .gameboy-animation-heart {
 }
 
 .xmark-tooltip {
-  width: 115px;
-  height: 25px;
+  width: fit-content;
+  min-width: 105px;
+  height: fit-content;
   border-radius: 12px;
   background-color: gainsboro;
   position: absolute;
