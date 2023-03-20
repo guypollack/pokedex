@@ -8,11 +8,18 @@
   right: 10px;
 }
 
-.play-pause-button {
+.play-button, .pause-button {
   cursor: pointer;
   position: absolute;
-  top: 2px;
-  right: 1px;
+  top: 3px;
+}
+
+.pause-button {
+  right: -5px;
+}
+
+.play-button {
+  right: -3px;
 }
 
 @media screen and (max-width: 880px) {
