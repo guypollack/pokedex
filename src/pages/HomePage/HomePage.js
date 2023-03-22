@@ -132,7 +132,6 @@ export function HomePage() {
       {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
       {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
       {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
-      {(displayCount < Object.keys(filteredPokemon).length) && <SeeMoreButton />}
     </div>
   )
 }
