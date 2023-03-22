@@ -61,6 +61,23 @@ body.gameboy-mode .pokemon-page-image-container {
   border-right: none;
 }
 
+.pokemon-page-normal-image {
+  display: inherit;
+}
+
+body.gameboy-mode .pokemon-page-normal-image {
+  display: none;
+}
+
+.pokemon-page-gameboy-image {
+  display: none;
+}
+
+body.gameboy-mode .pokemon-page-gameboy-image {
+  display: inherit;
+}
+
+
 .pokemon-page-data-container {
   width: 100%;
   display: grid;

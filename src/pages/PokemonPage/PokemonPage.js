@@ -33,7 +33,8 @@ export function PokemonPage() {
   // const heightV2 = useSelector(selectHeights)[number];
   // const weightV2 = useSelector(selectWeights)[number];
   const fontStyle = useSelector(selectFontStyle);
-  const imageUrl = fontStyle === "normal" ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png" : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
+  const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+  const gameboyImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
   let favouriteButtonMessage;
 
@@ -112,7 +113,8 @@ export function PokemonPage() {
           <ArrowContainer side="left" number={number} />
           <div className="pokemon-page-grid-container">
             <div className="pokemon-page-image-container">
-              <img src={imageUrl}></img>
+              <img className="pokemon-page-normal-image" src={normalImageUrl}></img>
+              <img className="pokemon-page-gameboy-image" src={gameboyImageUrl}></img>
             </div>
             <div className="pokemon-page-data-container">
               <h3>Number:</h3>
