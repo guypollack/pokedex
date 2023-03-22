@@ -6,7 +6,7 @@ import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
 import  { SearchBar } from "../SearchBar/SearchBar"
-import { addFilter, setDisplayCount, selectSearchTypes, toggleSearchType } from "../../features/pokemon/pokemonSlice";
+import { addFilter, setDisplayCount, selectSearchTypes, toggleSearchType, selectNumberOfFilters } from "../../features/pokemon/pokemonSlice";
 import "./FilterCreator.css";
 
 export function FilterCreator() {
@@ -18,7 +18,9 @@ export function FilterCreator() {
   const searchTypes = useSelector(selectSearchTypes);
   const inCategorySearchType = searchTypes["inCategory"];
   const betweenCategorySearchType = searchTypes["betweenCategory"];
-
+  const numberOfFilters = useSelector(selectNumberOfFilters);
+  
+  const filterCreatorClassName = numberOfFilters === 0 ? "filter-creator" : "filter-creator filters-applied";
 
   const inputValid = (category === "Height" || category === "Weight") ? (category && operator && (value >= 0)) : (category && value);
 
@@ -34,7 +36,7 @@ export function FilterCreator() {
 
 
   return (
-    <div className="filter-creator">
+    <div className={filterCreatorClassName}>
       <h2>Filter Creator</h2>
       <SearchBar />
       <div className="sliders-container">
