@@ -37,17 +37,18 @@ export function FilterCreator() {
 
   return (
     <div className={filterCreatorClassName}>
-      <h2>Filter Creator</h2>
+      <h4>Search</h4>
       <SearchBar />
-      <div className="sliders-container">
-        <Slider heading="In category search type" value1="AND" value2="OR" checked={inCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("inCategory"))} />
-        <Slider heading="Between category search type" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("betweenCategory"))} />
-      </div>
+      <h4>Add Filter</h4>
       <div className="selectors-flex-container">
         <CategorySelector />
         {(category === "Height" || category === "Weight") && <OperatorSelector />}
         {(category !== "") && <ValueSelector />}
-        <button className="add-filter-button" disabled={!inputValid} onClick={handleSubmit}>Add Filter</button>
+        <button className="add-filter-button" disabled={!inputValid} onClick={handleSubmit}>Add</button>
+      </div>
+      <div className="sliders-container">
+        <Slider heading="In category search type" value1="AND" value2="OR" checked={inCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("inCategory"))} />
+        <Slider heading="Between category search type" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("betweenCategory"))} />
       </div>
     </div>
   )

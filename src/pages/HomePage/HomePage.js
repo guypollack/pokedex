@@ -108,8 +108,7 @@ export function HomePage() {
   return (
     <div>
       <NavBar />
-      <h1>Hello World!</h1>
-      <h2>This is the home page</h2>
+      <h1>Pokédex Project</h1>
       {/* Slider({heading, type, value1, value2, checked}) { */}
       {/* <h3>lBound: {lBound.toString()}</h3> */}
       {/* <h3>uBound: {uBound.toString()}</h3> */}

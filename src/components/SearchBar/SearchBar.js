@@ -18,7 +18,6 @@ export function SearchBar() {
 
   return (
     <div>
-      <h4>Search</h4>
       <input type="text" value={searchTerm} onChange={handleChange}></input>
     </div>
   )
