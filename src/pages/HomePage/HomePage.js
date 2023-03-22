@@ -4,7 +4,7 @@ import { FiltersContainer } from '../../components/FiltersContainer/FiltersConta
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 
 export function HomePage() {
@@ -17,6 +17,15 @@ export function HomePage() {
   const filteredPokemon = useSelector(selectFilteredPokemon);
   const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
+  const displayCount = useSelector(selectDisplayCount);
+
+  function handleScroll() {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+      if (displayCount < Object.keys(filteredPokemon).length) {
+        dispatch(setDisplayCount(displayCount + 50));
+      }
+    }
+  }
 
   // dispatch(fetchAllPokemonAsync());
 
@@ -43,6 +52,13 @@ export function HomePage() {
       }
     }
   },[allPokemonFetched])
+
+  useEffect(() => {
+    window.addEventListener("scroll",handleScroll);
+    return (() => {
+      window.removeEventListener("scroll",handleScroll);
+    })
+  })
 
   useEffect(() => {
     // dispatch(addFilter({"property": "types", "value": "water"}))
@@ -89,7 +105,6 @@ export function HomePage() {
   // const noFiltersApplied = Object.values(filters).every(value => value.length === 0);
   // const filteredPokemonEqualsVisiblePokemon = Object.keys(filteredPokemon).length === Object.keys(visiblePokemon).length && Object.entries(filteredPokemon).every(([key, value]) => visiblePokemon[key] === value);
 
-
   return (
     <div>
       <NavBar />
@@ -117,7 +132,7 @@ export function HomePage() {
       {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
       {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
       {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
-      <SeeMoreButton />
+      {(displayCount < Object.keys(filteredPokemon).length) && <SeeMoreButton />}
     </div>
   )
 }
