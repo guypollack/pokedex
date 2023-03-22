@@ -33,7 +33,7 @@ export function PokemonPage() {
   // const heightV2 = useSelector(selectHeights)[number];
   // const weightV2 = useSelector(selectWeights)[number];
   const fontStyle = useSelector(selectFontStyle);
-  const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+  const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   const gameboyImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
   let favouriteButtonMessage;
