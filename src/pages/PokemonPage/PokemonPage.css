@@ -4,12 +4,13 @@
 } */
 
 .pokemon-page {
-  height: 100vh;
-  /* border: 4px solid orange; */
+  height: calc(100vh - 5px);
+  /* border: 1.5px solid orange; */
 }
 
+
 .pokemon-page-loading-container {
-  height: 664px;
+  height: 662px;
   width: calc(100vw + 0px);
   display: flex;
   justify-content: space-between;
@@ -71,7 +72,12 @@ body.gameboy-mode .pokemon-page-image-container {
 }
 
 body.gameboy-mode .pokemon-page-data-container {
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 160px minmax(120px,1fr);
+  /* border: 1px solid green; */
+}
+
+body.gameboy-mode .pokemon-page h3 {
+  font-size: 14px;
 }
 
 body.gameboy-mode .pokemon-page-data-container .favourite-button-container [class*="-heart"] {
@@ -96,11 +102,13 @@ body.gameboy-mode .pokemon-page-data-container .favourite-button-container [clas
   font-size: 14px;
 }
 
-.pokemon-page-data-container > h4 {
+.two-column-cell.description {
   width: 95%;
+  /* height: fit-content; */
   align-self: center;
-  font-style: italic;
   margin: 0 auto;
+  font-style: italic;
+  /* border: 1px solid blue; */
 }
 
 .pokemon-page-data-container > .favourite-button-container > .favourite-button {
@@ -139,16 +147,16 @@ body.gameboy-mode .pokemon-page-data-container .favourite-button-container [clas
 @media screen and (max-width: 880px) {
 
   .pokemon-page {
-    height: 100vh;
+    /* height: 100vh; */
     min-height: 650px;
   }
 
   .pokemon-page-loading-container {
-    height: calc(100% - 100px);
+    height: calc(100% - 110px);
   }
 
   .pokemon-page-content-container {
-    height: calc(100% - 100px);
+    height: calc(100% - 110px);
   }
 
   .pokemon-page-header {
@@ -162,7 +170,7 @@ body.gameboy-mode .pokemon-page-data-container .favourite-button-container [clas
 
   .pokemon-page-grid-container {
     width: 100%;
-    height: calc(100%);
+    height: calc(100% - 20px);
     grid-template-columns: minmax(0,1fr);
     grid-template-rows: 250px minmax(0,1fr);
     /* border: 4px solid blue; */
@@ -200,8 +208,9 @@ body.gameboy-mode .pokemon-page-data-container .favourite-button-container [clas
     padding-left: 10px;
   }
 
-  .pokemon-page-data-container > h4 {
+  .description-container > h4 {
     margin: 0 auto;
+    /* width: 90%; */
   }
 
   .pokemon-page-data-container > .favourite-button-container {
