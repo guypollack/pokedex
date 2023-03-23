@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectSearchTerm, setSearchTerm, selectFilteredNames, selectIsAnswerValid, markAnswer, selectIsMarkingInProgress, setIsMarkingInProgress, selectRound, setIsAnswerValid, selectIsGameFinished, setIsGameFinished } from "../../features/game/gameSlice";
+import "./GuessBar.css";
 
 export function GuessBar() {
   const dispatch = useDispatch();
@@ -59,13 +60,13 @@ export function GuessBar() {
   }
 
   return (
-    <div>
+    <div className="guess-bar-container">
       <label htmlFor="guess-bar">Guess</label>
       <input type="text" id="guess-bar" value={searchTerm} list="guess-bar-options" disabled={isMarkingInProgress} onChange={handleChange} onKeyDown={handleKeyDown}></input>
       <datalist id="guess-bar-options" >
         {!isMarkingInProgress && filteredNames.map((name, index) => <option value={name} className="filtered-name-option" key={`filtered-name-option-${+index+1}`} />)}
       </datalist>
-      <button onClick={handleSubmit}>Check</button>
+      {/* <button onClick={handleSubmit}>Guess</button> */}
     </div>
   )
 }
