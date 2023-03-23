@@ -8,6 +8,7 @@
   justify-content: flex-start;
   align-items: center;
   /* margin-bottom: -50px; */
+  margin-top: 20px;
 }
 
 .game-page-picture > img {
