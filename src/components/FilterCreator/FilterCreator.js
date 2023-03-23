@@ -47,8 +47,8 @@ export function FilterCreator() {
         <button className="add-filter-button" disabled={!inputValid} onClick={handleSubmit}>Add</button>
       </div>
       <div className="sliders-container">
-        <Slider heading="In category search type" value1="AND" value2="OR" checked={inCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("inCategory"))} />
-        <Slider heading="Between category search type" value1="AND" value2="OR" checked={betweenCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("betweenCategory"))} />
+        <Slider heading="Within category search type" value1="ALL" value2="ANY" checked={inCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("inCategory"))} />
+        <Slider heading="Between category search type" value1="ALL" value2="ANY" checked={betweenCategorySearchType === "or"} onChange={() => dispatch(toggleSearchType("betweenCategory"))} />
       </div>
     </div>
   )
