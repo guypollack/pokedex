@@ -6,6 +6,7 @@ import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import "./HomePage.css";
 
 export function HomePage() {
   // console.log("HomePage rendering");
@@ -108,29 +109,31 @@ export function HomePage() {
   return (
     <div>
       <NavBar />
-      <h1>Pokédex Project</h1>
-      {/* Slider({heading, type, value1, value2, checked}) { */}
-      {/* <h3>lBound: {lBound.toString()}</h3> */}
-      {/* <h3>uBound: {uBound.toString()}</h3> */}
-      {/* <h3>isLoading: {isLoading.toString()}</h3> */}
-      {/* <h3>areFiltersApplied: {areFiltersApplied.toString()}</h3> */}
-      {/* <h3>numberOfFilters: {numberOfFilters}</h3> */}
-      {/* <h3>filters: {Object.entries(filters).toString()}</h3> */}
-      <FiltersContainer /> 
-      {/* <FilterButton property="types" value="water" />
-      <FilterButton property="types" value="fire" />
-      <FilterButton property="types" value="flying" />
-      <FilterButton property="generations" value="2" />
-      <FilterButton property="generations" value="3" />
-      <FilterButton property="weights" value="<50" />
-      <FilterButton property="heights" value=">=6" /> */}
-      
-      {(!allPokemonFetched) && <h4>Data loading...</h4>}
-      {isLoading && <LoadingIcon />}
-      {/* {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>} */}
-      {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
-      {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
-      {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
+      <div className="home-page">
+        <h1>Pokédex Project</h1>
+        {/* Slider({heading, type, value1, value2, checked}) { */}
+        {/* <h3>lBound: {lBound.toString()}</h3> */}
+        {/* <h3>uBound: {uBound.toString()}</h3> */}
+        {/* <h3>isLoading: {isLoading.toString()}</h3> */}
+        {/* <h3>areFiltersApplied: {areFiltersApplied.toString()}</h3> */}
+        {/* <h3>numberOfFilters: {numberOfFilters}</h3> */}
+        {/* <h3>filters: {Object.entries(filters).toString()}</h3> */}
+        <FiltersContainer /> 
+        {/* <FilterButton property="types" value="water" />
+        <FilterButton property="types" value="fire" />
+        <FilterButton property="types" value="flying" />
+        <FilterButton property="generations" value="2" />
+        <FilterButton property="generations" value="3" />
+        <FilterButton property="weights" value="<50" />
+        <FilterButton property="heights" value=">=6" /> */}
+        
+        {(!allPokemonFetched) && <h4>Data loading...</h4>}
+        {isLoading && <LoadingIcon />}
+        {/* {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>} */}
+        {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
+        {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
+        {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
+      </div>
     </div>
   )
 }
