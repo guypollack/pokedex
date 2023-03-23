@@ -12,7 +12,9 @@ import { GamePage } from './pages/GamePage/GamePage.js';
 import Sound from 'react-sound';
 import PokemonCenterMusic from  "../src/resources/sounds/pokemon-center.mp3";
 import GameboyStartupSound from  "../src/resources/sounds/gameboy-startup.mp3";
+import CasinoMusic from "../src/resources/sounds/casino.mp3";
 import { selectFontStyle, selectFontSwitches, selectPlayStatus } from './features/design/designSlice.js';
+import { selectOnGamePage, selectGamePageVisits } from './features/game/gameSlice.js';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -64,10 +66,34 @@ function App() {
   const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
   const fontSwitches = useSelector(selectFontSwitches);
+  const onGamePage = useSelector(selectOnGamePage);
+  const gamePageVisits = useSelector(selectGamePageVisits);
+  let gameboyStartupSoundPlayStatus;
+  let pokemonCenterMusicPlayStatus;
+  let casinoMusicPlayStatus;
+
+  if (fontStyle !== "normal" && fontSwitches === 1 && gamePageVisits < 2 && !onGamePage) {
+    gameboyStartupSoundPlayStatus = "PLAYING";
+  } else {
+    gameboyStartupSoundPlayStatus = "STOPPED";
+  }
+
+  if (fontStyle === "normal") {
+    pokemonCenterMusicPlayStatus = "PAUSED";
+    casinoMusicPlayStatus = "PAUSED";
+  } else if (!onGamePage) {
+    pokemonCenterMusicPlayStatus = playStatus;
+    casinoMusicPlayStatus = "STOPPED";
+  } else {
+    casinoMusicPlayStatus = playStatus;
+    pokemonCenterMusicPlayStatus = "STOPPED";
+  }
+
   return (
     <div>
-      <Sound url={GameboyStartupSound} playStatus={(fontStyle !== "normal" && fontSwitches < 2) ? "PLAYING" : "PAUSED"} playbackRate={1} volume={20} loop={false} />
-      <Sound url={PokemonCenterMusic} playStatus={fontStyle === "normal" ? "PAUSED" : playStatus} playbackRate={0.85} volume={20} loop={true} />
+      <Sound url={GameboyStartupSound} playStatus={gameboyStartupSoundPlayStatus} playbackRate={1} volume={20} loop={false} />
+      <Sound url={PokemonCenterMusic} playStatus={pokemonCenterMusicPlayStatus} playbackRate={0.85} volume={20} loop={true} />
+      <Sound url={CasinoMusic} playStatus={casinoMusicPlayStatus} playbackRate={1} volume={20} loop={true} />
       <RouterProvider router={router} />
     </div>
   );
