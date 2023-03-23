@@ -24,11 +24,14 @@ export function FavouritesPage() {
 
 
   return (
-    <div className="favourites-page">
+    <div>
       <NavBar />
-      <h1>Favourites</h1>
-      {favourites.length === 0 && <h3>You don't have any favourites yet!</h3>}
-      <PokemonFlexContainer allPokemon={favouritePokemon}/>
+      <div className="favourites-page">
+        <h1>Favourites</h1>
+        {currentUser === "guest" && <h3>Log in to add Pokémon to your favourites</h3>}
+        {(favourites.length === 0 && currentUser !== "guest") && <h3>You don't have any favourites yet!</h3>}
+        <PokemonFlexContainer allPokemon={favouritePokemon}/>
+      </div>
     </div>
   )
 }
