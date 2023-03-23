@@ -1,3 +1,8 @@
 .home-page {
   padding: 0 20px;
 }
+
+.home-page > h6 {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}

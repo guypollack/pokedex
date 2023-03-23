@@ -111,6 +111,9 @@ export function HomePage() {
       <NavBar />
       <div className="home-page">
         <h1>Pokédex Project</h1>
+        <h3>By Guy Pollack</h3>
+        <h6>&#169; 2023 Guy Pollack</h6>
+        <h6>Pokémon and Pokémon character names are trademarks of Nintendo</h6>
         {/* Slider({heading, type, value1, value2, checked}) { */}
         {/* <h3>lBound: {lBound.toString()}</h3> */}
         {/* <h3>uBound: {uBound.toString()}</h3> */}
