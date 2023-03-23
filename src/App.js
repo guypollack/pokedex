@@ -11,7 +11,8 @@ import { MyAccountPage } from './pages/MyAccountPage/MyAccountPage.js';
 import { GamePage } from './pages/GamePage/GamePage.js';
 import Sound from 'react-sound';
 import PokemonCenterMusic from  "../src/resources/sounds/pokemon-center.mp3";
-import { selectFontStyle, selectPlayStatus } from './features/design/designSlice.js';
+import GameboyStartupSound from  "../src/resources/sounds/gameboy-startup.mp3";
+import { selectFontStyle, selectFontSwitches, selectPlayStatus } from './features/design/designSlice.js';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -62,8 +63,10 @@ const router = createBrowserRouter([
 function App() {
   const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
+  const fontSwitches = useSelector(selectFontSwitches);
   return (
     <div>
+      <Sound url={GameboyStartupSound} playStatus={(fontStyle !== "normal" && fontSwitches < 2) ? "PLAYING" : "PAUSED"} playbackRate={1} volume={20} loop={false} />
       <Sound url={PokemonCenterMusic} playStatus={fontStyle === "normal" ? "PAUSED" : playStatus} playbackRate={0.85} volume={20} loop={true} />
       <RouterProvider router={router} />
     </div>
