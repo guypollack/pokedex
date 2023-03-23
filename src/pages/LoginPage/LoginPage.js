@@ -93,9 +93,8 @@ export function LoginPage() {
   return (
     <div>
       <NavBar />
-      <h2>This is the Login Page</h2>
-      <h3>Login</h3>
       <div className="login-page">
+        <h3>Login</h3>
         <label htmlFor="login-username">Username</label>
         <input type="text" id="login-username" value={loginUsername} onChange={handleChangeLoginUsername} onKeyDown={handleKeyDown}></input>
         <label htmlFor="login-password">Password</label>
@@ -110,7 +109,7 @@ export function LoginPage() {
         <input type="password" id="create-account-password" value={createAccountPassword} onChange={handleChangeCreateAccountPassword} onKeyDown={handleKeyDown}></input>
         <label htmlFor="create-account-password-verify">Retype password</label>
         <input type="password" id="create-account-password-verify" value={createAccountPassword2} onChange={handleChangeCreateAccountPassword2} onKeyDown={handleKeyDown}></input>
-        <button onClick={handleClickCreateAccount}>Create Account</button>
+        <button onClick={handleClickCreateAccount}>Create</button>
         <p className="create-account-warning">{createAccountWarning}</p>
         <p className="create-account-success-message">{createAccountSuccessMessage}</p>
       </div>
