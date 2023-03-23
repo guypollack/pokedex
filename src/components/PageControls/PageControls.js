@@ -1,23 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
 import { Slider } from '../../components/Slider/Slider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeHigh, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
-import { selectFontStyle, toggleFontStyle, selectPlayStatus, togglePlayStatus, incrementNonGameFontSwitches } from '../../features/design/designSlice';
+import { selectFontStyle, toggleFontStyle, selectPlayStatus, togglePlayStatus } from '../../features/design/designSlice';
 import "./PageControls.css";
 
 export function PageControls() {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
 
   function handleFontChange() {
-    if (location.pathname !== "/game") {
-      dispatch(incrementNonGameFontSwitches());
-    }
     dispatch(toggleFontStyle());
     const body = document.getElementsByTagName('body')[0];
     if (!body.classList.contains("gameboy-mode")) {
