@@ -42,7 +42,7 @@ export function ValueSelector() {
     return (
       <div className="selector height">
         <p>{value}m</p>
-        <input type="range" min="0" max="10" step="0.1" value={value} class="slider" id="value-selector" onChange={handleChange}></input>
+        <input type="range" min="0" max="10" step="0.1" value={value} className="slider" id="value-selector" onChange={handleChange}></input>
       </div>
     )
   }
@@ -53,7 +53,7 @@ export function ValueSelector() {
     return (
       <div className="selector weight">
         <p>{value}kg</p>
-        <input type="range" min="0" max="1000" step="1" value={value} class="slider" id="value-selector" onChange={handleChange}></input>
+        <input type="range" min="0" max="1000" step="1" value={value} className="slider" id="value-selector" onChange={handleChange}></input>
       </div>
     )
   }
