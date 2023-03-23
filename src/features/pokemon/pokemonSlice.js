@@ -107,7 +107,7 @@ export const fetchPokemonPageDataByIndexAsync = createAsyncThunk(
     const descriptionJson = await descriptionResponse.json();
     let description;
     if (descriptionJson.flavor_text_entries.length > 0) {
-      description = descriptionJson.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text;
+      description = descriptionJson.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text.replace("/\f/"," ").replace("/\n/","");
     } else {
       description = "";
     }
