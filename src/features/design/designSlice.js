@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   fontStyle: "normal",
   nonGameFontSwitches: 0,
-  playStatus: "PAUSED"
+  playStatus: "PLAYING"
 };
 
 export const designSlice = createSlice({
@@ -12,9 +12,9 @@ export const designSlice = createSlice({
   reducers: {
     toggleFontStyle: (state) => {
       state.fontStyle = state.fontStyle === "normal" ? "gameboy" : "normal";
-      if (state.fontSwitches === 0) {
-        state.playStatus = "PLAYING";
-      }
+      // if (state.fontSwitches === 0) {
+      //   state.playStatus = "PLAYING";
+      // }
     },
     togglePlayStatus: (state) => {
       state.playStatus = state.playStatus === "PAUSED" ? "PLAYING" : "PAUSED";
