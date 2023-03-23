@@ -13,8 +13,8 @@ import Sound from 'react-sound';
 import PokemonCenterMusic from  "../src/resources/sounds/pokemon-center.mp3";
 import GameboyStartupSound from  "../src/resources/sounds/gameboy-startup.mp3";
 import CasinoMusic from "../src/resources/sounds/casino.mp3";
-import { selectFontStyle, selectFontSwitches, selectPlayStatus } from './features/design/designSlice.js';
-import { selectOnGamePage, selectGamePageVisits } from './features/game/gameSlice.js';
+import { selectFontStyle, selectNonGameFontSwitches, selectPlayStatus } from './features/design/designSlice.js';
+import { selectOnGamePage } from './features/game/gameSlice.js';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -65,14 +65,13 @@ const router = createBrowserRouter([
 function App() {
   const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
-  const fontSwitches = useSelector(selectFontSwitches);
+  const nonGameFontSwitches = useSelector(selectNonGameFontSwitches);
   const onGamePage = useSelector(selectOnGamePage);
-  const gamePageVisits = useSelector(selectGamePageVisits);
   let gameboyStartupSoundPlayStatus;
   let pokemonCenterMusicPlayStatus;
   let casinoMusicPlayStatus;
 
-  if (fontStyle !== "normal" && fontSwitches === 1 && gamePageVisits < 2 && !onGamePage) {
+  if (fontStyle !== "normal" && nonGameFontSwitches === 1 && !onGamePage) {
     gameboyStartupSoundPlayStatus = "PLAYING";
   } else {
     gameboyStartupSoundPlayStatus = "STOPPED";
