@@ -296,41 +296,10 @@ export const selectFilteredPokemon = (state) => {
     return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.toLowerCase().includes(state.pokemon.searchTerm.toLowerCase())));
   } else {  
     // console.log("C");
-    // START OF OLD METHOD
-    //
-    //
-    // const filteredPokemonArray = [];
-    // const myArrayFunction = Array.prototype.every;
-
-    // for (let i = 1; i < 1009; i++) {
-    //     if (myArrayFunction.call(filters, ([filterName, filterValues]) => {
-    //       return myArrayFunction.call(filterValues, (filterValue) => {
-    //         return doesPokemonFitFilter(filterName, filterValue, i);
-    //       })
-    //     })) {
-    //       filteredPokemonArray.push(i);
-    //     }
-    //   if (filteredPokemonArray.length === state.pokemon.displayCount) {
-    //     break;
-    //   }
-    // }
-    //
-    //
-    // END OF OLD METHOD
-
-    // START OF NEW METHOD
-    //
     //
     const filteredPokemonObj = {"types": [], "generations": [], "heights": [], "weights": []};
-    
-    //Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.name.includes(state.pokemon.searchTerm)));
-
-    // Object.keys(state.pokemon.allPokemon).forEach(key => {
-    //   console.log(key);
-    // })
 
     const searchTermFilteredPokemonArray = Object.keys(state.pokemon.allPokemon).filter(key => state.pokemon.allPokemon[key].name.toLowerCase().includes(state.pokemon.searchTerm.toLowerCase()));
-
 
     for (let i of searchTermFilteredPokemonArray) {
       for (let filterName of filteredCategories) {
@@ -374,8 +343,6 @@ export const selectFilteredPokemon = (state) => {
     // console.log(filteredPokemonArray2);
     //
     //
-    // END OF NEW METHOD
-
     const filteredPokemon = Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => filteredPokemonArray2.includes(key))); // now removed the + in +key is needed to convert string to number
     // console.log(filteredPokemon);
     return filteredPokemon;
