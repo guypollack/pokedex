@@ -5,6 +5,7 @@ import { selectAllPokemon } from '../../features/pokemon/pokemonSlice.js';
 import { selectFavourites } from '../../features/favourites/favouritesSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer.js';
+import "./FavouritesPage.css";
 
 export function FavouritesPage() {
   const currentUser = useSelector(selectCurrentUser);
@@ -23,10 +24,9 @@ export function FavouritesPage() {
 
 
   return (
-    <div>
+    <div className="favourites-page">
       <NavBar />
-      <h1>Hello World!</h1>
-      <h2>This is the favourites page</h2>
+      <h1>Favourites</h1>
       {favourites.length === 0 && <h3>You don't have any favourites yet!</h3>}
       <PokemonFlexContainer allPokemon={favouritePokemon}/>
     </div>
