@@ -2,7 +2,7 @@
   /* background-color: chocolate; */
   /* height: fit-content; */
   height: 30px;
-  width: fit-content;
+  width: 40px;
   /* min-width: 40px; */
   white-space: nowrap;
   display: flex;
@@ -13,6 +13,10 @@
   margin-right: 5px;
   margin-bottom: 2px;
   border-radius: 5px;
+}
+
+body.gameboy-mode .filter-block > p {
+  font-size: 7px;
 }
 
 .filter-block:hover {
