@@ -13,7 +13,6 @@ const initialState = {
   isMarkingInProgress: false,
   isGameFinished: false,
   onGamePage: false,
-  gamePageVisits: 0
 };
 
 export const gameSlice = createSlice({
@@ -82,7 +81,6 @@ export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
 export const selectIsGameFinished = (state) => state.game.isGameFinished;
 export const selectOnGamePage = (state) => state.game.onGamePage;
-export const selectGamePageVisits = (state) => state.game.gamePageVisits;
 export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer, setIsGameFinished, resetGame, setOnGamePage } = gameSlice.actions;
 
 export default gameSlice.reducer;
