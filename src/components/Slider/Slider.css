@@ -3,7 +3,7 @@
   flex-direction: column;
   /* border: 1px solid black; */
   margin-right: 20px;
-  align-items: center;;
+  align-items: center;
 }
 
 .slider-flex-container > * {
