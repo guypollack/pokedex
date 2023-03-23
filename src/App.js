@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, Navigate, RouterProvider, useSearchParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';
 import { Page2 } from './pages/Page2.js';
@@ -13,7 +13,7 @@ import Sound from 'react-sound';
 import PokemonCenterMusic from  "../src/resources/sounds/pokemon-center.mp3";
 import GameboyStartupSound from  "../src/resources/sounds/gameboy-startup.mp3";
 import CasinoMusic from "../src/resources/sounds/casino.mp3";
-import { selectFontStyle, selectNonGameFontSwitches, selectPlayStatus } from './features/design/designSlice.js';
+import { selectFontStyle, selectGameboySoundPlayed, selectPlayStatus, setGameboySoundPlayed } from './features/design/designSlice.js';
 import { selectOnGamePage } from './features/game/gameSlice.js';
 import './App.css';
 
@@ -63,18 +63,19 @@ const router = createBrowserRouter([
 
 
 function App() {
+  const dispatch = useDispatch();
   const fontStyle = useSelector(selectFontStyle);
   const playStatus = useSelector(selectPlayStatus);
-  const nonGameFontSwitches = useSelector(selectNonGameFontSwitches);
   const onGamePage = useSelector(selectOnGamePage);
+  const gameboySoundPlayed = useSelector(selectGameboySoundPlayed);
   let gameboyStartupSoundPlayStatus;
   let pokemonCenterMusicPlayStatus;
   let casinoMusicPlayStatus;
 
-  if (fontStyle !== "normal" && nonGameFontSwitches === 1 && !onGamePage) {
-    gameboyStartupSoundPlayStatus = "PLAYING";
+  if (fontStyle !== "normal" && !onGamePage && !gameboySoundPlayed) {
+    gameboyStartupSoundPlayStatus = playStatus;
   } else {
-    gameboyStartupSoundPlayStatus = "STOPPED";
+    gameboyStartupSoundPlayStatus = "PAUSED";
   }
 
   if (fontStyle === "normal") {
@@ -90,7 +91,7 @@ function App() {
 
   return (
     <div>
-      <Sound url={GameboyStartupSound} playStatus={gameboyStartupSoundPlayStatus} playbackRate={1} volume={20} loop={false} />
+      <Sound url={GameboyStartupSound} playStatus={gameboyStartupSoundPlayStatus} playbackRate={1} volume={20} loop={false} onFinishedPlaying={() => dispatch(setGameboySoundPlayed(true))} />
       <Sound url={PokemonCenterMusic} playStatus={pokemonCenterMusicPlayStatus} playbackRate={0.85} volume={20} loop={true} />
       <Sound url={CasinoMusic} playStatus={casinoMusicPlayStatus} playbackRate={1} volume={20} loop={true} />
       <RouterProvider router={router} />
