@@ -7,7 +7,7 @@
   flex-direction: row;
 }
 
-.change-password-section, .update-username-section {
+.change-password-section, .change-username-section {
   display: flex;
   flex-direction: column;
   width: 300px;
