@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished, resetGame } from '../../features/game/gameSlice';
@@ -13,6 +13,7 @@ import { GamePageScoreIcon } from '../../components/GamePageScoreIcon/GamePageSc
 import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
 import { GuessBar } from '../../components/GuessBar/GuessBar';
 import { NewGameButton } from '../../components/NewGameButton/NewGameButton';
+import { setOnGamePage } from '../../features/game/gameSlice';
 import "./GamePage.css";
 
 export function GamePage() {
@@ -43,7 +44,9 @@ export function GamePage() {
   })
 
   useEffect(() => {
+    dispatch(setOnGamePage(true));
     return () => {
+      dispatch(setOnGamePage(false));
       dispatch(resetGame());
     }
   },[]);
@@ -93,8 +96,7 @@ export function GamePage() {
     <div>
       <NavBar />
       <div className="game-page">
-        <h1>Hello World!</h1>
-        <h2>This is the game page</h2>
+        <h1>Who's That Pokémon?</h1>
         <h3>Round: {round}/5</h3>
         <h3>Score: {score}/5</h3>
         <div className="score-and-picture-container">
