@@ -11,7 +11,9 @@ const initialState = {
   round: 1,
   isAnswerValid: false,
   isMarkingInProgress: false,
-  isGameFinished: false
+  isGameFinished: false,
+  onGamePage: false,
+  gamePageVisits: 0
 };
 
 export const gameSlice = createSlice({
@@ -59,6 +61,12 @@ export const gameSlice = createSlice({
       state.round = 1;
       state.isAnswerValid = false;
       state.isGameFinished = false
+    },
+    setOnGamePage: (state, action) => {
+      state.onGamePage = action.payload;
+      if (action.payload) {
+        state.gamePageVisits++;
+      }
     }
   }
 });
@@ -73,6 +81,8 @@ export const selectRound = (state) => state.game.round;
 export const selectIsAnswerValid = (state) => state.game.isAnswerValid;
 export const selectIsMarkingInProgress = (state) => state.game.isMarkingInProgress;
 export const selectIsGameFinished = (state) => state.game.isGameFinished;
-export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer, setIsGameFinished, resetGame } = gameSlice.actions;
+export const selectOnGamePage = (state) => state.game.onGamePage;
+export const selectGamePageVisits = (state) => state.game.gamePageVisits;
+export const { setCurrentPokemon, addPokemonToQuestions , setSearchTerm, setAllNames, setIsMarkingInProgress, markAnswer, setIsGameFinished, resetGame, setOnGamePage } = gameSlice.actions;
 
 export default gameSlice.reducer;
