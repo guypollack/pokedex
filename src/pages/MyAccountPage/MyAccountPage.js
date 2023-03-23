@@ -114,7 +114,12 @@ export function MyAccountPage() {
   }
 
   function handleChangeDeleteAccountConfirmation(e) {
-    dispatch(setDeleteAccountConfirmation(e.target.value));
+    if (e.target.value.toString() === "false") {
+      dispatch(setDeleteAccountConfirmation(true));
+    } else {
+      dispatch(setDeleteAccountConfirmation(false));
+    }
+    
   }
 
   function handleClickDeleteAccount() {
@@ -125,7 +130,7 @@ export function MyAccountPage() {
     if (e.key === "Enter") {
       if (e.target.id.includes("change-password-")) {
         handleClickChangePassword();
-      } else if (e.target.id.includes("rename-user-")) {
+      } else if (e.target.id.includes("change-username-")) {
         handleClickUpdateUsername();
       } else if (e.target.id.includes("delete-account-")) {
         handleClickDeleteAccount();
@@ -136,8 +141,8 @@ export function MyAccountPage() {
   return (
     <div>
       <NavBar />
-      <h2>This is the My Account Page</h2>
       <div className="my-account-page">
+        <h2>My Account</h2>
         <h3 className="my-account-page-username">{user}</h3>
         <div className="update-details-section">
           <div className="change-password-section">
@@ -152,14 +157,14 @@ export function MyAccountPage() {
             <p>{changePasswordWarning}</p>
             <p>{changePasswordSuccessMessage}</p>
           </div>
-          <div className="update-username-section">
-            <h3>Update Username</h3>
-            <label htmlFor="rename-user-current-username">Current Username</label>
-            <input id="rename-user-current-username" type="text" value={user} disabled></input>
-            <label htmlFor="rename-user-password">Password</label>
-            <input type="password" id="rename-user-password" value={renamePassword} onChange={handleChangeRenamePassword} onKeyDown={handleKeyDown}></input>
-            <label htmlFor="rename-user-new-username">New Username</label>
-            <input type="text" id="rename-user-new-username" value={renameUsername} onChange={handleChangeRenameUsername} onKeyDown={handleKeyDown}></input>
+          <div className="change-username-section">
+            <h3>Change Username</h3>
+            <label htmlFor="change-username-current-username">Current Username</label>
+            <input id="change-username-current-username" type="text" value={user} disabled></input>
+            <label htmlFor="change-username-password">Password</label>
+            <input type="password" id="change-username-password" value={renamePassword} onChange={handleChangeRenamePassword} onKeyDown={handleKeyDown}></input>
+            <label htmlFor="change-username-new-username">New Username</label>
+            <input type="text" id="change-username-new-username" value={renameUsername} onChange={handleChangeRenameUsername} onKeyDown={handleKeyDown}></input>
             <button onClick={handleClickUpdateUsername}>Update</button>
             <p>{renameWarning}</p>
             <p className="my-account-page-rename-success-message">{renameSuccessMessage}</p>
@@ -174,7 +179,7 @@ export function MyAccountPage() {
           </div>
           <label htmlFor="delete-account-password">Password</label>
           <input type="password" id="delete-account-password" value={deleteAccountPassword} onChange={handleChangeDeleteAccountPassword} onKeyDown={handleKeyDown}></input>
-          <button onClick={handleClickDeleteAccount}>Delete Account</button>
+          <button onClick={handleClickDeleteAccount}>Delete</button>
           <p>{deleteAccountWarning}</p>
           <p>{deleteAccountSuccessMessage}</p>
         </div>
