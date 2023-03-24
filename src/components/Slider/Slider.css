@@ -84,7 +84,8 @@
 }
 
 .slider-value {
-  transition: all 0.2s linear;
+  /* transition: all 0.2s linear; */
+  transition: opacity 0.2s linear, font-weight 0.2s linear;
 }
 
 [id$="checkbox"] {
