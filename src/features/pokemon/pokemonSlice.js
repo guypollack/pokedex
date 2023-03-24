@@ -17,6 +17,7 @@ const initialState = {
   inCategorySearchType: "and",
   betweenCategorySearchType: "and",
   searchTypes: {"inCategory": "and", "betweenCategory": "and"},
+  inCategorySearchTypes: {"types": "and", "generations": "and", "heights": "and", "weights": "and"},
   filteredPokemonSnapshot: {},
   searchTerm: "",
   pokemonPageData: {},
@@ -64,6 +65,7 @@ export const fetchPokemonDataAsync = createAsyncThunk(
     const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
 
     for (let i = start; i < end; i++) {
+      // console.log(i);
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
       const pokemonTypes = json.types.map(t => t.type.name);
@@ -202,6 +204,9 @@ export const pokemonSlice = createSlice({
     toggleInCategorySearchType: (state) => {
       state.inCategorySearchType = state.inCategorySearchType === "and" ? "or" : "and";
     },
+    toggleSearchTypeByCategory: (state, action) => {
+      state.inCategorySearchTypes[action.payload] = state.inCategorySearchTypes[action.payload] === "and" ? "or" : "and";
+    },
     toggleBetweenCategorySearchType: (state) => {
       state.betweenCategorySearchType = state.betweenCategorySearchType === "and" ? "or" : "and";
     },
@@ -307,7 +312,7 @@ export const selectFilteredPokemon = (state) => {
         // console.log(filterName);
         // console.log(state.pokemon.filters[filterName].length === 0);
         //
-        if (state.pokemon.searchTypes["inCategory"] === "and") {
+        if (state.pokemon.inCategorySearchTypes[filterName] === "and") {
           //"AND" within categories
           if (state.pokemon.filters[filterName].every(filterValue => doesPokemonFitFilter(filterName, filterValue, i))) {
             // console.log(i);
@@ -362,10 +367,11 @@ export const selectNumberOfFilters = (state) => {
 export const selectPreviousCount  = (state) => state.pokemon.previousCount;
 export const selectDisplayCount  = (state) => state.pokemon.displayCount;
 export const selectInCategorySearchType  = (state) => state.pokemon.inCategorySearchType;
+export const selectInCategorySearchTypes  = (state) => state.pokemon.inCategorySearchTypes;
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
 export const selectSearchTerm = (state) => state.pokemon.searchTerm;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched } = pokemonSlice.actions;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleSearchTypeByCategory, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
