@@ -65,7 +65,7 @@ export const fetchPokemonDataAsync = createAsyncThunk(
     const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
 
     for (let i = start; i < end; i++) {
-      // console.log(i);
+      console.log(i);
       const response = await fetch("https://pokeapi.co/api/v2/pokemon/"+i+"/");
       const json = await response.json();
       const pokemonTypes = json.types.map(t => t.type.name);
