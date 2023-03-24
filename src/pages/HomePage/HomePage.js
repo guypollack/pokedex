@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { NavBar } from '../../components/NavBar/NavBar.js';
-import { LoadingIcon } from '../../components/LoadingIcon/LoadingIcon';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
@@ -130,8 +129,9 @@ export function HomePage() {
         <FilterButton property="weights" value="<50" />
         <FilterButton property="heights" value=">=6" /> */}
         
-        {(!allPokemonFetched) && <h4>Data loading...</h4>}
-        {isLoading && <LoadingIcon />}
+        {/* {(!dataFetched) && <h4>Data loading...</h4>} */}
+        {/* {(!dataFetched) && <LoadingIcon />} */}
+        {/* {isLoading && <LoadingIcon />} */}
         {/* {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>} */}
         {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
         {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
