@@ -33,3 +33,9 @@
   transform: translateY(-10px);
   font-weight: bold;
 }
+
+@media screen and (max-width: 880px) {
+  .pokemon-card {
+    margin: 10px 0;
+  }  
+}
