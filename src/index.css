@@ -124,7 +124,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-:not(:root):fullscreen::backdrop {
-  background: none;
-}
