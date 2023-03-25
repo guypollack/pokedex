@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doesPokemonFitFilter, correctName } from './pokemonSliceHelperFunctions';
+import { heights, weights } from './additionalData';
 import { nameFormatter } from '../../util/nameFormatter';
 
 const initialState = {
@@ -148,6 +149,25 @@ export const fetchPokemonDescriptionByIndexAsync = createAsyncThunk(
   }
 );
 
+export const fetchPokemonTypesAsync = createAsyncThunk(
+  'pokemon/fetchPokemonTypesAsync',
+  async () => {
+    const types = {};
+    for (let i = 1; i < 19; i++) {
+      const response = await fetch("https://pokeapi.co/api/v2/type/" + i);
+      const json = await response.json();
+      // console.log(json);
+      const name = json.name;
+      // console.log(name);
+      const numbers = json.pokemon.map(p => p.pokemon.url.replace("https://pokeapi.co/api/v2/pokemon/","").replace("/",""));
+      // console.log(numbers);
+      types[name] = numbers;
+    }
+    // console.log(types);
+    return types;
+  }
+);
+
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
@@ -228,6 +248,25 @@ export const pokemonSlice = createSlice({
     },
     setPokemonPageDescriptionFetched: (state, action) => {
       state.pokemonPageDescriptionFetched = action.payload;
+    },
+    fetchGenerations: (state) => {
+      const generationBoundaries = {1: 151, 2: 251, 3: 386, 4: 493, 5: 649, 6: 721, 7: 809, 8: 905, 9: 1008}
+      const generationsObj = {}
+      for (let i = 1; i < 1009; i++) {
+        for (let [generation, boundary] of Object.entries(generationBoundaries)) {
+          if (i <= boundary) {
+            generationsObj[i] = generation;
+            break;
+          }
+        }
+      }
+      state.generations = generationsObj;
+    },
+    fetchHeights: (state) => {
+      state.heights = heights;
+    },
+    fetchWeights: (state) => {
+      state.weights = weights;
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -267,6 +306,9 @@ export const pokemonSlice = createSlice({
       .addCase(fetchPokemonDescriptionByIndexAsync.fulfilled, (state, action) => {
         state.pokemonPageDescription = action.payload;
         state.pokemonPageDescriptionFetched = true;
+      })
+      .addCase(fetchPokemonTypesAsync.fulfilled, (state, action) => {
+        state.types = action.payload;
       });
   },
 });
@@ -374,7 +416,9 @@ export const selectInCategorySearchTypes  = (state) => state.pokemon.inCategoryS
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
 export const selectSearchTerm = (state) => state.pokemon.searchTerm;
-export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleSearchTypeByCategory, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched } = pokemonSlice.actions;
+export const selectHeights = (state) => state.pokemon.heights;
+export const selectWeights = (state) => state.pokemon.weights;
+export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleSearchTypeByCategory, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched, fetchGenerations, fetchHeights, fetchWeights } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
