@@ -9,6 +9,7 @@ const initialState = {
   generations: {},
   heights: {},
   weights: {},
+  descriptions: {},
   filters: {"types": [], "generations": [], "heights": [], "weights": []},
   filterMessage: "",
   status: "",
@@ -141,11 +142,11 @@ export const fetchPokemonDescriptionByIndexAsync = createAsyncThunk(
     const json = await response.json();
     let description;
     if (json.flavor_text_entries.length > 0) {
-      description = json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text;
+      description = json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text.replace("/\f/"," ").replace("/\n/","").replace("/\t/","xxxxx");
     } else {
       description = "";
     }
-    return description;
+    return {index, description};
   }
 );
 
@@ -304,7 +305,8 @@ export const pokemonSlice = createSlice({
         state.pokemonPageDescriptionFetched = false;
       })
       .addCase(fetchPokemonDescriptionByIndexAsync.fulfilled, (state, action) => {
-        state.pokemonPageDescription = action.payload;
+        // state.pokemonPageDescription = action.payload;
+        state.descriptions[action.payload.index] = action.payload.description;
         state.pokemonPageDescriptionFetched = true;
       })
       .addCase(fetchPokemonTypesAsync.fulfilled, (state, action) => {
@@ -417,8 +419,12 @@ export const selectInCategorySearchTypes  = (state) => state.pokemon.inCategoryS
 export const selectBetweenCategorySearchType  = (state) => state.pokemon.betweenCategorySearchType;
 export const selectSearchTypes = (state) => state.pokemon.searchTypes;
 export const selectSearchTerm = (state) => state.pokemon.searchTerm;
+export const selectNames = (state) => Object.values(state.pokemon.allPokemon).map(data => data.name);
+export const selectTypes = (state) => state.pokemon.types;
+export const selectGenerations = (state) => state.pokemon.generations;
 export const selectHeights = (state) => state.pokemon.heights;
 export const selectWeights = (state) => state.pokemon.weights;
+export const selectDescriptions = (state) => state.pokemon.descriptions;
 export const { addFilter, removeFilter, clearFilters, setDisplayCount, toggleInCategorySearchType, toggleSearchTypeByCategory, toggleBetweenCategorySearchType, toggleSearchType, resetSearchTypes, setFilteredPokemonSnapshot, setSearchTerm, setPokemonPageDataFetched, setPokemonPageDescriptionFetched, fetchGenerations, fetchHeights, fetchWeights } = pokemonSlice.actions;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
