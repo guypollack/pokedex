@@ -35,6 +35,9 @@ export function FavouriteButton({number, index}) {
     tooltip.classList.add("xmark-tooltip");
     const tooltipText = document.createTextNode("Log in to add Pokémon to your favourites");
     const currentCard = document.querySelectorAll(".pokemon-card")[+index];
+    if (window.innerWidth - currentCard.getBoundingClientRect().right < 120) {
+      tooltip.classList.add("narrow");
+    }
     tooltip.appendChild(tooltipText);
     currentCard.appendChild(tooltip);
     setTimeout(() => {
