@@ -292,7 +292,10 @@ export const selectFilteredPokemon = (state) => {
   // alert("Getting filtered pokemon");
   const filteredCategories = Object.keys(state.pokemon.filters).filter(category => state.pokemon.filters[category].length !== 0);
   // console.log(filteredCategories);
-  if ((filteredCategories.length === 0 && state.pokemon.searchTerm === "") || !state.pokemon.dataFetched) {
+
+  if ((filteredCategories.length === 0 && state.pokemon.searchTerm === "")) {
+  // if ((filteredCategories.length === 0 && state.pokemon.searchTerm === "") || !state.pokemon.dataFetched) {
+
     // console.log("A");
     // return Object.fromEntries(Object.entries(state.pokemon.allPokemon).filter(([key, value]) => value.visible));
     return state.pokemon.allPokemon;
