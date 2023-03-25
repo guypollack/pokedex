@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { nameFormatter } from '../../util/nameFormatter.js';
-import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonPageDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync, selectDescriptionsFetched, fetchPokemonDescriptionsAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectDataFetched, fetchPokemonDataAsync } from '../../features/pokemon/pokemonSlice.js';
+import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonPageDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync, selectDescriptionsFetched, fetchPokemonDescriptionsAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectDataFetched, fetchPokemonDataAsync, selectAllDataFetched, fetchPokemonTypesAsync, fetchGenerations, fetchHeights, fetchWeights, selectNames } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { selectFavourites } from "../../features/favourites/favouritesSlice";
 import { NavBar } from '../../components/NavBar/NavBar.js';
@@ -16,11 +16,15 @@ export function PokemonPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { number } = useParams();
+  const name = useSelector(selectNames)[+number - 1];
   // const allPokemonFetched = useSelector(selectAllPokemonFetched);
   // const allPokemon = useSelector(selectAllPokemon);
   // const dataFetched = useSelector(selectDataFetched);
   // const descriptionsFetched = useSelector(selectDescriptionsFetched);
   // const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
+  const allPokemonFetched = useSelector(selectAllPokemonFetched);
+  const allDataFetched = useSelector(selectAllDataFetched);
+  const allPokemon = useSelector(selectAllPokemon);
   const pokemonPageData = useSelector(selectPokemonPageData);
   // const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
   // const description = useSelector(selectPokemonPageDescription);
@@ -36,6 +40,39 @@ export function PokemonPage() {
   const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   const gameboyImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
+  const generation = useSelector(selectGenerations)[number];
+  const height = useSelector(selectHeights)[number];
+  const weight = useSelector(selectWeights)[number];
+  const descriptions = useSelector(selectDescriptions);
+  const description = descriptions[number];
+
+  const allTypes = useSelector(selectTypes);
+  const types = Object.keys(allTypes).filter(type => allTypes[type].includes(number));
+
+  useEffect(() => {
+    if (!allPokemonFetched) {
+      dispatch(fetchAllPokemonAsync());
+    }
+    if (!allDataFetched) {
+      dispatch(fetchPokemonTypesAsync());
+      dispatch(fetchGenerations());
+      dispatch(fetchHeights());
+      dispatch(fetchWeights());
+    }
+  },[number])
+
+  useEffect(() => {
+    if (allDataFetched) {
+      Object.entries(allTypes).forEach(([type, pokemonList]) => {
+        // console.log(type);
+        if (pokemonList.includes(number)) {
+          types.push(type);
+        }
+      });
+    }
+    // console.log(types);
+  },[allDataFetched])
+
   let favouriteButtonMessage;
 
   if (favourited) {
@@ -46,26 +83,40 @@ export function PokemonPage() {
     favouriteButtonMessage = "Log in to add pokémon to favourites"
   }
 
+
   useEffect(() => {
-    dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
-    // dispatch(setPokemonPageDescriptionFetched(false));
+    if (!description) {
+      dispatch(fetchPokemonDescriptionByIndexAsync(number));
+    }
     const startIndex = number <= 10 ? 1 : (+number - 10);
     const endIndex = number >= 999 ? 1009 : (+number + 11);
     for (let i = startIndex; i < endIndex; i++) {
-      if (!pokemonPageData[i]) {
-        dispatch(fetchPokemonPageDataByIndexAsync(i))
+      if (!descriptions[i]) {
+        dispatch(fetchPokemonDescriptionByIndexAsync(i))
       }
     }
-    // if (!descriptionsFetched) {
-    //   // dispatch(fetchPokemonDescriptionsAsync());
-    // }
-    // if (!allPokemonFetched) {
-    //   // dispatch(fetchAllPokemonAsync());
-    // }
-    // return () => {
-    //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
-    // }
   },[number])
+
+  // useEffect(() => {
+  //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
+  //   // dispatch(setPokemonPageDescriptionFetched(false));
+  //   const startIndex = number <= 10 ? 1 : (+number - 10);
+  //   const endIndex = number >= 999 ? 1009 : (+number + 11);
+  //   for (let i = startIndex; i < endIndex; i++) {
+  //     if (!pokemonPageData[i]) {
+  //       dispatch(fetchPokemonPageDataByIndexAsync(i))
+  //     }
+  //   }
+  //   // if (!descriptionsFetched) {
+  //   //   // dispatch(fetchPokemonDescriptionsAsync());
+  //   // }
+  //   // if (!allPokemonFetched) {
+  //   //   // dispatch(fetchAllPokemonAsync());
+  //   // }
+  //   // return () => {
+  //   //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
+  //   // }
+  // },[number])
 
   if (!(number >= 1 && number <= 1008)) {
     const randomNumber = Math.floor(Math.random() * 1008) + 1;
@@ -85,7 +136,7 @@ export function PokemonPage() {
   }
 
   // consider deleting if statement because data is loading fast
-  if (!pokemonPageData[number]) {
+  if (!(allPokemonFetched && allDataFetched)) {
     // console.log(number + "not yet loaded");
     // alert("A");
     return (
@@ -102,12 +153,12 @@ export function PokemonPage() {
   }
 
   // if (allPokemonFetched && dataFetched && descriptionsFetched) {
-  if (pokemonPageData[number]) {
+  if (allPokemonFetched && allDataFetched) {
     return (
       <div className="pokemon-page">
         <div className="pokemon-page-header">
           <NavBar />
-          <h1>{pokemonPageData[number].name}</h1>
+          <h1>{name}</h1>
         </div>
         <div className="pokemon-page-content-container">
           <ArrowContainer side="left" number={number} />
@@ -120,16 +171,16 @@ export function PokemonPage() {
               <h3>Number:</h3>
               <h3>{number}</h3>
               <h3>Generation:</h3>
-              <h3>{pokemonPageData[number].generation}</h3>
+              <h3>{generation}</h3>
               <h3>Type:</h3>
               <div className="pokemon-page-types-container">
-                {pokemonPageData[number].types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
+                {types.map(type => <TypeBlock type={type} key={`type-block-${type}`}/>)}
               </div>
               <h3>Height:</h3>
-              <h3>{pokemonPageData[number].height}m</h3>
+              <h3>{height}m</h3>
               <h3>Weight:</h3>
-              <h3>{pokemonPageData[number].weight}kg</h3>
-              <h4 className="two-column-cell description">{pokemonPageData[number].description}</h4>
+              <h3>{weight}kg</h3>
+              <h4 className="two-column-cell description">{description}</h4>
               <div className="two-column-cell favourite-button-container">
                 <p>{favouriteButtonMessage}</p>
                 <FavouriteButton number={number} />
