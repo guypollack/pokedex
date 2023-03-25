@@ -3,7 +3,7 @@ import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, selectHeights, selectWeights, fetchHeights, fetchWeights } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 import "./HomePage.css";
 
@@ -18,6 +18,8 @@ export function HomePage() {
   const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
   const displayCount = useSelector(selectDisplayCount);
+  const heights = useSelector(selectHeights);
+  const weights = useSelector(selectWeights);
 
   function handleScroll() {
     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
@@ -48,7 +50,11 @@ export function HomePage() {
       // dispatch(filterPokemonAsync());
       // console.log(`dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));`);
       if (!dataFetched) {
-        dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
+        dispatch(fetchPokemonTypesAsync());
+        dispatch(fetchGenerations());
+        dispatch(fetchHeights());
+        dispatch(fetchWeights());
+        // dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));
       }
     }
   },[allPokemonFetched])
