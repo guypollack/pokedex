@@ -3,6 +3,7 @@ import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { fetchAllPokemonAsync, fetchPokemonDataAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, selectHeights, selectWeights, fetchHeights, fetchWeights, selectAllDataFetched } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 import "./HomePage.css";
@@ -10,6 +11,7 @@ import "./HomePage.css";
 export function HomePage() {
   // console.log("HomePage rendering");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const dataFetched = useSelector(selectDataFetched);
@@ -31,6 +33,10 @@ export function HomePage() {
   }
 
   // dispatch(fetchAllPokemonAsync());
+
+  useEffect(() => {
+    navigate("/");
+  },[])
 
   useEffect(() => {
     if (!allPokemonFetched) {
