@@ -52,6 +52,11 @@ export function GamePage() {
   },[]);
 
   useEffect(() => {
+    const page = document.querySelector(".game-page-container");
+    page.requestFullscreen();
+  },[])
+
+  useEffect(() => {
     if (!allPokemonFetched) {
       // console.log("A");
       // console.log("dispatch(fetchAllPokemonAsync());");
@@ -86,14 +91,14 @@ export function GamePage() {
   },[filters, searchTerm])
 
 
-  if (!allPokemonFetched || questionPokemon.length < 5) return;
+  // if (!allPokemonFetched || questionPokemon.length < 5) return;
 
 
   // console.log(questionPokemon);
 
 
   return (
-    <div>
+    <div className="game-page-container">
       <NavBar />
       <div className="game-page">
         <h1>Who's That Pokémon?</h1>
