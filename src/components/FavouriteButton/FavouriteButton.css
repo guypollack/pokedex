@@ -121,8 +121,8 @@ body.gameboy-mode .gameboy-animation-heart {
 }
 
 .xmark-tooltip {
-  width: fit-content;
-  min-width: 105px;
+  width: 105px;
+  /* min-width: 105px; */
   height: fit-content;
   border-radius: 12px;
   background-color: gainsboro;
@@ -133,6 +133,11 @@ body.gameboy-mode .gameboy-animation-heart {
   padding: 5px;
   z-index: 1;
   animation: fadeOpacity 500ms linear 1200ms 1 normal forwards;
+}
+
+.xmark-tooltip.narrow {
+  left: 30px;
+  bottom: 50px;
 }
 
 @keyframes visibleToHidden {
