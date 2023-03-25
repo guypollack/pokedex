@@ -3,7 +3,7 @@ import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, selectHeights, selectWeights, fetchHeights, fetchWeights } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonDataAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, selectHeights, selectWeights, fetchHeights, fetchWeights, selectAllDataFetched } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 import "./HomePage.css";
 
@@ -13,6 +13,7 @@ export function HomePage() {
 
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const dataFetched = useSelector(selectDataFetched);
+  const allDataFetched = useSelector(selectAllDataFetched);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
   const isLoading = useSelector(selectIsLoading);
@@ -49,7 +50,7 @@ export function HomePage() {
       // dispatch(makeVisible({"start": lBound, "end": uBound}));
       // dispatch(filterPokemonAsync());
       // console.log(`dispatch(fetchPokemonDataAsync({"start": 1, "end": 1009}));`);
-      if (!dataFetched) {
+      if (!allDataFetched) {
         dispatch(fetchPokemonTypesAsync());
         dispatch(fetchGenerations());
         dispatch(fetchHeights());
@@ -140,7 +141,7 @@ export function HomePage() {
         {/* {isLoading && <LoadingIcon />} */}
         {/* {allPokemonFetched && <h4>Showing results for Pokémon numbers 1 to {uBound - 1}</h4>} */}
         {/* {allPokemonFetched && <h4>{Object.keys(filteredPokemon).length} results found</h4>} */}
-        {dataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
+        {allDataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
         {allPokemonFetched && <PokemonFlexContainer allPokemon={filteredPokemon} />}
       </div>
     </div>
