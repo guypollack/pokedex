@@ -97,6 +97,13 @@ export function PokemonPage() {
     }
   },[number])
 
+  useEffect(() => {
+    if (allPokemonFetched && allDataFetched) {
+      const page = document.querySelector(".pokemon-page");
+      page.requestFullscreen();
+    }
+  },[number])
+
   // useEffect(() => {
   //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
   //   // dispatch(setPokemonPageDescriptionFetched(false));
