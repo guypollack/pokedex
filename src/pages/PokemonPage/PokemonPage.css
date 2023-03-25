@@ -87,8 +87,7 @@ body.gameboy-mode .pokemon-page-gameboy-image {
 
 
 .pokemon-page-data-container {
-  /* width: 100%; */
-  width: calc(100vw - 665px);
+  width: 100%;
   display: grid;
   grid-template-rows: repeat(5, 10%) 40% 10%;
   grid-template-columns: 120px 1fr;
@@ -247,10 +246,10 @@ body.gameboy-mode .pokemon-not-found-section > h1 {
     padding-left: 10px;
   }
 
-  /* .description-container > h4 { */
-    /* margin: 0 auto; */
+  .description-container > h4 {
+    margin: 0 auto;
     /* width: 90%; */
-  /* } */
+  }
 
   .pokemon-page-data-container > .favourite-button-container {
     text-align: right;
