@@ -320,6 +320,7 @@ export const pokemonSlice = createSlice({
 export const selectStatus = (state) => state.pokemon.status;
 export const selectAllPokemonFetched = (state) => state.pokemon.allPokemonFetched;
 export const selectDataFetched = (state) => state.pokemon.dataFetched;
+export const selectAllDataFetched = (state) => Object.keys(state.pokemon.types).length === 18 && Object.keys(state.pokemon.generations).length === 1008 && Object.keys(state.pokemon.heights).length === 1008 && Object.keys(state.pokemon.weights).length === 1008;
 export const selectPokemonPageDataFetched = (state) => state.pokemon.pokemonPageDataFetched;
 export const selectPokemonPageDescriptionFetched = (state) => state.pokemon.pokemonPageDescriptionFetched;
 export const selectCount = (state) => state.counter.value;
