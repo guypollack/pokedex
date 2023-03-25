@@ -52,11 +52,6 @@ export function GamePage() {
   },[]);
 
   useEffect(() => {
-    const page = document.querySelector(".game-page-container");
-    page.requestFullscreen();
-  },[])
-
-  useEffect(() => {
     if (!allPokemonFetched) {
       // console.log("A");
       // console.log("dispatch(fetchAllPokemonAsync());");
