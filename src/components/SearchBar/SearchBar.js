@@ -23,7 +23,7 @@ export function SearchBar() {
     <div className="search-bar">
       <input type="text" value={searchTerm} onChange={handleChange}></input>
       {/* {!dataFetched && <h3>Fetching...</h3>} */}
-      {!dataFetched && searchTerm !== "" && <LoadingIcon />}
+      {/* {!dataFetched && searchTerm !== "" && <LoadingIcon />} */}
     </div>
   )
 }
