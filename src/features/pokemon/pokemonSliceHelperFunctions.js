@@ -1,4 +1,4 @@
-import { store } from "../../app/store"
+import { store } from "../../app/store";
 
 export const doesPokemonFitFilter = (filterName, filterValue, pokemonNumber) => {
   if (filterName === "types") {
