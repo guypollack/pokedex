@@ -21,10 +21,18 @@
     padding-left: 0;
   }
 
+  .game-page > h1 {
+    text-align: center;
+  }
+
   .round-and-score-numbers-container {
     display: flex;
     justify-content: space-around;
     width: 60vw;
+  }
+
+  .round-and-score-numbers-container > *:first-child {
+    margin-right: 20px;
   }
 
   .score-and-picture-container {
@@ -35,6 +43,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .score-and-picture-container {
+    width: 100vw;
+    max-width: inherit;
+    flex-direction: row;
   }
 }
