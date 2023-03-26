@@ -97,8 +97,10 @@ export function GamePage() {
       <NavBar />
       <div className="game-page">
         <h1>Who's That Pokémon?</h1>
-        <h3>Round: {round}/5</h3>
-        <h3>Score: {score}/5</h3>
+        <div className="round-and-score-numbers-container">
+          <h3>Round: {round}/5</h3>
+          <h3>Score: {score}/5</h3>
+        </div>
         <div className="score-and-picture-container">
           <GamePageScoreContainer />
           {!isGameFinished && questionPokemon.map((pokemon, index) => <GamePagePicture key={`game-page-picture-${index + 1}`} classNameVisibility={round === (index + 1) ? "" : " hidden"} imageUrl={pokemon["imageUrl"]} name={pokemon["name"]} />)}
