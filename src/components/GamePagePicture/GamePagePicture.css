@@ -34,5 +34,11 @@
 .game-page-name.revealed {
   display: block;
   padding: 0;
-  margin: 0;
+  margin: -9px;
+}
+
+@media screen and (max-width: 500px) {
+  .game-page-picture > img {
+    width: 60%;
+  }
 }
