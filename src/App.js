@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, Navigate, RouterProvider, useSearchParams } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { HomePage } from './pages/HomePage/HomePage.js';
 import { Page1 } from './pages/Page1.js';

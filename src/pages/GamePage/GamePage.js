@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
-import { selectCurrentPokemon, setCurrentPokemon, addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished, resetGame } from '../../features/game/gameSlice';
+import { addPokemonToQuestions, setAllNames, selectRound, selectScore, selectQuestionPokemon, selectIsGameFinished, resetGame } from '../../features/game/gameSlice';
 import { selectCurrentUser } from '../../features/users/usersSlice';
 import { NavBar } from '../../components/NavBar/NavBar.js';
-import { nameFormatter } from '../../util/nameFormatter';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
-import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
+import { fetchAllPokemonAsync, selectAllPokemon, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, setFilteredPokemonSnapshot, selectSearchTerm } from '../../features/pokemon/pokemonSlice';
 import { GamePageScoreContainer } from '../../components/GamePageScoreContainer/GamePageScoreContainer';
-import { GamePageScoreIcon } from '../../components/GamePageScoreIcon/GamePageScoreIcon';
 import { GamePagePicture } from '../../components/GamePagePicture/GamePagePicture';
 import { GuessBar } from '../../components/GuessBar/GuessBar';
 import { NewGameButton } from '../../components/NewGameButton/NewGameButton';
@@ -22,13 +18,10 @@ export function GamePage() {
   const navigate = useNavigate();
 
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
-  const dataFetched = useSelector(selectDataFetched);
   const allPokemon = useSelector(selectAllPokemon);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
-  const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
-  const currentPokemon = useSelector(selectCurrentPokemon);
   const questionPokemon = useSelector(selectQuestionPokemon);
   const round = useSelector(selectRound);
   const score = useSelector(selectScore);

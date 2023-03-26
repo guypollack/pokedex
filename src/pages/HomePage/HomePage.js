@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { SeeMoreButton } from '../../components/SeeMoreButton/SeeMoreButton';
 import { FiltersContainer } from '../../components/FiltersContainer/FiltersContainer';
 import { NavBar } from '../../components/NavBar/NavBar.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { fetchAllPokemonAsync, fetchPokemonDataAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, selectDataFetched, selectIsLoading, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, selectHeights, selectWeights, fetchHeights, fetchWeights, selectAllDataFetched } from '../../features/pokemon/pokemonSlice';
+import { fetchAllPokemonAsync, fetchPokemonTypesAsync, selectFilteredPokemon, selectFilters, selectAllPokemonFetched, setFilteredPokemonSnapshot, selectSearchTerm, selectDisplayCount, setDisplayCount, fetchGenerations, fetchHeights, fetchWeights, selectAllDataFetched } from '../../features/pokemon/pokemonSlice';
 import { PokemonFlexContainer } from '../../components/PokemonFlexContainer/PokemonFlexContainer';
 import "./HomePage.css";
 
@@ -14,15 +13,11 @@ export function HomePage() {
   const navigate = useNavigate();
 
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
-  const dataFetched = useSelector(selectDataFetched);
   const allDataFetched = useSelector(selectAllDataFetched);
   const filters = useSelector(selectFilters);
   const filteredPokemon = useSelector(selectFilteredPokemon);
-  const isLoading = useSelector(selectIsLoading);
   const searchTerm = useSelector(selectSearchTerm);
   const displayCount = useSelector(selectDisplayCount);
-  const heights = useSelector(selectHeights);
-  const weights = useSelector(selectWeights);
 
   function handleScroll() {
     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {

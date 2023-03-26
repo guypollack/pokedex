@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nameFormatter } from '../../util/nameFormatter';
 
 const initialState = {
   searchTerm: "",

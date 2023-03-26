@@ -1,12 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCategory, selectOperator, selectValue, setSelectorValue, addToFilterList } from "../../features/filters/filtersSlice";
-import { Slider } from '../../components/Slider/Slider'; 
+import { selectCategory, selectOperator, selectValue, setSelectorValue, addToFilterList } from "../../features/filters/filtersSlice"; 
 import { CategorySelector } from "./CategorySelector";
 import { OperatorSelector } from "./OperatorSelector";
 import { ValueSelector } from "./ValueSelector";
 import  { SearchBar } from "../SearchBar/SearchBar"
-import { addFilter, setDisplayCount, selectSearchTypes, toggleSearchType, selectNumberOfFilters } from "../../features/pokemon/pokemonSlice";
+import { addFilter, setDisplayCount, selectNumberOfFilters } from "../../features/pokemon/pokemonSlice";
 import "./FilterCreator.css";
 
 export function FilterCreator() {
@@ -15,9 +14,6 @@ export function FilterCreator() {
   const category = useSelector(selectCategory);
   const operator = useSelector(selectOperator);
   const value = useSelector(selectValue);
-  const searchTypes = useSelector(selectSearchTypes);
-  const inCategorySearchType = searchTypes["inCategory"];
-  const betweenCategorySearchType = searchTypes["betweenCategory"];
   const numberOfFilters = useSelector(selectNumberOfFilters);
   
   const filterCreatorClassName = numberOfFilters === 0 ? "filter-creator" : "filter-creator filters-applied";
