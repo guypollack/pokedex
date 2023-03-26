@@ -11,3 +11,10 @@
     top: 40%;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .new-game-button-container {
+    left: 35%;
+    top: 0;
+  }
+}
