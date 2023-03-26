@@ -2,3 +2,9 @@
   display: flex;
   width: fit-content;
 }
+
+@media screen and (max-width: 500px) {
+  .game-page-score-container {
+    flex-direction: column;
+  }
+}
