@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { nameFormatter } from '../../util/nameFormatter.js';
-import { selectPokemonPageDataFetched, setPokemonPageDataFetched, selectPokemonPageData, fetchPokemonPageDataByIndexAsync, selectPokemonPageDescription, selectPokemonPageDescriptionFetched, setPokemonPageDescriptionFetched, fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, selectAllPokemon, fetchAllPokemonAsync, selectDescriptionsFetched, fetchPokemonDescriptionsAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectDataFetched, fetchPokemonDataAsync, selectAllDataFetched, fetchPokemonTypesAsync, fetchGenerations, fetchHeights, fetchWeights, selectNames } from '../../features/pokemon/pokemonSlice.js';
+import { fetchPokemonDescriptionByIndexAsync, selectAllPokemonFetched, fetchAllPokemonAsync, selectDescriptions, selectTypes, selectGenerations, selectHeights, selectWeights, selectAllDataFetched, fetchPokemonTypesAsync, fetchGenerations, fetchHeights, fetchWeights, selectNames } from '../../features/pokemon/pokemonSlice.js';
 import { selectCurrentUser } from '../../features/users/usersSlice.js';
 import { selectFavourites } from "../../features/favourites/favouritesSlice";
 import { NavBar } from '../../components/NavBar/NavBar.js';
@@ -10,11 +9,9 @@ import { ArrowContainer } from './ArrowContainer.js';
 import { TypeBlock } from '../../components/TypeBlock/TypeBlock.js';
 import { FavouriteButton } from "../../components/FavouriteButton/FavouriteButton.js";
 import "./PokemonPage.css";
-import { selectFontStyle } from '../../features/design/designSlice.js';
 
 export function PokemonPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { number } = useParams();
   const name = useSelector(selectNames)[+number - 1];
   // const allPokemonFetched = useSelector(selectAllPokemonFetched);
@@ -24,8 +21,6 @@ export function PokemonPage() {
   // const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const allDataFetched = useSelector(selectAllDataFetched);
-  const allPokemon = useSelector(selectAllPokemon);
-  const pokemonPageData = useSelector(selectPokemonPageData);
   // const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
   // const description = useSelector(selectPokemonPageDescription);
   const user = useSelector(selectCurrentUser);
@@ -36,7 +31,6 @@ export function PokemonPage() {
   // const generationV2 = useSelector(selectGenerations)[number];
   // const heightV2 = useSelector(selectHeights)[number];
   // const weightV2 = useSelector(selectWeights)[number];
-  const fontStyle = useSelector(selectFontStyle);
   const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   const gameboyImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
@@ -127,7 +121,7 @@ export function PokemonPage() {
         </div>
         <div className="pokemon-not-found-section">
           <h1>Pokemon not found!</h1>
-          <img id="pokemon-not-found-image" src="https://i.ytimg.com/vi/_UzGgIz52YU/maxresdefault.jpg" />
+          <img id="pokemon-not-found-image" src="https://i.ytimg.com/vi/_UzGgIz52YU/maxresdefault.jpg" alt="" />
           <p>Click <a href={`/pokemon/${randomNumber}`}>here</a> to view a random Pokemon</p>
         </div>
       </div>
@@ -164,8 +158,8 @@ export function PokemonPage() {
           <ArrowContainer side="left" number={number} />
           <div className="pokemon-page-grid-container">
             <div className="pokemon-page-image-container">
-              <img className="pokemon-page-normal-image" src={normalImageUrl}></img>
-              <img className="pokemon-page-gameboy-image" src={gameboyImageUrl}></img>
+              <img className="pokemon-page-normal-image" src={normalImageUrl} alt=""></img>
+              <img className="pokemon-page-gameboy-image" src={gameboyImageUrl} alt=""></img>
             </div>
             <div className="pokemon-page-data-container">
               <h3>Number:</h3>
