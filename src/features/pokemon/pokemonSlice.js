@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doesPokemonFitFilter, correctName } from './pokemonSliceHelperFunctions';
 import { heights, weights } from './additionalData';
 import { nameFormatter } from '../../util/nameFormatter';
+import { removeInvisibles } from '../../util/removeInvisibles';
 
 const initialState = {
   allPokemon: {},
@@ -142,7 +143,7 @@ export const fetchPokemonDescriptionByIndexAsync = createAsyncThunk(
     const json = await response.json();
     let description;
     if (json.flavor_text_entries.length > 0) {
-      description = json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text.replace("/\f/"," ").replace("/\n/","").replace("/\t/","xxxxx");
+      description = removeInvisibles(json.flavor_text_entries.filter(entry => entry.language.name === "en")[0].flavor_text);
     } else {
       description = "";
     }
