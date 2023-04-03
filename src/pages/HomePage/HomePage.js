@@ -117,7 +117,7 @@ export function HomePage() {
     <div>
       <NavBar />
       <div className="home-page">
-        <h1>Pokédex Project - Hello Afik and Nadav!</h1>
+        <h1>Pokédex Project</h1>
         <h3>By Guy Pollack</h3>
         <h6>&#169; 2023 Guy Pollack</h6>
         <h6>Pokémon and Pokémon character names are trademarks of Nintendo</h6>
