@@ -1,8 +1,8 @@
-# 🔥💧🌱⚡ Guy's Pokedex Project - An Interactive Pokedex Using React Redux, React Router and PokeAPI
+# 🔥💧🌱⚡ Guy's Pokédex Project - An Interactive Pokédex Using React Redux, React Router and PokeAPI
 
-Guy's Pokedex Project is an interactive Pokedex (Pokemon encyclopedia) React app built by Guy Pollack.
+Guy's Pokédex Project is an interactive Pokédex (Pokémon encyclopedia) React app built by Guy Pollack.
 It was created as my final project on my <a href="https://www.codecademy.com/learn/paths/front-end-engineer-career-path" target="_blank">Codecademy Front-End Engineer Career Path course</a>, bringing together the knowledge of React Redux, React Router, HTML, CSS and JavaScript that I gained during the course.
-This was an open-ended project, and I chose to use PokeAPI as my data source because I have always loved Pokemon and thought it would be more fun and interesting for users to explore than, say, a weather or to-do list app!
+This was an open-ended project, and I chose to use [https://pokeapi.co](PokeAPI) as my data source because I have always loved Pokémon and thought it would be more fun and interesting for users to explore than, say, a weather or to-do list app!
 
 ## How Do I Use the App?
 
