@@ -6,7 +6,7 @@ This was an open-ended project, and I chose to use PokeAPI as my data source bec
 
 ## How Do I Use the App?
 
-You can use the app at [https://pokedex-gp.netlify.app](https://pokedex-gp.netlify.app).
+You can use the app at [https://pokedex-gp.netlify.app](https://pokedex-gp.netlify.app)
 
 ## What Features Does the App Have?
 
@@ -26,4 +26,4 @@ After creating an account you can...
 
 6. Update your account details
 
-#### At any time you can also switch the app's formatting to Gameboy Mode using the slider at the top right of the screen, to enjoy a retro experience complete with Pokémon music!
+<em>At any time you can also switch the app's formatting to Gameboy Mode using the slider at the top right of the screen, to enjoy a retro experience complete with Pokémon music!</em>
