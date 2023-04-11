@@ -1,46 +1,31 @@
-# Getting Started with Create React App and Redux
+# 🔥💧🌱⚡ Guy's Pokedex Project - An Interactive Pokedex Using React Redux, React Router and PokeAPI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## What is Guy's Pokedex Project?
 
-## Available Scripts
+Quizify is an interactive Pokedex (Pokemon encyclopedia) React app built by Guy Pollack.
+It was created as my final project on my [https://www.codecademy.com/learn/paths/front-end-engineer-career-path](Codecademy Front-End Engineer Career Path course), bringing together the knowledge of React Redux, React Router, HTML, CSS and JavaScript that I gained during the course.
+This was an open-ended projected, and I chose to use PokeAPI as my data source because I have always loved Pokemon and thought it would be more fun and interesting for users than, say, a weather or to-do list app!
 
-In the project directory, you can run:
+## How Do I Use the App?
 
-### `npm start`
+You can use the app at [https://pokedex-gp.netlify.app](https://pokedex-gp.netlify.app).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## What Features Does the App Have?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In Guy's Pokédex Project you can...
 
-### `npm test`
+1. View all Pokémon released to date (as of 2023) on the Home Page, and filter them based on name, type, generation, height and weight. Within each filter category, you can choose whether the filtered Pokémon need to fit all the criteria, or just any of them
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. View specific Pokémon's details on their own pages, by clicking a Pokémon on the Home Page
 
-### `npm run build`
+3. Create a user account. Note: no user data is stored by the app, and accounts are automatically deleted when you leave the app
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After creating an account you can...
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Add Pokémon to your favourites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Play the Who's That Pokémon guessing game
 
-### `npm run eject`
+6. Update your account details
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### At any time you can also switch the app's formatting to Gameboy Mode using the slider at the top right of the screen, to enjoy a retro experience complete with Pokémon music!
