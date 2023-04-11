@@ -14,23 +14,11 @@ export function PokemonPage() {
   const dispatch = useDispatch();
   const { number } = useParams();
   const name = useSelector(selectNames)[+number - 1];
-  // const allPokemonFetched = useSelector(selectAllPokemonFetched);
-  // const allPokemon = useSelector(selectAllPokemon);
-  // const dataFetched = useSelector(selectDataFetched);
-  // const descriptionsFetched = useSelector(selectDescriptionsFetched);
-  // const pokemonPageDataFetched = useSelector(selectPokemonPageDataFetched);
   const allPokemonFetched = useSelector(selectAllPokemonFetched);
   const allDataFetched = useSelector(selectAllDataFetched);
-  // const pokemonPageDescriptionFetched = useSelector(selectPokemonPageDescriptionFetched);
-  // const description = useSelector(selectPokemonPageDescription);
   const user = useSelector(selectCurrentUser);
   const favourites = useSelector(selectFavourites);
   const favourited = favourites[user].includes(number);
-  // const { generation, types, height, weight } = pokemonPageData;
-  // const typesV2 = useSelector(selectTypes)[number];
-  // const generationV2 = useSelector(selectGenerations)[number];
-  // const heightV2 = useSelector(selectHeights)[number];
-  // const weightV2 = useSelector(selectWeights)[number];
   const normalImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + number + ".png";
   const gameboyImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + number +".png";
 
@@ -90,27 +78,6 @@ export function PokemonPage() {
       }
     }
   },[number])
-
-  // useEffect(() => {
-  //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
-  //   // dispatch(setPokemonPageDescriptionFetched(false));
-  //   const startIndex = number <= 10 ? 1 : (+number - 10);
-  //   const endIndex = number >= 999 ? 1009 : (+number + 11);
-  //   for (let i = startIndex; i < endIndex; i++) {
-  //     if (!pokemonPageData[i]) {
-  //       dispatch(fetchPokemonPageDataByIndexAsync(i))
-  //     }
-  //   }
-  //   // if (!descriptionsFetched) {
-  //   //   // dispatch(fetchPokemonDescriptionsAsync());
-  //   // }
-  //   // if (!allPokemonFetched) {
-  //   //   // dispatch(fetchAllPokemonAsync());
-  //   // }
-  //   // return () => {
-  //   //   dispatch(setPokemonPageDataFetched(!!pokemonPageData[number]));
-  //   // }
-  // },[number])
 
   if (!(number >= 1 && number <= 1008)) {
     const randomNumber = Math.floor(Math.random() * 1008) + 1;

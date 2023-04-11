@@ -30,44 +30,24 @@ export const correctName = name => {
 
   for (const word of wordsToRemove) {
     if (name.includes(word)) {
-      // if (word === "Incarnate") {
-      //   console.log("1");
-      //   console.log(name);
-      //   console.log(name.replace(word,""));
-      // }
       return name.replace(word,"");
     }
   }
   if (!name.includes(" ")) {
     return name;
   } else if (name.includes(" O")) {
-    // console.log(name);
-    // console.log(name.replace(" O","-o"));
     return name.replace(" O","-o");
   } else if (name.includes(" Chien")) {
-    // console.log(name);
-    // console.log(name.replace(" ","-"));
     return name.replace(" ","-");
   } else if (name.includes(" Pao")) {
-    // console.log(name);
-    // console.log(name.replace(" ","-"));
     return name.replace(" ","-");
   } else if (name.includes(" Lu")) {
-    // console.log(name);
-    // console.log(name.replace(" ","-"));
     return name.replace(" ","-");
   } else if (name.includes(" Yu")) {
-    // console.log(name);
-    // console.log(name.replace(" ","-"));
     return name.replace(" ","-");
   } else if (name === "Type Null") {
-    // console.log(name);
     return "Type: Null";
   } else {
     return name;
   }
 }
-
-//Type Null => Type: Null
-//'Jangmo O', 'Hakamo O', 'Kommo O',
-//'Wo Chien', 'Chien Pao', 'Ting Lu', 'Chi Yu', 

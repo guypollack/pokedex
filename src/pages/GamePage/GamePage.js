@@ -28,8 +28,6 @@ export function GamePage() {
   const isGameFinished = useSelector(selectIsGameFinished);
   const user = useSelector(selectCurrentUser);
 
-  // dispatch(fetchAllPokemonAsync());
-
   useEffect(() => {
     if (user === "guest") {
       navigate("/");
@@ -46,11 +44,7 @@ export function GamePage() {
 
   useEffect(() => {
     if (!allPokemonFetched) {
-      // console.log("A");
-      // console.log("dispatch(fetchAllPokemonAsync());");
       dispatch(fetchAllPokemonAsync());
-      // dispatch(makeVisible({"start": lBound, "end": uBound}));
-      // dispatch(fetchPokemonDataAsync());
     } else {
       const allNames = Object.values(allPokemon).map(pokemon => pokemon["name"]);
       dispatch(setAllNames(allNames));
@@ -62,28 +56,11 @@ export function GamePage() {
     }
   },[allPokemonFetched])
 
-
-  // re-enable
-  // useEffect(() => {
-  //   if (allPokemonFetched) {
-  //     const randomNumber = Math.floor(Math.random() * 1009) + 1;
-  //     const pokemonData = {"number": randomNumber, "name": nameFormatter(allPokemon[randomNumber]["name"]), "imageUrl": allPokemon[randomNumber]["imageUrl"]};
-  //     dispatch(setCurrentPokemon(pokemonData));
-  //   }
-  // },[round])
-
   useEffect(() => {
     return (() => {
       dispatch(setFilteredPokemonSnapshot(filteredPokemon));
     })
   },[filters, searchTerm])
-
-
-  // if (!allPokemonFetched || questionPokemon.length < 5) return;
-
-
-  // console.log(questionPokemon);
-
 
   return (
     <div className="game-page-container">
