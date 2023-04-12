@@ -38,7 +38,7 @@
   .score-and-picture-container {
     width: 60vw;
     max-width: 350px;
-    height: calc(60vw + 20px);
+    height: calc(60vw + 60px);
     max-height: 420px;
     display: flex;
     flex-direction: column;
