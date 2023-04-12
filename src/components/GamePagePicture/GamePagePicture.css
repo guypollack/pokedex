@@ -4,6 +4,7 @@
   /* width: fit-content; */
   width: 100%;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -29,12 +30,14 @@
 
 .game-page-name {
   display: none;
+  position: absolute;
+  bottom: -40px;
 }
 
 .game-page-name.revealed {
   display: block;
   padding: 0;
-  margin: -9px;
+  /* margin: -9px; */
 }
 
 @media screen and (max-width: 500px) {
