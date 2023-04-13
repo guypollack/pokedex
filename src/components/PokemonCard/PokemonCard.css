@@ -12,6 +12,7 @@
 .pokemon-card-image  {
   width: 100px;
   margin-top: 10px;
+  cursor: pointer;
   will-change: filter;
 }
 
