@@ -11,6 +11,11 @@
 .nav-bar > a {
   margin-left: 20px;
   margin-bottom: 10px;
+  color: black;
+}
+
+.nav-bar > a:hover {
+  color: rgb(158,183,184);
 }
 
 @media screen and (max-width: 880px) {
