@@ -12,7 +12,7 @@ export function FilterBlocksContainer({category, filters}) {
 
   return (
     <div className="filter-blocks-container">
-      <h3>{nameFormatter(category)}</h3>
+      <h4>{nameFormatter(category)}</h4>
       <Slider heading={`${category} slider`} value1="ALL" value2="ANY" checked={searchType === "or"} onChange={() => dispatch(toggleSearchTypeByCategory(category + "s"))} />
       <div className="filter-blocks-flex-container">
         {filters.map(([cat, value], index) => <FilterBlock property={cat} value={value} filterNumber={index} key={`${cat}-filter-block-${index}`}/>)}
