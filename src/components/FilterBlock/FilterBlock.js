@@ -2,6 +2,7 @@ import React from "react";
 import { removeFilter, setDisplayCount, selectNumberOfFilters, selectSearchTerm } from "../../features/pokemon/pokemonSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromFilterList } from "../../features/filters/filtersSlice";
+import { RemoveFilterButton } from "../RemoveFilterButton/RemoveFilterButton";
 import "./FilterBlock.css"
 
 export function FilterBlock({property, value, filterNumber}) {
@@ -48,7 +49,7 @@ export function FilterBlock({property, value, filterNumber}) {
   return (
     <div className={`filter-block ${property.toLowerCase()}-${valueRounder(value).toLowerCase()}`} onClick={handleClick}>
       <p>{valueFormatter(value)}</p>
-      <p className="filter-block-x">+</p>
+      {/* <RemoveFilterButton /> */}
     </div>
   )
 }
