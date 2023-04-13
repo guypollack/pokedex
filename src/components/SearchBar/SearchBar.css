@@ -4,5 +4,6 @@
 }
 
 .search-bar > input {
+  max-width: 200px;
   margin-right: 5px;
 }
