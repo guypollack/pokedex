@@ -67,7 +67,7 @@ export function HomePage() {
       <div className="home-page">
         <h1>Guy's Pokédex Project</h1>
         {/* <h3>By Guy Pollack</h3> */}
-        <h6>&#169; 2023 Guy Pollack</h6>
+        <h6>&#169; 2023 <a href="https://www.guypollack.com" target="_blank" className="home-page-name">Guy Pollack</a></h6>
         <h6>Pokémon and Pokémon character names are trademarks of Nintendo</h6>
         <FiltersContainer /> 
         {allDataFetched && Object.keys(filteredPokemon).length === 0 && <h3>No results found!</h3>}
